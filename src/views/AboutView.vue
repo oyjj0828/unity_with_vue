@@ -11,7 +11,7 @@
   </div>
   <div class="head">
     <h1>数据中心可视化管理平台</h1>
-    <div class="time" id="showTime">{{t}}</div>
+    <div class="time" id="showTime">{{currentTime}}</div>
    
 
   </div>
@@ -72,34 +72,34 @@
 </template>
 <script>
 export default {
-  name: 'WEB',
-  data(){
-    return{
-      t: null
-    }
-  },
-  methods:{
-    time() {
-      t = setTimeout(time, 1000)
-      clearTimeout(t);//清除定时器
-        dt = new Date()
-        var y = dt.getFullYear();
-        var mt = dt.getMonth() + 1;
-        var day = dt.getDate();
-        var h = dt.getHours();//获取时
-        var m = dt.getMinutes();//获取分
-        var s = dt.getSeconds();//获取秒
-        var t = null;
-        document.getElementById("showTime").innerHTML = y + "/" + Appendzero(mt) + "/" + Appendzero(day) + " " + Appendzero(h) + ":" + Appendzero(m) + ":" + Appendzero(s) + "";
-        
-        t = setTimeout(time, 1000); //设定定时器，循环运行     
+    data() {
+      return {
+        currentTime: '',
+        loading: false
+      };
     },
-    Appendzero(obj) {
-          if (obj < 10) return "0" + "" + obj;
-          else return obj;
+    mounted() {
+      this.updateTime();
+      setInterval(() => {
+        this.updateTime();
+      }, 1000);
+    },
+    methods: {
+      updateTime() {
+        const dt = new Date();
+        const y = dt.getFullYear();
+        const mt = dt.getMonth() + 1;
+        const day = dt.getDate();
+        const h = dt.getHours();
+        const m = dt.getMinutes();
+        const s = dt.getSeconds();
+        this.currentTime = `${y}/${this.Appendzero(mt)}/${this.Appendzero(day)} ${this.Appendzero(h)}:${this.Appendzero(m)}:${this.Appendzero(s)}`;
+      },
+      Appendzero(obj) {
+        return obj < 10 ? `0${obj}` : obj;
+      }
     }
   }
-}
 
 
 </script>
