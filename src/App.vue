@@ -4,6 +4,9 @@
       <meta charset="utf-8">
       <title>数据中心可视化管理平台</title> 
     </head>
+    <footer class="footer" style="z-index: 10;">
+      <!-- Footer content -->
+    </footer>
     <div class="loading" style="display: none;">
       <div class="loadbox"> <img src="assets/loading.gif"> 页面加载中... </div>
     </div>
