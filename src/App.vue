@@ -1,5 +1,5 @@
 <template>
- <div>
+ <div style="height: 100%;">
     <head>
       <meta charset="utf-8">
       <title>数据中心可视化管理平台</title> 
@@ -19,19 +19,22 @@
         <iframe ref="iframe" style="width:100%; height:100% ;position: absolute;top:0;left: 0;"
           src="/Unity/index.html" frameborder="0" ></iframe>
       </div>
-      <!-- <ul class="clearfix">
+
+      <ul class="clearfix" style="z-index: 10; height: inherit">
         <li>
-          <div class="boxall" style="height: calc(58% - .15rem)">
+          <div class="boxall" style="height: calc(58% )">
             <div class="alltitle">室内温度预测</div>
-            <div class=" boxnav " id="echarts4" style="user-select: none;" _echarts_instance_="ec_1710235324242">
-              <div
+            <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;" _echarts_instance_="ec_1710235324242">
+              <div 
                 style="position: relative; overflow: hidden; width: 406px; height: 131px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
                 <canvas
                   style="position: absolute; left: 0px; top: 0px; width: 406px; height: 131px; user-select: none; padding: 0px; margin: 0px; border-width: 0px;"
-                  data-zr-dom-id="zr_0" width="507" height="163"></canvas></div>
+                  data-zr-dom-id="zr_0" width="507" height="163">
+                </canvas>
+              </div>
             </div>
           </div>
-          <div class="boxall" style="height: calc(42% - .15rem)">
+          <div class="boxall" style="height: calc(42% )">
             <div class="alltitle">服务器能耗预测</div>
             <div class="boxnav" id="echarts3" style="user-select: none; position: relative;"
               _echarts_instance_="ec_1710235324241">
@@ -44,16 +47,13 @@
             </div>
           </div>
         </li>
+
         <li>
-
-
-
 
         </li>
+
         <li>
-
-          <div class="boxall" style="height: calc(33.333% - .15rem)">
-
+          <div class="boxall" style="height: calc(32.333% )">
             <div class="alltitle">服务器能耗优化对比</div>
             <div class="boxnav" id="echarts5" style="user-select: none; position: relative;"
               _echarts_instance_="ec_1710235324243">
@@ -64,22 +64,15 @@
                   data-zr-dom-id="zr_0" width="507" height="60"></canvas></div>
               <div></div>
             </div>
-
           </div>
-          <div class="boxall" style="height: calc(33.333% - .15rem)">
+          <div class="boxall" style="height: calc(33.333% )">
             <div class="alltitle">PUE优化对比</div>
             <div class="boxnav" id="">
               <table cellspacing="0">
               </table>
-
-
-
-
-
             </div>
-
           </div>
-          <div class="boxall" style="height: calc(33.333% - .15rem)">
+          <div class="boxall" style="height: calc(33.333% )">
             <div class="alltitle">空调能耗监测</div>
             <div class="boxnav" id="echarts6"
               style="height: calc(100% - 0.3rem); user-select: none; position: relative;"
@@ -89,11 +82,12 @@
                 <canvas
                   style="position: absolute; left: 0px; top: 0px; width: 411px; height: 63px; user-select: none; padding: 0px; margin: 0px; border-width: 0px;"
                   data-zr-dom-id="zr_0" width="513" height="78"></canvas></div>
-              <div></div>
+              <div>
+              </div>
             </div>
           </div>
         </li>
-      </ul> -->
+      </ul> 
     </div>
   </div>
 </template>
