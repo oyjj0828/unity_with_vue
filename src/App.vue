@@ -62,7 +62,7 @@
         </li>
 
         <li style="width: 50%">
-
+          <dv-charts :option="option" style="z-index: 10; width: 100%; height: 50%;"/>
         </li>
 
         <li style="width: 25%">
@@ -112,7 +112,34 @@ export default{
  data() {
     return {
       currentTime: '',
-      loading: false
+      loading: false,
+      option:{
+        title: {
+          text: '剩余油量表',
+          style: {
+            fill: '#fff'
+          }
+        },
+        series: [
+          {
+            type: 'gauge',
+            data: [ { name: 'itemA', value: 55 } ],
+            center: ['50%', '55%'],
+            axisLabel: {
+              formatter: '{value}%',
+              style: {
+                fill: '#fff'
+              }
+            },
+            axisTick: {
+              style: {
+                stroke: '#fff'
+              }
+            },
+            animationCurve: 'easeInOutBack'
+          }
+        ]
+      },
     };
   },
   mounted() {
@@ -147,6 +174,7 @@ export default{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: inherit;
 }
 
 unity-container{

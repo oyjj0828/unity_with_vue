@@ -1,9 +1,14 @@
-import { createApp } from 'vue'
+import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 import "lib-flexible/flexible.js"
+import dataV from '@jiaminghi/data-view'
 
-createApp(App).use(store).use(router).mount('#app');
-let appElement = document.getElementById('app');
-appElement.style.height='inherit';
+Vue.use(dataV);
+
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app');
