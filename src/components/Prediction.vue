@@ -126,7 +126,7 @@ export default {
   },
   methods: {
     randomData() {
-      this.now = new Date(+this.now + 1000); // 更新为每秒
+      this.now = new Date(+this.now - 1000); // 更新为每秒
       this.value1 = this.value1 + Math.random() * 21 - 10;
       this.value2 = this.value2 + Math.random() * 21 - 10;
       return [
