@@ -208,18 +208,20 @@ body {
 
 .boxall {
   padding: 0 .2rem .2rem .2rem;
-  background: rgba(6, 48, 109, .5);
+  /* background: rgba(6, 48, 109, .5); */
   position: relative;
   margin-bottom: .15rem;
   z-index: 10;
 }
 
 .alltitle {
-  font-size: .2rem;
-  color: #fff;
+  font-size: .25rem;
+  color: #ffffff;
+  text-shadow: 0 0 3px #1e82be, 0 0 4px #1e82be, 0 0 5px #1e82be, 0 0 6px #1e82be !important;
   line-height: .5rem;
   position: relative;
-  padding-left: .15rem
+  padding-left: .15rem;
+  top: 5%
 }
 
 .alltitle:before {

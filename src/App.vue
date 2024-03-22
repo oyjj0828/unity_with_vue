@@ -1,8 +1,9 @@
 <template>
- <div style="height: 100%;">
+  <div style="height: 100%;">
+
     <head>
       <meta charset="utf-8">
-      <title>数据中心可视化管理平台</title> 
+      <title>数据中心可视化管理平台</title>
     </head>
     <footer class="footer" style="z-index: 10; width:100%">
       <!-- Footer content -->
@@ -14,93 +15,38 @@
       <h1 style="font-size: xx-large;">数据中心可视化管理平台</h1>
       <div class="time" id="showTime">{{ currentTime }}</div>
     </div>
+
     <div class="mainbox">
       <div class="unity-container" style="z-index: -10;">
-        <iframe ref="iframe" style="width:100%; height:100% ;position: absolute;top:0;left: 0;"
-          src="/Unity/index.html" frameborder="0" ></iframe>
+        <iframe ref="iframe" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="/Unity/index.html"
+          frameborder="0"></iframe>
       </div>
 
+      <!--<button_nenghaoyuce v-model="view1" :sendState="getState" />-->
+      <!--<button1 v-model:view1="view1" :view2="view2" :view3="view3" :sendState="getStae"></button1>-->
+      <button_zhuye :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
+      <button_nenghaoyuce :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
+      <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
+
       <ul class="clearfix" style="z-index: 10; height: inherit">
-        <li style="width: 25%">
-          <div class="boxall" style="height: calc(25% )">
-            <div class="alltitle">室内环境监控</div>
-            <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;" _echarts_instance_="ec_1710235324242">
-              <div 
-                style="position: relative; overflow: hidden; width: 100%; height: 100%; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
-                <canvas
-                  style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; user-select: none; padding: 0px; margin: 0px; border-width: 0px;"
-                  data-zr-dom-id="zr_0" width="507" height="163">
-                </canvas>
-              </div>
-            </div>
-          </div>
-
-          <div class="boxall" style="height: calc(37% )">
-            <div class="alltitle">室内温度预测</div>
-            <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;" _echarts_instance_="ec_1710235324242">
-              <div 
-                style="position: relative; overflow: hidden; width: 100%; height: 100%; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
-                <canvas
-                  style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; user-select: none; padding: 0px; margin: 0px; border-width: 0px;"
-                  data-zr-dom-id="zr_0" width="507" height="163">
-                </canvas>
-              </div>
-            </div>
-          </div>
-          <div class="boxall" style="height: calc(38% )">
-            <div class="alltitle">服务器能耗预测</div>
-            <div class="boxnav" id="echarts3" style="user-select: none; position: relative;"
-              _echarts_instance_="ec_1710235324241">
-              <div
-                style="position: relative; overflow: hidden; width: 100%; height: 100%; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
-                <canvas
-                  style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; user-select: none; padding: 0px; margin: 0px; border-width: 0px;"
-                  data-zr-dom-id="zr_0" width="507" height="96"></canvas></div>
-              <div></div>
-            </div>
-          </div>
+        <transition name="fade">
+        <li v-if="view1" style="width: 25%">
+          <Statistics />
+          <Equipments />
+          <BarChart />
         </li>
+        </transition>
 
-        <li style="width: 50%">
-          <dv-charts :option="option" style="z-index: 10; width: 100%; height: 50%;"/>
-        </li>
+        <li style="width: 50%"></li>
 
-        <li style="width: 25%">
-          <div class="boxall" style="height: calc(32.333% )">
-            <div class="alltitle">服务器能耗优化对比</div>
-            <div class="boxnav" id="echarts5" style="user-select: none; position: relative;"
-              _echarts_instance_="ec_1710235324243">
-              <div
-                style="position: relative; overflow: hidden; width: 100%; height: 100%; padding: 0px; margin: 0px; border-width: 0px;">
-                <canvas
-                  style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; user-select: none; padding: 0px; margin: 0px; border-width: 0px;"
-                  data-zr-dom-id="zr_0" width="507" height="60"></canvas></div>
-              <div></div>
-            </div>
-          </div>
-          <div class="boxall" style="height: calc(33.333% )">
-            <div class="alltitle">PUE优化对比</div>
-            <div class="boxnav" id="">
-              <table cellspacing="0">
-              </table>
-            </div>
-          </div>
-          <div class="boxall" style="height: calc(33.333% )">
-            <div class="alltitle">空调能耗监测</div>
-            <div class="boxnav" id="echarts6"
-              style="height: calc(100% - 0.3rem); user-select: none; position: relative;"
-              _echarts_instance_="ec_1710235324244">
-              <div
-                style="position: relative; overflow: hidden; width: 100%; height: 100%; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
-                <canvas
-                  style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; user-select: none; padding: 0px; margin: 0px; border-width: 0px;"
-                  data-zr-dom-id="zr_0" width="513" height="78"></canvas></div>
-              <div>
-              </div>
-            </div>
-          </div>
+        <transition name="fade">
+        <li v-if="view1" style="width: 25%">
+          <SlideShow />
+          <Prediction />
+          <WaterPolo />
         </li>
-      </ul> 
+        </transition>
+      </ul>
     </div>
   </div>
 </template>
@@ -108,39 +54,59 @@
 <script>
 import '../public/js/jquery.js'
 import '../public/js/echarts.min.js'
-export default{
- data() {
+
+/*button*/
+import button_zhuye from './components/button_zhuye.vue'
+import button_nenghaoyuce from './components/button_nenghaoyuce.vue'
+import button_youhuakongzhi from './components/button_youhuakongzhi.vue'
+
+/* Components */
+import Temperature from '@/components/Temperature'
+import Equipments from '@/components/Equipments'
+import BarChart from '@/components/BarChart'
+import SlideShow from '@/components/SlideShow'
+import WaterPolo from '@/components/WaterPolo'
+import Prediction from '@/components/Prediction'
+import Statistics from '@/components/Statistics'
+
+import { ref } from "vue";
+
+export default {
+
+  setup() {
+    let indoorParams = ref([1]);
+    return { indoorParams };
+  },
+
+  components: {
+    button_zhuye,
+    button_nenghaoyuce,
+    button_youhuakongzhi,
+
+    Equipments,
+    Temperature,
+    BarChart,
+    SlideShow,
+    WaterPolo,
+    Prediction,
+    Statistics
+  },
+  data() {
     return {
       currentTime: '',
       loading: false,
-      option:{
-        title: {
-          text: '剩余油量表',
-          style: {
-            fill: '#fff'
-          }
-        },
-        series: [
-          {
-            type: 'gauge',
-            data: [ { name: 'itemA', value: 55 } ],
-            center: ['50%', '55%'],
-            axisLabel: {
-              formatter: '{value}%',
-              style: {
-                fill: '#fff'
-              }
-            },
-            axisTick: {
-              style: {
-                stroke: '#fff'
-              }
-            },
-            animationCurve: 'easeInOutBack'
-          }
-        ]
-      },
+      view0: true,
+      view1: false,
+      view2: false,
+      view3: false
     };
+  },
+  computed: {
+    biankuang() {
+      return {
+        backgroundColor: this.view1 ? rgba(6, 48, 109, .5) : rgba(6, 48, 109, .5)
+      };
+    }
   },
   mounted() {
     this.updateTime();
@@ -168,6 +134,7 @@ export default{
 
 <style lang="scss">
 @import '../public/css/comon0.css';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -177,8 +144,37 @@ export default{
   height: inherit;
 }
 
-unity-container{
+unity-container {
   width: 100%;
   height: 1080px;
+}
+
+.rounded-btn {
+  border: none;
+  /* 去除默认边框 */
+  background-color: transparent;
+  /* 设置背景色 */
+  color: rgb(0, 174, 255);
+  /* 设置字体颜色 */
+  padding: 12px 36px;
+  /* 调整按钮大小 */
+  text-align: center;
+  /* 居中显示文本 */
+  font-size: 18px;
+  /* 设置字号 */
+  cursor: pointer;
+  /* 光标变成手型 */
+  border-radius: 100px;
+  /* 设置圆角 */
+}
+
+/* 定义过渡效果 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
