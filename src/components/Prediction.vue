@@ -115,7 +115,8 @@ export default {
             type: 'line',
             showSymbol: false,
             data: []
-          }
+          },
+
         ]
       }
     };
@@ -126,7 +127,7 @@ export default {
   },
   methods: {
     randomData() {
-      this.now = new Date(+this.now - 1000); // 更新为每秒
+      this.now = new Date(+this.now + 1000); // 更新为每秒
       this.value1 = this.value1 + Math.random() * 21 - 10;
       this.value2 = this.value2 + Math.random() * 21 - 10;
       return [
@@ -138,8 +139,8 @@ export default {
     initChart() {
       for (var i = 0; i < 500; i++) { // 初始化14400个数据，即四个小时
         const newData = this.randomData();
-        this.data1.unshift([newData[0], newData[1]]);
-        this.data2.unshift([newData[0], newData[2]]);
+        this.data1.push([newData[0], newData[1]]);
+        this.data2.push([newData[0], newData[2]]);
       }
       this.option.series[0].data = this.data1;
       this.option.series[1].data = this.data2;
@@ -148,13 +149,13 @@ export default {
       this.myChart.setOption(this.option);
     },
     updateData() {
-      this.data1.pop(); // 移除数组的最后一个元素
-      this.data2.pop(); // 移除数组的最后一个元素
+      this.data1.shift(); // 移除数组的最后一个元素
+      this.data2.shift(); // 移除数组的最后一个元素
       const newData = this.randomData();
-      this.data1.unshift([newData[0], newData[1]]); // 在数组开头添加新数据，保持数据顺序
-      this.data2.unshift([newData[0], newData[2]]); // 在数组开头添加新数据，保持数据顺序
-      this.option.xAxis.data.pop(); // 移除x轴标签的最后一个元素
-      this.option.xAxis.data.unshift(newData[0]); // 在x轴标签的开头添加新的标签
+      this.data1.push([newData[0], newData[1]]); // 在数组开头添加新数据，保持数据顺序
+      this.data2.push([newData[0], newData[2]]); // 在数组开头添加新数据，保持数据顺序
+      this.option.xAxis.data.shift(); // 移除x轴标签的最后一个元素
+      this.option.xAxis.data.push(newData[0]); // 在x轴标签的开头添加新的标签
       this.myChart.setOption({
         series: [
           {
@@ -163,7 +164,11 @@ export default {
           {
             data: this.data2
           }
-        ]
+        ],
+        xAxis: 
+          {
+            data: this.option.xAxis.data
+          }    
       });
     }
   }
