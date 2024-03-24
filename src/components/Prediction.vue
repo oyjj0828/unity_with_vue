@@ -144,19 +144,6 @@ export default {
     randomData(currentTime) {
       // 获取当前时间
       //var currentTime = new Date();
-<<<<<<< HEAD
-
-
-      // 减去100秒
-      // currentTime.setSeconds(currentTime.getSeconds() - 100);
-
-      this.value1 = this.value1 + Math.random() * 21 - 10;
-      this.value2 = this.value2 + Math.random() * 21 - 10;
-
-      return [
-        currentTime.toLocaleTimeString(), // 修改为本地时间格式
-        // this.now.toLocaleTimeString(), // 修改为本地时间格式
-=======
    
 
       // 减去100秒
@@ -168,49 +155,11 @@ export default {
       return [
       currentTime.toLocaleTimeString(), // 修改为本地时间格式
        // this.now.toLocaleTimeString(), // 修改为本地时间格式
->>>>>>> 98fa998c73ddc05fb6ff21d545f7160cc33ca74a
         Math.round(this.value1),
         Math.round(this.value2)
       ];
     },
     initChart() {
-<<<<<<< HEAD
-      // 获取当前时间
-      var currentTime = new Date();
-      var currentTime1 = new Date();
-      currentTime.setSeconds(currentTime.getSeconds() - 100);
-      currentTime1.setSeconds(currentTime1.getSeconds() - 70);
-
-      // 减去100秒
-
-
-      for (var i = 0; i < 100; i++) { // 初始化100个数据点
-
-
-        var newData = this.randomData(currentTime); // 传入当前时间
-        var newData1 = this.randomData(currentTime1);
-        // newData[0].setSeconds(newData[0].getSeconds() - 1);
-        this.data1.push([newData[0], newData[1]]); // 在数组末尾添加新数据，保持数据顺序
-        this.data2.push([newData1[0], newData1[2]]); // 在数组末尾添加新数据，保持数据顺序
-        // newData[0].setSeconds(currentTime.getSeconds() - 1);
-        currentTime.setSeconds(currentTime.getSeconds() + 1); // 增加1秒，即移动到下一个时间点
-        currentTime1.setSeconds(currentTime1.getSeconds() + 1);
-        console.log(i);
-        console.log(newData[0], newData[1]);
-
-      }
-      this.option.series[0].data = this.data1;
-      this.option.series[1].data = this.data2;
-      this.option.xAxis.data = this.data2.map(item => item[0]); // 使用时间数据作为x轴数据
-      this.myChart = echarts.init(document.getElementById('chartContainer'));
-      this.myChart.setOption(this.option);
-
-      // 打印this.data1
-      console.log(this.data1);
-    },
-
-
-=======
   // 获取当前时间
   var currentTime = new Date();
   var currentTime1 = new Date();
@@ -246,16 +195,11 @@ export default {
 },
 
  
->>>>>>> 98fa998c73ddc05fb6ff21d545f7160cc33ca74a
 
     updateData() {
       var currentTime = new Date();
       var currentTime1 = new Date();
-<<<<<<< HEAD
-      currentTime1.setSeconds(currentTime1.getSeconds() + 30);
-=======
       currentTime1.setSeconds(currentTime1.getSeconds()+30);
->>>>>>> 98fa998c73ddc05fb6ff21d545f7160cc33ca74a
       const newData = this.randomData(currentTime);
       const newData1 = this.randomData(currentTime1);
       this.data1.push([newData[0], newData[1]]); // 在数组末尾添加新数据，保持数据顺序
@@ -280,11 +224,7 @@ export default {
         ]
       });
     }
-<<<<<<< HEAD
-  }
-=======
 }
->>>>>>> 98fa998c73ddc05fb6ff21d545f7160cc33ca74a
 
 
 };
