@@ -18,33 +18,34 @@
 
     <div class="mainbox">
       <div class="unity-container" style="z-index: -10;">
-        <iframe ref="iframe" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="/Unity/index.html"
-          frameborder="0"></iframe>
+        <iframe ref="iframe" style="width:100%; height:100% ; position: absolute;top:0;left: 0;" src="/Unity/index.html"
+          frameborder="0" @load="handleIframeLoad"></iframe>
       </div>
 
       <!--<button_nenghaoyuce v-model="view1" :sendState="getState" />-->
       <!--<button1 v-model:view1="view1" :view2="view2" :view3="view3" :sendState="getStae"></button1>-->
-      <button_zhuye :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
-      <button_nenghaoyuce :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
-      <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
+
+      <button_zhuye v-if="iframeLoaded" :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
+      <button_nenghaoyuce v-if="iframeLoaded" :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
+      <button_youhuakongzhi v-if="iframeLoaded" :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
 
       <ul class="clearfix" style="z-index: 10; height: inherit">
         <transition name="fade">
-        <li v-if="view1" style="width: 25%">
-          <Statistics />
-          <Equipments />
-          <BarChart />
-        </li>
+          <li v-if="view1" style="width: 25%">
+            <Statistics />
+            <Equipments />
+            <BarChart />
+          </li>
         </transition>
 
         <li style="width: 50%"></li>
 
         <transition name="fade">
-        <li v-if="view1" style="width: 25%">
-          <SlideShow />
-          <Prediction />
-          <WaterPolo />
-        </li>
+          <li v-if="view1" style="width: 25%">
+            <SlideShow />
+            <Prediction />
+            <WaterPolo />
+          </li>
         </transition>
       </ul>
     </div>
@@ -98,7 +99,8 @@ export default {
       view0: true,
       view1: false,
       view2: false,
-      view3: false
+      view3: false,
+      iframeLoaded: false,
     };
   },
   computed: {
@@ -124,6 +126,11 @@ export default {
       const m = dt.getMinutes();
       const s = dt.getSeconds();
       this.currentTime = `${y}/${this.Appendzero(mt)}/${this.Appendzero(day)} ${this.Appendzero(h)}:${this.Appendzero(m)}:${this.Appendzero(s)}`;
+    },
+    handleIframeLoad() {
+      setTimeout(() => {
+        this.iframeLoaded = true;
+      }, 6500);
     },
     Appendzero(obj) {
       return obj < 10 ? `0${obj}` : obj;
@@ -173,6 +180,7 @@ unity-container {
 .fade-leave-active {
   transition: opacity 1s;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
