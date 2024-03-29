@@ -164,8 +164,8 @@ export default {
    // newData[0].setSeconds(currentTime.getSeconds() - 1);
    currentTime.setSeconds(currentTime.getSeconds() + 1); // 增加1秒，即移动到下一个时间点
    currentTime1.setSeconds(currentTime1.getSeconds() + 1);
-   console.log(i);
-   console.log(newData[0], newData[1]);
+  //  console.log(i);
+  //  console.log(newData[0], newData[1]);
   
   }
   this.option.series[0].data = this.data1;
@@ -175,7 +175,7 @@ export default {
   this.myChart.setOption(this.option);
 
   // 打印this.data1
-  console.log(this.data1);
+  // console.log(this.data1);
 },
 
  

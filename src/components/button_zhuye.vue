@@ -24,14 +24,34 @@
 <script>
 
 export default {
-  props: ['view1', 'view2', 'view3'],
+  //props: ['view1', 'view2', 'view3', 'test'],
+  props: {
+    view1: {
+      type: Boolean,
+      default: false,
+    },
+    view3: {
+      type: Boolean,
+      default: false,
+    },
+    view3: {
+      type: Boolean,
+      default: false,
+    },
+    test: {
+      type: Function,
+      default: () => {},
+    },
+  },
 
 
   methods: {
     handleClick() {
       this.$emit('update:view1', true)
       this.$emit('update:view2', false)
-      this.$emit('update:view3', false)      
+      this.$emit('update:view3', false)   
+      
+      this.test();
     }
   }
 }

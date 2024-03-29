@@ -14,19 +14,22 @@
     <div class="head" style="z-index: 10;">
       <h1 style="font-size: xx-large;">数据中心可视化管理平台</h1>
       <div class="time" id="showTime">{{ currentTime }}</div>
+      <!-- <button @click="test">test</button> -->
     </div>
 
     <div class="mainbox">
       <div class="unity-container" style="z-index: -10;">
-        <iframe ref="iframe" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="/Unity/index.html"
+        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="/Unity/index.html"
           frameborder="0"></iframe>
       </div>
 
       <!--<button_nenghaoyuce v-model="view1" :sendState="getState" />-->
       <!--<button1 v-model:view1="view1" :view2="view2" :view3="view3" :sendState="getStae"></button1>-->
-      <button_zhuye :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
+     
+      <button_zhuye :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" :test="test" />
       <button_nenghaoyuce :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
       <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
+      
 
       <ul class="clearfix" style="z-index: 10; height: inherit">
         <transition name="fade">
@@ -37,7 +40,8 @@
         </li>
         </transition>
 
-        <li style="width: 50%"></li>
+        <li style="width: 50%">
+        </li>
 
         <transition name="fade">
         <li v-if="view1" style="width: 25%">
@@ -127,6 +131,10 @@ export default {
     },
     Appendzero(obj) {
       return obj < 10 ? `0${obj}` : obj;
+    },
+    test(){
+      console.log(this.$refs.iframe1.contentWindow.myGameInstance);
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("UI展示界面/总览按钮", "clickMove","");
     }
   }
 }
