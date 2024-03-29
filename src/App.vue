@@ -33,22 +33,22 @@
 
       <ul class="clearfix" style="z-index: 10; height: inherit">
         <transition name="fade">
-        <li v-if="view1" style="width: 25%">
-          <Statistics />
-          <Equipments />
-          <BarChart />
-        </li>
+          <li v-if="view1" style="width: 25%">
+            <Statistics />
+            <Equipments />
+            <BarChart />
+          </li>
         </transition>
 
         <li style="width: 50%">
         </li>
 
         <transition name="fade">
-        <li v-if="view1" style="width: 25%">
-          <SlideShow />
-          <Prediction />
-          <WaterPolo />
-        </li>
+          <li v-if="view1" style="width: 25%">
+            <SlideShow />
+            <Prediction />
+            <WaterPolo />
+          </li>
         </transition>
       </ul>
     </div>
@@ -102,7 +102,8 @@ export default {
       view0: true,
       view1: false,
       view2: false,
-      view3: false
+      view3: false,
+      iframeLoaded: false,
     };
   },
   computed: {
@@ -128,6 +129,11 @@ export default {
       const m = dt.getMinutes();
       const s = dt.getSeconds();
       this.currentTime = `${y}/${this.Appendzero(mt)}/${this.Appendzero(day)} ${this.Appendzero(h)}:${this.Appendzero(m)}:${this.Appendzero(s)}`;
+    },
+    handleIframeLoad() {
+      setTimeout(() => {
+        this.iframeLoaded = true;
+      }, 6500);
     },
     Appendzero(obj) {
       return obj < 10 ? `0${obj}` : obj;
@@ -181,6 +187,7 @@ unity-container {
 .fade-leave-active {
   transition: opacity 1s;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;

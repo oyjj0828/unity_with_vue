@@ -31,45 +31,61 @@ export default {
         tooltip:  {
           trigger: 'axis',
           formatter: function (params) {
-            const time = params[0].value[0];
-            const realValue = params[0].value[1];
-            const predictedValue = params[1].value[1];
-            return time + '<br />' + '真实值: ' + realValue + '<br />' + '预测值: ' + predictedValue;
+            if (typeof params === 'undefined') {
+              return ''; // 如果params为undefined，则返回空字符串
+            }
+            console.log(params)
+
+            if (params.length >= 2) {
+              const time = params[1].value[0];
+
+              const predictedValue = params[1].value[1];
+              const realValue = params[0].value[1];
+              return time + '<br />' + '真实值: ' + realValue + '<br />' + '预测值: ' + predictedValue;
+
+            }
+            else {
+              const time = params[0].value[0];
+
+              const predictedValue = params[0].value[1];
+              console.log(params)
+              return time + '<br />' + '真实值: -' + '<br />' + '预测值: ' + predictedValue;
+            }
           },
 
           axisPointer: {
             animation: false,
             type: 'shadow',
-							crossStyle: {
-								color: '#999'
-							},
+            crossStyle: {
+              color: '#999'
+            },
           },
-          position: function(point, params, dom, rect, size) {
-							var x = 0; // x坐标位置
-							var y = 0; // y坐标位置
-							// 当前鼠标位置
-						    var pointX = point[0];
-							var pointY = point[1];
-							// 提示框大小
-							var boxWidth = size.contentSize[0];
-							var boxHeight = size.contentSize[1];
- 
-							// boxWidth > pointX 说明鼠标左边放不下提示框
-							if (boxWidth > pointX) {
-								x = pointX + 10;
-							} else { // 左边放的下
-								x = pointX - boxWidth - 5;
-							}
- 
-							// boxHeight > pointY 说明鼠标上边放不下提示框
-							if (boxHeight > pointY) {
-								y = 5;
-							} else { // 上边放得下
-								y = pointY - boxHeight;
-							}
-							return [x, y];
-						},
-						
+          position: function (point, params, dom, rect, size) {
+            var x = 0; // x坐标位置
+            var y = 0; // y坐标位置
+            // 当前鼠标位置
+            var pointX = point[0];
+            var pointY = point[1];
+            // 提示框大小
+            var boxWidth = size.contentSize[0];
+            var boxHeight = size.contentSize[1];
+
+            // boxWidth > pointX 说明鼠标左边放不下提示框
+            if (boxWidth > pointX) {
+              x = pointX + 10;
+            } else { // 左边放的下
+              x = pointX - boxWidth - 5;
+            }
+
+            // boxHeight > pointY 说明鼠标上边放不下提示框
+            if (boxHeight > pointY) {
+              y = 5;
+            } else { // 上边放得下
+              y = pointY - boxHeight;
+            }
+            return [x, y];
+          },
+
         },
         grid: {
           top: '15%',
@@ -92,7 +108,7 @@ export default {
         },
         yAxis: {
           type: 'value',
-        
+
           splitLine: {
             show: false
           },
