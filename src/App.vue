@@ -156,7 +156,7 @@ export default {
     //const iframe = document.getElementById('iframe1');
     window.addEventListener('message', (event) => {
       if (event.origin === window.location.origin) {
-        console.log("message")
+        console.log(event.data)
         this.view1 = false;
       }
     });
