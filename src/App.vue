@@ -19,7 +19,7 @@
 
     <div class="mainbox">
       <div class="unity-container" style="z-index: -10;">
-        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="/Unity/index.html"
+        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="/AC_Test2/index.html"
           frameborder="0"></iframe>
       </div>
 
@@ -84,7 +84,7 @@ import OptimParam from '@/components/OptimParam'
 import OptimStrategy from '@/components/OptimStrategy'
 
 
-import { ref } from "vue";
+import Vue, { ref } from "vue";
 
 export default {
 
@@ -130,8 +130,26 @@ export default {
   mounted() {
     this.updateTime();
     setInterval(() => {
-      this.updateTime();
+      this.updateTime();      
     }, 1000);
+
+
+    // window.addEventListener('message', function(e) {
+    //   var res = e.data;
+      
+    //   if(res == 'test'){
+    //     console.log("this.view1");
+    //     this.view1 = false;
+    //   }
+    // }) 
+
+    //const iframe = document.getElementById('iframe1');
+    window.addEventListener('message', (event) => {
+      if (event.origin === window.location.origin) {
+        console.log("message")
+        this.view1 = false;
+      }
+    });
   },
   methods: {
     updateTime() {
@@ -155,6 +173,13 @@ export default {
     test(){
       console.log(this.$refs.iframe1.contentWindow.myGameInstance);
       this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("UI展示界面/总览按钮", "clickMove","");
+    },
+    GetFlag(flag) {
+      console.log("--------------------");
+      if(flag == 1){
+        console.log(flag);
+        this.view1 = this.view2 = this.view3 = false;
+      }
     }
   }
 }
