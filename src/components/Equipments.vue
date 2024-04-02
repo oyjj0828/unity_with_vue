@@ -4,8 +4,7 @@
       <div class="alltitle">IT装备统计</div>
       <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
         _echarts_instance_="ec_1710235324242">
-        <div class="mainbox" style="position: relative; overflow: hidden; width: 100%; height: 100%;
-                  cursor: default;">
+        <div class="mainbox" style="position: relative; overflow: hidden; width: 100%; height: 100%;cursor: default;">
 
           <ul class="clearfix" style="height: inherit">
             <li style="width: 65%;">

@@ -57,7 +57,12 @@
             <Prediction />
             <WaterPolo />
           </li>
+          <li v-else-if="view3" style="width: 25%">
+            <button_FaultMonitor :monitor.sync="monitor"/>
+            <FaultMonitor v-if="view3&&monitor"/>
+          </li>
         </transition>
+        
       </ul>
     </div>
   </div>
@@ -82,6 +87,8 @@ import Prediction from '@/components/Prediction'
 import Statistics from '@/components/Statistics'
 import OptimParam from '@/components/OptimParam'
 import OptimStrategy from '@/components/OptimStrategy'
+import button_FaultMonitor from '@/components/button_FaultMonitor'
+import FaultMonitor from '@/components/FaultMonitor'
 
 
 import Vue, { ref } from "vue";
@@ -107,6 +114,8 @@ export default {
     Statistics,
     OptimParam,
     OptimStrategy,
+    button_FaultMonitor,
+    FaultMonitor,
   },
   data() {
     return {
@@ -117,6 +126,7 @@ export default {
       view2: false,
       view3: false,
       strategy: false,
+      monitor: false,
       iframeLoaded: false,
     };
   },

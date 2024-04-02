@@ -3,7 +3,6 @@
       <div class="boxall" style="height: calc(100% )">
         <div class="alltitle">优化策略</div>
         <dv-scroll-board :config="config" style="position:relative; top:30px; left:20px; width:315px; height:calc(70% )">
-
         </dv-scroll-board>
         <button class="btn2" @click="handleClick">执行</button> 
         <span class="span">预计降低能耗：5.16%</span>
@@ -36,6 +35,9 @@
               columnWidth: [50],
               align: ['center', 'center', 'center'],
               indexHeader: '序号',
+              oddRowBGC: 'rgba(6, 48, 109, 0)',
+              evenRowBGC: 'rgba(6, 48, 109, 0.5)',
+              headerBGC: 'rgba(6, 48, 109, 1)',
             }
           }
         }
@@ -47,27 +49,32 @@
     /* CSS Document */
     @import "../../public/css/comon0.css";
     li{
-        font-size: 16px;
-        font-style: Source Han Sans CN;
-        margin-bottom: 10px;
+      font-size: 16px;
+      font-style: Source Han Sans CN;
+      margin-bottom: 10px;
     }
     .btn2 {
-        position: relative;
-        left:100px;
-        font-size: 18px;
-        border-radius: 100px;
-        width: 80px;
-        top: 40px;
-        background-color: rgb(2, 135, 197);
-  /* 设置圆角 */
+      border: 3px solid #004063;
+      position: relative;
+      left:100px;
+      font-size: 18px;
+      border-radius: 100px;
+      width: 80px;
+      top: 40px;
+      background-color: rgb(2, 135, 197);
+      color:aliceblue;
+    }
+    .btn2:active {
+      background-color: aliceblue;
+      color: rgb(2, 135, 197);
     }
     .span{
       position: relative;
-        left:105px;
-        font-size: 12px;
-        border-radius: 100px;
-        width: 80px;
-        top: 40px;
-        color:rgb(0, 223, 26);
+      left:105px;
+      font-size: 12px;
+      border-radius: 100px;
+      width: 80px;
+      top: 40px;
+      color:rgb(0, 223, 26);
     }
   </style>

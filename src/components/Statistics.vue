@@ -11,7 +11,7 @@
             <li style="width: 5%; height: 100%;"></li>
             <li style="width: 95%; height: 10%;"></li>
             <li style="width: 25%; height: 50%;">
-              <dv-decoration-9 style="width:75px;height:75px;" dur="10">
+              <dv-decoration-9 style="width:75px;height:75px;" dur:10>
                 <span style="font-weight: bold; font-size: 12px;">
                   机柜<br />总数
                 </span>
