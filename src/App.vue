@@ -38,10 +38,18 @@
             <Equipments />
             <BarChart />
           </li>
+          <li v-else-if="view3" style="width: 25%">
+            <OptimParam :strategy.sync="strategy"/>
+          </li>
         </transition>
 
-        <li style="width: 50%">
-        </li>
+        <transition name="fade">
+          <li v-if="view3 && strategy" style="width: 50%">
+            <OptimStrategy />
+          </li>
+          <li v-else style="width: 50%">
+          </li>
+        </transition>
 
         <transition name="fade">
           <li v-if="view1" style="width: 25%">
@@ -72,6 +80,9 @@ import SlideShow from '@/components/SlideShow'
 import WaterPolo from '@/components/WaterPolo'
 import Prediction from '@/components/Prediction'
 import Statistics from '@/components/Statistics'
+import OptimParam from '@/components/OptimParam'
+import OptimStrategy from '@/components/OptimStrategy'
+
 
 import Vue, { ref } from "vue";
 
@@ -93,7 +104,9 @@ export default {
     SlideShow,
     WaterPolo,
     Prediction,
-    Statistics
+    Statistics,
+    OptimParam,
+    OptimStrategy,
   },
   data() {
     return {
@@ -103,6 +116,7 @@ export default {
       view1: false,
       view2: false,
       view3: false,
+      strategy: false,
       iframeLoaded: false,
     };
   },
