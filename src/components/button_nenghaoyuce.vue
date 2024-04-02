@@ -24,7 +24,21 @@
   <script>
   
   export default {
-    props: ['view1', 'view2', 'view3'],
+    //props: ['view1', 'view2', 'view3'],
+    props: {
+    view1: {
+      type: Boolean,
+      default: false,
+    },
+    view2: {
+      type: Boolean,
+      default: false,
+    },
+    view3: {
+      type: Boolean,
+      default: false,
+    },
+  },
   
   
     methods: {

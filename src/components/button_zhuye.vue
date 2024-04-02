@@ -30,7 +30,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    view3: {
+    view2: {
       type: Boolean,
       default: false,
     },
