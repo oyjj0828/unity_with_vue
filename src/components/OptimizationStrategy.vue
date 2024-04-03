@@ -105,7 +105,7 @@ export default {
           this.config.data[7][1]='混合制冷模式';
           this.ret=2;
         };
-        console.log(this.ret);
+        // console.log(this.ret);
         
 
       }
@@ -119,9 +119,9 @@ export default {
 
   methods: {
   handleClick() {
-    console.log("this.mode");
+    // console.log("this.mode");
     this.$emit('update:mode', this.ret);
-    console.log(this.ret);
+    // console.log(this.ret);
   },
 
   updateData() {
