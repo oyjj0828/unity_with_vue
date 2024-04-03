@@ -39,6 +39,10 @@
             <BarChart />
             <!-- <AirConditioningUnitParameters /> -->
           </li>
+          <li v-else-if="view2" style="width: 25%" key="consumption">
+            <ServerPrediction />
+            <RefrigePrediction />
+          </li>
           <li v-else-if="view3" style="width: 25%" key="control">
             <AirConditioningUnitParameters />
             <button_guzhangjiance :chart.sync="chart"/>
@@ -60,6 +64,10 @@
             <SlideShow />
             <Prediction />
             <WaterPolo />
+          </li>
+          <li v-else-if="view2" style="width: 25%" key="consumption">
+            <TemperaturePrediction />
+            <PuePrediction />
           </li>
           <li v-else-if="view3" style="width: 25%" key="none" ></li>
           <li v-else-if="view4" style="width: 25%" key="ACCharts">
@@ -99,6 +107,10 @@ import ACTable from '@/components/ACTable'
 import ECTable from '@/components/ECTable'
 import AirConditioningUnitParameters from '@/components/AirConditioningUnitParameters'
 import OptimizationStrategy from '@/components/OptimizationStrategy'
+import ServerPrediction from '@/components/ServerPrediction'
+import RefrigePrediction from '@/components/RefrigePrediction'
+import TemperaturePrediction from '@/components/TemperaturePrediction'
+import PuePrediction from '@/components/PuePrediction'
 
 
 import Vue, { ref } from "vue";
@@ -129,6 +141,10 @@ export default {
     ECTable,
     AirConditioningUnitParameters,
     OptimizationStrategy,
+    ServerPrediction,
+    RefrigePrediction,
+    TemperaturePrediction,
+    PuePrediction,
   },
   data() {
     return {
