@@ -68,6 +68,7 @@
             <ECTable />
           </li>
         </transition>
+        
       </ul>
     </div>
   </div>
@@ -137,6 +138,7 @@ export default {
       view4: false,
       view5: false,
       strategy: false,
+      monitor: false,
       iframeLoaded: false,
     };
   },

@@ -33,7 +33,6 @@
   </script>
 
 
-  
   <style>
     /* @charset "utf-8";
     /* CSS Document */
@@ -44,12 +43,17 @@
         /* margin-bottom: 10px; 
     } */
     .btn {
-        position: relative;
-        left:125px;
-        font-size: 18px;
-        border-radius: 100px;
-        width: 100px;
-        background-color: rgb(2, 135, 197);
-  /* 设置圆角 */
+      border: 3px solid #004063;
+      position: relative;
+      left:125px;
+      font-size: 18px;
+      border-radius: 100px;
+      width: 100px;
+      background-color: rgb(2, 135, 197);
+      color:aliceblue;
+    }
+    .btn:active {
+      background-color: aliceblue;
+      color: rgb(2, 135, 197);
     }
   </style>
