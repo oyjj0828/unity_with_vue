@@ -1,5 +1,5 @@
 <template>
-  <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(33% ); z-index: 11;">
+  <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(100% ); z-index: 11;">
     <div class="boxall" style="height: calc(100% )">
       <div class="alltitle">故障监测</div>
     

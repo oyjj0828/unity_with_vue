@@ -41,6 +41,7 @@
           </li>
           <li v-else-if="view3" style="width: 25%" key="control">
             <AirConditioningUnitParameters />
+            <button_guzhangjiance :chart.sync="chart"/>
           </li>
           <li v-else-if="view4" style="width: 25%" key="control1"></li>
           <li v-else-if="view5" style="width: 25%" key="control2"></li>
@@ -82,6 +83,7 @@ import '../public/js/echarts.min.js'
 import button_zhuye from './components/button_zhuye.vue'
 import button_nenghaoyuce from './components/button_nenghaoyuce.vue'
 import button_youhuakongzhi from './components/button_youhuakongzhi.vue'
+import button_guzhangjiance from '@/components/button_guzhangjiance'
 
 /* Components */
 import Temperature from '@/components/Temperature'
@@ -112,6 +114,7 @@ export default {
     button_zhuye,
     button_nenghaoyuce,
     button_youhuakongzhi,
+    button_guzhangjiance,
 
     Equipments,
     Temperature,
@@ -140,6 +143,7 @@ export default {
       strategy: false,
       monitor: false,
       iframeLoaded: false,
+      chart: false,
     };
   },
   computed: {

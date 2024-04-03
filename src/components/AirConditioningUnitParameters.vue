@@ -1,26 +1,45 @@
 <template>
-  <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(50% ); z-index: 11;">
-    <div class="boxall" style="height: calc(100% )">
-      <div class="alltitle">工作状态</div>
+  <div style="height: 100%;">
+    <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(40% ); z-index: 11;">
+      <div class="boxall" style="height: calc(100% )">
+        <div class="alltitle">空调机组参数</div>
 
-      <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
-        _echarts_instance_="ec_1710235324242">
-        <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
+        <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
+          _echarts_instance_="ec_1710235324242">
+          <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
                    padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
-          <div style="height:5%;"></div>
+            <div style="height:5%;"></div>
 
-          <dv-scroll-board :config="config" :key="updateDataCount + '-' + initDataCount"
-            style="width:100%; height:75%" />
-          <button class="button" @click="handleClick">优化策略</button>
-
-
-        </div>
-        <div v-if="test">
-          <OptimizationStrategy :Temperature="Temperature" :mode.sync="mode" />
+            <dv-scroll-board :config="config" :key="updateDataCount + '-' + initDataCount"
+              style="width:100%; height:95%" />
+          </div>
         </div>
       </div>
+    </dv-border-box-13>
+
+    <p v-if="!this.test" style="height: 10%;">
+      <dv-border-box-12 style="height: 50px; width: 150px; top: 20%; left: 114.13px;">
+        <button class="rounded-btn" @click="handleClick" style="z-index: 20; width: 150px; height: 50px;">
+          <span style="font-size: 18px; font-weight: bold; color: azure;">
+            能耗预测
+          </span>
+        </button>
+      </dv-border-box-12>
+    </p>
+    <p v-else style="height: 10%;">
+      <dv-border-box-12 backgroundColor="rgba(6, 48, 109, .5)"
+        style="height: 50px; width: 150px; top: 20%; left: 114.13px;">
+        <button class="rounded-btn" @click="handleClick" style="z-index: 20; width: 150px; height: 50px;">
+          <span style="font-size: 18px; font-weight: bold; color: azure;">
+            能耗预测
+          </span>
+        </button>
+      </dv-border-box-12>
+    </p>
+    <div v-if="test" style="height: calc(50%);">
+      <OptimizationStrategy :temperature="Temperature" :mode.sync="mode" />
     </div>
-  </dv-border-box-13>
+  </div>
 </template>
 
 <script>
@@ -60,15 +79,14 @@ export default {
 
       initDataCount: 0,
       updateDataCount: 0,
-      boardKey: 0,// 初始key
+      boardKey: 0, // 初始key
 
       Temperature: [],
+
     };
   },
   created() {
-    // 初始时遍历数据进行标红
 
-    // 每隔一秒更新数据
     setInterval(() => {
       this.updateData();
     }, 5000);
@@ -77,42 +95,17 @@ export default {
     }, 500);
   },
   methods: {
-    // TemperatureStatus(Temperature1,Temperature2){
-    //   if(Temperature1<=16){
-    //     return 0;
-    //   };
-    //   if(Temperature1>16 && Temperature2<=19){
-    //     return 1;
-    //   };
-    //   if(Temperature2>19){
-    //     return 2;
-    //   };
-    // },
+
     handleClick() {
-      // 设置status
-      //console.log(this.config.data[2][1]);
-      // console.log(this.config.data[3][1]);
-      //  const Temperature1 = parseFloat(this.config.data[2][1].slice(0, -2)); 
-      //   const Temperature2 = parseFloat(this.config.data[3][1].slice(0, -2)); 
-      //console.log(Temperature1);
-      //console.log(Temperature2);
-      // this.status = this.TemperatureStatus(Temperature1, Temperature2);
-      // console.log(this.status);
-      // 发送更新后的 status 给子组件
-      // this.$emit('update:status', this.status);
-      // 在这里处理点击事件
-      // if(this.strategy){
-      //   this.$emit('update:strategy', false);
-      //   // this.$emit('send-data', this.status);
-      // }
-      // else{
-      //   this.$emit('update:strategy', true);
-      //   // this.$emit('send-data', this.status);
-      // }
-      this.test = !this.test;
+      this.test = !(this.test);
     },
 
     updateData() {
+
+
+
+
+
       // 修改第三行和第四行的第二列数据
       // 第三行第二列数据范围在10-23之间
       const DryBulbTemperature = (Math.random() * 13 + 10).toFixed(2)
@@ -131,7 +124,6 @@ export default {
       this.updateDataCount += 1;
     },
     changemode() {
-      console.log(this.mode);
       if (this.mode == 0) {
         this.config.data[1][1] = '干模式';
       };
@@ -144,10 +136,6 @@ export default {
       };
       // 更新 key，强制重新渲染组件
       this.initDataCount += 1;
-    },
-    mode1(data) {
-      console.log("传来：", data);
-      this.mode = data;
     }
   }
 
