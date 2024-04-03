@@ -6,7 +6,7 @@
 
         </dv-scroll-board>
         <button class="btn2" @click="handleClick">执行</button> 
-        <span class="span">预计降低能耗：5.16%</span>
+        <span class="span">预计降低能耗: 5.16%</span>
       </div>
     </dv-border-box-13>
   </template>
@@ -46,7 +46,7 @@
     /* @charset "utf-8";
     /* CSS Document */
     @import "../../public/css/comon0.css";
-    li{
+    .li{
         font-size: 16px;
         font-style: Source Han Sans CN;
         margin-bottom: 10px;

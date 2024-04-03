@@ -32,30 +32,40 @@
       
 
       <ul class="clearfix" style="z-index: 10; height: inherit">
-        <transition name="fade">
-          <li v-if="view1" style="width: 25%">
+        <transition name="fade" mode="out-in">
+          <li v-if="view1" style="width: 25%" key="hone">
             <Statistics />
             <Equipments />
             <BarChart />
+            <!-- <AirConditioningUnitParameters /> -->
           </li>
-          <li v-else-if="view3" style="width: 25%">
-            <OptimParam :strategy.sync="strategy"/>
+          <li v-else-if="view3" style="width: 25%" key="control">
+            <AirConditioningUnitParameters />
           </li>
+          <li v-else-if="view4" style="width: 25%" key="control1"></li>
+          <li v-else-if="view5" style="width: 25%" key="control2"></li>
         </transition>
 
-        <transition name="fade">
-          <li v-if="view3 && strategy" style="width: 50%">
+        <transition name="fade" mode="out-in">
+          <!-- <li v-if="view3 && strategy" style="width: 50%" key="control-1">
             <OptimStrategy />
-          </li>
-          <li v-else style="width: 50%">
+          </li> -->
+          <li style="width: 50%" key="none">
           </li>
         </transition>
 
-        <transition name="fade">
-          <li v-if="view1" style="width: 25%">
+        <transition name="fade" mode="out-in">
+          <li v-if="view1" style="width: 25%" key="home">
             <SlideShow />
             <Prediction />
             <WaterPolo />
+          </li>
+          <li v-else-if="view3" style="width: 25%" key="none"></li>
+          <li v-else-if="view4" style="width: 25%" key="ACCharts">
+            <ACTable />
+          </li>
+          <li v-else-if="view5" style="width: 25%" key="ECCharts">
+            <ECTable />
           </li>
         </transition>
       </ul>
@@ -82,6 +92,10 @@ import Prediction from '@/components/Prediction'
 import Statistics from '@/components/Statistics'
 import OptimParam from '@/components/OptimParam'
 import OptimStrategy from '@/components/OptimStrategy'
+import ACTable from '@/components/ACTable'
+import ECTable from '@/components/ECTable'
+import AirConditioningUnitParameters from '@/components/AirConditioningUnitParameters'
+import OptimizationStrategy from '@/components/OptimizationStrategy'
 
 
 import Vue, { ref } from "vue";
@@ -107,6 +121,10 @@ export default {
     Statistics,
     OptimParam,
     OptimStrategy,
+    ACTable,
+    ECTable,
+    AirConditioningUnitParameters,
+    OptimizationStrategy,
   },
   data() {
     return {
@@ -116,6 +134,8 @@ export default {
       view1: false,
       view2: false,
       view3: false,
+      view4: false,
+      view5: false,
       strategy: false,
       iframeLoaded: false,
     };
@@ -146,8 +166,17 @@ export default {
     //const iframe = document.getElementById('iframe1');
     window.addEventListener('message', (event) => {
       if (event.origin === window.location.origin) {
-        console.log(event.data)
+        // console.log(event.data)
         this.view1 = false;
+        this.view3 = false;
+        this.view4 = false;
+        this.view5 = false;
+        if (event.data == "AC"){
+          this.view4 = true;
+        }
+        else if (event.data == "EC"){
+          this.view5 = true;
+        }
       }
     });
   },
@@ -171,13 +200,13 @@ export default {
       return obj < 10 ? `0${obj}` : obj;
     },
     test(){
-      console.log(this.$refs.iframe1.contentWindow.myGameInstance);
+      // console.log(this.$refs.iframe1.contentWindow.myGameInstance);
       this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("UI展示界面/总览按钮", "clickMove","");
     },
     GetFlag(flag) {
-      console.log("--------------------");
+      // console.log("--------------------");
       if(flag == 1){
-        console.log(flag);
+        // console.log(flag);
         this.view1 = this.view2 = this.view3 = false;
       }
     }
@@ -224,7 +253,7 @@ unity-container {
 /* 定义过渡效果 */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 1s;
+  transition: opacity .5s;
 }
 
 .fade-enter,

@@ -38,11 +38,11 @@
     /* @charset "utf-8";
     /* CSS Document */
     @import "../../public/css/comon0.css";
-    li{
+    /* li{
         font-size: 16px;
         font-style: Source Han Sans CN;
-        margin-bottom: 10px;
-    }
+        /* margin-bottom: 10px; 
+    } */
     .btn {
         position: relative;
         left:125px;
