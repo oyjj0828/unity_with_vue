@@ -61,7 +61,7 @@
             <Prediction />
             <WaterPolo />
           </li>
-          <li v-else-if="view3" style="width: 25%" key="none"></li>
+          <li v-else-if="view3" style="width: 25%" key="none" ></li>
           <li v-else-if="view4" style="width: 25%" key="ACCharts">
             <ACTable />
           </li>
