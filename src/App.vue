@@ -93,8 +93,6 @@ import SlideShow from '@/components/SlideShow'
 import WaterPolo from '@/components/WaterPolo'
 import Prediction from '@/components/Prediction'
 import Statistics from '@/components/Statistics'
-import OptimParam from '@/components/OptimParam'
-import OptimStrategy from '@/components/OptimStrategy'
 import ACTable from '@/components/ACTable'
 import ECTable from '@/components/ECTable'
 import AirConditioningUnitParameters from '@/components/AirConditioningUnitParameters'
@@ -123,8 +121,6 @@ export default {
     WaterPolo,
     Prediction,
     Statistics,
-    OptimParam,
-    OptimStrategy,
     ACTable,
     ECTable,
     AirConditioningUnitParameters,

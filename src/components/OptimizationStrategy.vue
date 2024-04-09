@@ -92,7 +92,6 @@ export default {
   watch: {
     temperature: {
       handler (newData, oldData){
-
         if(newData[0]<=16){
           this.config.data[7][1]='干模式';
           this.ret=0;
@@ -105,9 +104,7 @@ export default {
           this.config.data[7][1]='混合制冷模式';
           this.ret=2;
         };
-        // console.log(this.ret);
-        
-
+        // console.log(this.ret);     
       }
     },
   deep: true
