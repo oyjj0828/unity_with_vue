@@ -21,7 +21,7 @@
       <dv-border-box-12 style="height: 50px; width: 150px; top: 20%; left: 114.13px;">
         <button class="rounded-btn" @click="handleClick" style="z-index: 20; width: 150px; height: 50px;">
           <span style="font-size: 18px; font-weight: bold; color: azure;">
-            能耗预测
+            优化策略
           </span>
         </button>
       </dv-border-box-12>
@@ -31,7 +31,7 @@
         style="height: 50px; width: 150px; top: 20%; left: 114.13px;">
         <button class="rounded-btn" @click="handleClick" style="z-index: 20; width: 150px; height: 50px;">
           <span style="font-size: 18px; font-weight: bold; color: azure;">
-            能耗预测
+            优化策略
           </span>
         </button>
       </dv-border-box-12>
