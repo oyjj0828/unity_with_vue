@@ -19,7 +19,7 @@
 
     <div class="mainbox">
       <div class="unity-container" style="z-index: -10;">
-        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="/AC_Test2/index.html"
+        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="/Unity/index.html"
           frameborder="0"></iframe>
       </div>
 
@@ -112,6 +112,7 @@ import PuePrediction from '@/components/PuePrediction'
 
 
 import Vue, { ref } from "vue";
+import axios from 'axios';
 
 export default {
 
@@ -156,6 +157,7 @@ export default {
       monitor: false,
       iframeLoaded: false,
       chart: false,
+      data: null,
     };
   },
   computed: {
@@ -170,8 +172,8 @@ export default {
     setInterval(() => {
       this.updateTime();      
     }, 1000);
-
-
+    // this.fetchData();
+    // this.interval = setInterval(this.fetchData, 100000);
     // window.addEventListener('message', function(e) {
     //   var res = e.data;
       
@@ -197,6 +199,9 @@ export default {
         }
       }
     });
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
   },
   methods: {
     updateTime() {
@@ -227,6 +232,15 @@ export default {
         // console.log(flag);
         this.view1 = this.view2 = this.view3 = false;
       }
+    },
+    fetchData: function() {
+      axios.get('http://localhost:8000/consumption?page=1')
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
   }
 }
