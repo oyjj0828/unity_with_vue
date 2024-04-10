@@ -92,11 +92,25 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
+          unityInstance.SendMessage("UI展示界面/总览按钮", "clickMove", "");
           loadingBar.style.display = "none";
+          myGameInstance = unityInstance;
         }).catch((message) => {
           alert(message);
         });
       };
+      function GetFlag(flag) {
+        // console.log("+++++++++++-----+++++++++++");
+        // console.log(flag);
+        if (flag == "1") {
+          // console.log("flag");
+          window.parent.postMessage('AC', '*');
+        }
+        else if (flag == 2) {
+          // console.log("flag2");
+          window.parent.postMessage('EC', '*');
+        }
+      }
       document.body.appendChild(script);
     </script>
   </body>

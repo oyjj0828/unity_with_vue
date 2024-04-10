@@ -29,7 +29,10 @@
       <button_zhuye :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" :test="test" />
       <button_nenghaoyuce :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
       <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
-      
+      <button_nenghaorelitu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"/>
+      <button_nenghaoliudongtu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"/>
+      <button_wendufenbutu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"/>
+      <button_tanpaifangjiance :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"/>
 
       <ul class="clearfix" style="z-index: 10; height: inherit">
         <transition name="fade" mode="out-in">
@@ -92,6 +95,10 @@ import button_zhuye from './components/button_zhuye.vue'
 import button_nenghaoyuce from './components/button_nenghaoyuce.vue'
 import button_youhuakongzhi from './components/button_youhuakongzhi.vue'
 import button_guzhangjiance from '@/components/button_guzhangjiance'
+import button_nenghaorelitu from '@/components/button_nenghaorelitu'
+import button_nenghaoliudongtu from '@/components/button_nenghaoliudongtu'
+import button_wendufenbutu from '@/components/button_wendufenbutu'
+import button_tanpaifangjiance from '@/components/button_tanpaifangjiance'
 
 /* Components */
 import Temperature from '@/components/Temperature'
@@ -110,7 +117,6 @@ import RefrigePrediction from '@/components/RefrigePrediction'
 import TemperaturePrediction from '@/components/TemperaturePrediction'
 import PuePrediction from '@/components/PuePrediction'
 
-
 import Vue, { ref } from "vue";
 import axios from 'axios';
 
@@ -126,6 +132,10 @@ export default {
     button_nenghaoyuce,
     button_youhuakongzhi,
     button_guzhangjiance,
+    button_nenghaorelitu,
+    button_nenghaoliudongtu,
+    button_wendufenbutu,
+    button_tanpaifangjiance,
 
     Equipments,
     Temperature,
@@ -153,6 +163,10 @@ export default {
       view3: false,
       view4: false,
       view5: false,
+      top1:false,
+      top2:false,
+      top3:false,
+      top4:false,
       strategy: false,
       monitor: false,
       iframeLoaded: false,
@@ -264,13 +278,15 @@ unity-container {
 }
 
 .rounded-btn {
+  white-space: nowrap;
   border: none;
   /* 去除默认边框 */
   background-color: transparent;
   /* 设置背景色 */
-  color: rgb(0, 174, 255);
+  font-weight: bold; 
+  color: azure;
   /* 设置字体颜色 */
-  padding: 12px 36px;
+  padding: 12px 0px;
   /* 调整按钮大小 */
   text-align: center;
   /* 居中显示文本 */
