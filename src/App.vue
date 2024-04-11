@@ -32,51 +32,51 @@
       <button_nenghaorelitu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"/>
       <button_nenghaoliudongtu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"/>
       <button_wendufenbutu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"/>
-      <button_tanpaifangjiance :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"/>
+      <button_tanpaifangjiance :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" :chart.sync="chart2"/>
 
       <ul class="clearfix" style="z-index: 10; height: inherit">
         <transition name="fade" mode="out-in">
-          <li v-if="view1" style="width: 25%" key="hone">
+          <li v-if="view1" style="width: 22%" key="hone">
             <Statistics />
             <Equipments />
             <BarChart />
             <!-- <AirConditioningUnitParameters /> -->
           </li>
-          <li v-else-if="view2" style="width: 25%" key="consumption">
+          <li v-else-if="view2" style="width: 22%" key="consumption">
             <ServerPrediction />
             <RefrigePrediction />
           </li>
-          <li v-else-if="view3" style="width: 25%" key="control">
+          <li v-else-if="view3" style="width: 22%" key="control">
             <AirConditioningUnitParameters />
             <button_guzhangjiance :chart.sync="chart"/>
           </li>
-          <li v-else-if="view4" style="width: 25%" key="control1"></li>
-          <li v-else-if="view5" style="width: 25%" key="control2"></li>
+          <li v-else-if="view4" style="width: 22%" key="control1"></li>
+          <li v-else-if="view5" style="width: 22%" key="control2"></li>
         </transition>
 
         <transition name="fade" mode="out-in">
           <!-- <li v-if="view3 && strategy" style="width: 50%" key="control-1">
             <OptimStrategy />
           </li> -->
-          <li style="width: 50%" key="none">
+          <li style="width: 56%" key="none">
           </li>
         </transition>
 
         <transition name="fade" mode="out-in">
-          <li v-if="view1" style="width: 25%" key="home">
-            <SlideShow />
+          <li v-if="view1" style="width: 22%" key="home">
+            <Overview />
             <Prediction />
             <WaterPolo />
           </li>
-          <li v-else-if="view2" style="width: 25%" key="consumption">
+          <li v-else-if="view2" style="width: 22%" key="consumption">
             <TemperaturePrediction />
             <PuePrediction />
           </li>
-          <li v-else-if="view3" style="width: 25%" key="none" ></li>
-          <li v-else-if="view4" style="width: 25%" key="ACCharts">
+          <li v-else-if="view3" style="width: 22%" key="none" ></li>
+          <li v-else-if="view4" style="width: 22%" key="ACCharts">
             <ACTable />
           </li>
-          <li v-else-if="view5" style="width: 25%" key="ECCharts">
+          <li v-else-if="view5" style="width: 22%" key="ECCharts">
             <ECTable />
           </li>
         </transition>
@@ -116,6 +116,7 @@ import ServerPrediction from '@/components/ServerPrediction'
 import RefrigePrediction from '@/components/RefrigePrediction'
 import TemperaturePrediction from '@/components/TemperaturePrediction'
 import PuePrediction from '@/components/PuePrediction'
+import Overview from '@/components/Overview'
 
 import Vue, { ref } from "vue";
 import axios from 'axios';
@@ -152,6 +153,7 @@ export default {
     RefrigePrediction,
     TemperaturePrediction,
     PuePrediction,
+    Overview,
   },
   data() {
     return {
@@ -171,6 +173,7 @@ export default {
       monitor: false,
       iframeLoaded: false,
       chart: false,
+      chart2: false,
       data: null,
     };
   },

@@ -13,11 +13,9 @@
           <ul style="position: relative;  height: 15%;">
             
             <li style="width: 30%; height: 100%">
-              <dv-border-box-10 style="position:absolute; height: 40px; left:40px; width: 100px; top: 10px;">
-                <button class="rounded-btn-Optimization" @click="handleClick" style="z-index: 20; width: 100px; height: 40px;">
-                  <span style="font-size: 14px; font-weight: bold; color: azure;">
-                    执行
-                  </span>
+              <dv-border-box-10 style="position:absolute; height: 40px; left:35px; width: 80px; top: 10px;">
+                <button class="rounded-btn-Optimization" @click="handleClick" style="z-index: 20; width: inherit; height: inherit;">
+                  执行
                 </button>
               </dv-border-box-10>
             </li>
@@ -122,17 +120,20 @@ export default {
   /* 去除默认边框 */
   background-color: transparent;
   /* 设置背景色 */
-  color: rgb(0, 174, 255);
+  color: azure;
   /* 设置字体颜色 */
-  padding: 0px 36px;
+  padding: 0px 24px;
   /* 调整按钮大小 */
   text-align: center;
   /* 居中显示文本 */
-  font-size: 18px;
+  font-size: 16px;
   /* 设置字号 */
   cursor: pointer;
   /* 光标变成手型 */
   border-radius: 100px;
+  font-weight: bold;
+  cursor: pointer;
+
   /* 设置圆角 */
 }
 
