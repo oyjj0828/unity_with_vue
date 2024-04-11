@@ -19,8 +19,8 @@
 
     <div class="mainbox">
       <div class="unity-container" style="z-index: -10;">
-        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;"
-          src="/new/index.html" frameborder="0"></iframe>
+        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="/new/index.html"
+          frameborder="0"></iframe>
       </div>
 
       <!--<button_nenghaoyuce v-model="view1" :sendState="getState" />-->
@@ -159,6 +159,7 @@ export default {
     TemperaturePrediction,
     PuePrediction,
     TestBackend,
+    Overview
   },
   data() {
     return {
@@ -170,10 +171,10 @@ export default {
       view3: false,
       view4: false,
       view5: false,
-      top1:false,
-      top2:false,
-      top3:false,
-      top4:false,
+      top1: false,
+      top2: false,
+      top3: false,
+      top4: false,
       strategy: false,
       monitor: false,
       iframeLoaded: false,
@@ -247,7 +248,7 @@ export default {
     },
     test() {
       // console.log(this.$refs.iframe1.contentWindow.myGameInstance);
-      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("test/F4/Overview", "clickMove","");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("test/F4/Overview", "clickMove", "");
     },
     GetFlag(flag) {
       // console.log("--------------------");
@@ -283,7 +284,7 @@ unity-container {
   /* 去除默认边框 */
   background-color: transparent;
   /* 设置背景色 */
-  font-weight: bold; 
+  font-weight: bold;
   color: azure;
   /* 设置字体颜色 */
   padding: 12px 0px;
