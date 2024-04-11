@@ -30,7 +30,6 @@ export default {
     return {
       config: {
         data: [
-
           ['输入电压：', '240V'],
           ['输出电压：', '220V'],
           ['输入频率：', '50Hz'],

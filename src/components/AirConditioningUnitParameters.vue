@@ -1,7 +1,7 @@
 <template>
   <div style="height: 100%;">
     <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(40% ); z-index: 11;">
-      <div class="boxall" style="height: calc(100% )">
+      <div class="boxall" style="height: calc(96% )">
         <div class="alltitle">空调机组参数</div>
 
         <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
@@ -18,23 +18,23 @@
     </dv-border-box-13>
 
     <p v-if="!this.test" style="height: 10%;">
-      <dv-border-box-12 style="height: 50px; width: 150px; top: 20%; left: 114.13px;">
+      <dv-border-box-10 style="height: 50px; width: 150px; top: 12%; left: 114.13px;">
         <button class="rounded-btn" @click="handleClick" style="z-index: 20; width: 150px; height: 50px;">
           <span style="font-size: 18px; font-weight: bold; color: azure;">
             优化策略
           </span>
         </button>
-      </dv-border-box-12>
+      </dv-border-box-10>
     </p>
     <p v-else style="height: 10%;">
-      <dv-border-box-12 backgroundColor="rgba(6, 48, 109, .5)"
-        style="height: 50px; width: 150px; top: 20%; left: 114.13px;">
+      <dv-border-box-10 backgroundColor="rgba(6, 48, 109, .5)"
+        style="height: 50px; width: 150px; top: 12%; left: 114.13px;">
         <button class="rounded-btn" @click="handleClick" style="z-index: 20; width: 150px; height: 50px;">
           <span style="font-size: 18px; font-weight: bold; color: azure;">
             优化策略
           </span>
         </button>
-      </dv-border-box-12>
+      </dv-border-box-10>
     </p>
     <div v-if="test" style="height: calc(50%);">
       <OptimizationStrategy :temperature="Temperature" :mode.sync="mode" />

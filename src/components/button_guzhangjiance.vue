@@ -1,14 +1,14 @@
 <template>
-  <div style="position: absolute; width: 50px; height: 200px; left: 95%; top: 30%; z-index: 10;">
+  <div style="position: absolute; width: 50px; height: 200px; left: 96.5%; top: 30%; z-index: 10;">
     <div v-if="chart">
-      <dv-border-box-12 backgroundColor="rgba(6, 48, 109, .5)">
+      <dv-border-box-8 backgroundColor="rgba(6, 48, 109, .5)">
         <button class="btn_test" @click="handleClick" style="z-index: 20; width: 50px; height: 200px;">
           <span style="font-size: 21px; font-weight: bold; color: azure;">
             故障检测
           </span>
         </button>
-      </dv-border-box-12>
-      <div style="position: absolute; right: 80px; top: -4.92px; height: 209.84px; width: 358.5px;">
+      </dv-border-box-8>
+      <div style="position: absolute; right: 55px; top: -80px; height: 400px; width: 370px;">
       
         <ErrorAct />
     
@@ -17,13 +17,13 @@
     </div>
   
     <div v-else>
-      <dv-border-box-12 style="width: 72dx;">
+      <dv-border-box-8 style="width: 72dx;">
         <button class="btn_test" @click="handleClick" style="z-index: 20; width: 50px; height: 200px; left: -11px">
           <span style="font-size: 21px; font-weight: bold; color: azure;">
             故障检测
           </span>
         </button>
-      </dv-border-box-12>
+      </dv-border-box-8>
     </div>
   </div>
 </template>
