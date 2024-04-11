@@ -18,18 +18,21 @@
     </div>
 
     <div class="mainbox">
-      <!-- <div class="unity-container" style="z-index: -10;">
+      <div class="unity-container" style="z-index: -10;">
         <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;"
           src="/Unity/index.html" frameborder="0"></iframe>
-      </div> -->
+      </div>
 
       <!--<button_nenghaoyuce v-model="view1" :sendState="getState" />-->
       <!--<button1 v-model:view1="view1" :view2="view2" :view3="view3" :sendState="getStae"></button1>-->
 
       <button_zhuye :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" :test="test" />
       <button_nenghaoyuce :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
-      <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
-      
+      <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3"/>
+      <button_nenghaorelitu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
+      <button_nenghaoliudongtu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
+      <button_wendufenbutu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
+      <button_tanpaifangjiance :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
 
       <ul class="clearfix" style="z-index: 10; height: inherit">
         <transition name="fade" mode="out-in">
@@ -64,6 +67,7 @@
             <!-- <SlideShow />
             <Prediction />
             <WaterPolo /> -->
+            <Overview />
             <TestBackend />
           </li>
           <li v-else-if="view2" style="width: 25%" key="consumption">
@@ -114,6 +118,8 @@ import ServerPrediction from '@/components/ServerPrediction'
 import RefrigePrediction from '@/components/RefrigePrediction'
 import TemperaturePrediction from '@/components/TemperaturePrediction'
 import PuePrediction from '@/components/PuePrediction'
+import TestBackend from '@/components/TestBackend'
+import Overview from '@/components/Overview'
 
 
 import Vue, { ref } from "vue";
@@ -151,6 +157,7 @@ export default {
     TemperaturePrediction,
     PuePrediction,
     TestBackend,
+    Overview
   },
   data() {
     return {
