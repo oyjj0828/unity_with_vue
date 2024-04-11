@@ -18,10 +18,10 @@
     </div>
 
     <div class="mainbox">
-      <!-- <div class="unity-container" style="z-index: -10;">
+      <div class="unity-container" style="z-index: -10;">
         <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;"
-          src="/Unity/index.html" frameborder="0"></iframe>
-      </div> -->
+          src="/new/index.html" frameborder="0"></iframe>
+      </div>
 
       <!--<button_nenghaoyuce v-model="view1" :sendState="getState" />-->
       <!--<button1 v-model:view1="view1" :view2="view2" :view3="view3" :sendState="getStae"></button1>-->
@@ -29,7 +29,7 @@
       <button_zhuye :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" :test="test" />
       <button_nenghaoyuce :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
       <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
-      
+
 
       <ul class="clearfix" style="z-index: 10; height: inherit">
         <transition name="fade" mode="out-in">
@@ -42,6 +42,8 @@
           <li v-else-if="view2" style="width: 25%" key="consumption">
             <ServerPrediction />
             <RefrigePrediction />
+            <!-- <TestBackend Name="服务器能耗预测"/>
+            <TestBackend Name="空调能耗预测"/> -->
           </li>
           <li v-else-if="view3" style="width: 25%" key="control">
             <AirConditioningUnitParameters />
@@ -61,14 +63,16 @@
 
         <transition name="fade" mode="out-in">
           <li v-if="view1" style="width: 25%" key="home">
-            <!-- <SlideShow />
+            <SlideShow />
             <Prediction />
-            <WaterPolo /> -->
-            <TestBackend />
+            <WaterPolo />
+            <!-- <TestBackend Name="设备占用情况"/> -->
           </li>
           <li v-else-if="view2" style="width: 25%" key="consumption">
             <TemperaturePrediction />
-            <PuePrediction />
+            <!-- <PuePrediction /> -->
+            <!-- <TestBackend Name="室内温度预测"/>
+            <TestBackend Name="PUE预测"/> -->
           </li>
           <li v-else-if="view3" style="width: 25%" key="none"></li>
           <li v-else-if="view4" style="width: 25%" key="ACCharts">
@@ -114,9 +118,13 @@ import ServerPrediction from '@/components/ServerPrediction'
 import RefrigePrediction from '@/components/RefrigePrediction'
 import TemperaturePrediction from '@/components/TemperaturePrediction'
 import PuePrediction from '@/components/PuePrediction'
+import TestBackend from '@/components/TestBackend'
+
+import axios from 'axios';
 
 
 import Vue, { ref } from "vue";
+
 
 export default {
 
@@ -202,6 +210,7 @@ export default {
       if (event.origin === window.location.origin) {
         // console.log(event.data)
         this.view1 = false;
+        this.view2 = false;
         this.view3 = false;
         this.view4 = false;
         this.view5 = false;
@@ -238,7 +247,7 @@ export default {
     },
     test() {
       // console.log(this.$refs.iframe1.contentWindow.myGameInstance);
-      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("UI展示界面/总览按钮", "clickMove", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("test/F4/Overview", "clickMove","");
     },
     GetFlag(flag) {
       // console.log("--------------------");
@@ -246,7 +255,7 @@ export default {
         // console.log(flag);
         this.view1 = this.view2 = this.view3 = false;
       }
-    }
+    },
   }
 }
 </script>

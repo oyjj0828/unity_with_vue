@@ -1,7 +1,7 @@
 <template>
   <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(33% ); z-index: 11;">
     <div class="boxall" style="height: calc(100% )">
-      <div class="alltitle">设备占用情况</div>
+      <div class="alltitle">{{ Name }}</div>
       <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
         _echarts_instance_="ec_1710235324242">
         <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
@@ -24,6 +24,7 @@ const axiosInstance = axios.create({
 
 
 export default {
+  props:['Name'],
   data() {
     return {
       records: [],
@@ -61,9 +62,7 @@ export default {
             }
             else {
               const time = params[0].value[0];
-
-              const predictedValue = params[0].value[1];
-              // console.log(params)
+              const predictedValue = params[0].value[1]; 
               return time + '<br />' + '真实值: -' + '<br />' + '预测值: ' + predictedValue;
             }
           },
@@ -153,7 +152,6 @@ export default {
   },
   mounted() {
     this.initChart();
-    // setInterval(this.updateData, 1000);
     this.timer = setInterval(() => {
       this.fetchDataAndUpdate();
     }, 10000);
@@ -169,142 +167,112 @@ export default {
   },
   methods: {
     fetchDataAndUpdate() {
-      axiosInstance.get('/next-n-records/')
+      axiosInstance.get('/next-an-records', {
+        params: { batch_size: 5 }
+      })
         .then(response => {
-          this.records = response.data;
-          this.consumption = this.records.map(record => record.Consumption)
-          this.records = this.records.map(record => (new Date(record.time)))
-          console.log('工耗:', this.consumption, 'Time:', this.records, 'CurTime:', new Date())
-        })
-        .catch(error => {
-          console.log('Error:', error.message);
-        });
-        axiosInstance.get('/next-an-records/')
-        .then(response => {
+          
           this.records1 = response.data;
           this.consumption1 = this.records1.map(record => record.Consumption)
           this.records1 = this.records1.map(record => (new Date(record.time)))
-          console.log('工耗:', this.consumption1, 'Time:', this.records1, 'CurTime:', new Date())
+          axiosInstance.get('/next-n-records', {
+            params: { batch_size: 5 }
+          })
+            .then(response => {
+             
+              this.records = response.data;
+              this.consumption = this.records.map(record => record.Consumption)
+              this.records = this.records.map(record => (new Date(record.time)))
+              
+              for (var i = 0; i < 5; i++) {
+                if (this.records[i] instanceof Date && this.records1[i] instanceof Date) {
+                  const updatedTime = new Date(this.records[i]);
+                  updatedTime.setSeconds(updatedTime.getSeconds() + 0); // 修改时间
+                  this.tempTime = updatedTime.toLocaleTimeString(); // 格式化时间字符串
+                  
+                  const updatedTime1 = new Date(this.records[i]);
+                  updatedTime1.setSeconds(updatedTime1.getSeconds() + 10); // 修改时间
+                  this.tempTime1 = updatedTime1.toLocaleTimeString(); // 格式化时间字符串
+                  this.data1.push([this.tempTime, this.consumption[i]]);
+                  this.data2.push([this.tempTime1, this.consumption1[i]]); // 在数组末尾添加新数据，保持数据顺序
+                  this.option.xAxis.data.push(this.tempTime1); // 在x轴标签的末尾添加新的标签
+                }
+                
+                this.data1.shift(); // 移除数组的第一个元素
+                this.data2.shift(); // 移除数组的第一个元素
+                this.option.xAxis.data.shift(); // 移除x轴标签的第一个元素
+              }
+              
+              this.myChart.setOption({
+                xAxis: {
+                  data: this.option.xAxis.data // 更新x轴标签配置
+                },
+                series: [
+                  {
+                    data: this.data1
+                  },
+                  {
+                    data: this.data2
+                  }
+                ]
+              });
+            })
+            .catch(error => {
+              console.log('Error:', error.message);
+            });
         })
         .catch(error => {
           console.log('Error:', error.message);
         });
-      for (var i = 0; i < 5; i++) {
-        //this.data1.push([this.records[i], this.consumption[i]]); // 在数组末尾添加新数据，保持数据顺序  
-        if (this.records[i] instanceof Date && this.records1[i] instanceof Date) {
-          // this.tempTime = this.records[i].setSeconds(this.records[i].getSeconds() + 30).toLocaleTimeString();
-          const updatedTime = new Date(this.records[i]);
-          updatedTime.setSeconds(updatedTime.getSeconds() + 0); // 修改时间
-          this.tempTime = updatedTime.toLocaleTimeString(); // 格式化时间字符串
-          console.log('updateTemp:',this.tempTime)
-          const updatedTime1 = new Date(this.records[i]);
-          updatedTime1.setSeconds(updatedTime1.getSeconds() + 10); // 修改时间
-          this.tempTime1 = updatedTime1.toLocaleTimeString(); // 格式化时间字符串
-          this.data1.push([this.tempTime, this.consumption[i]]);
-          this.data2.push([this.tempTime1, this.consumption1[i]]); // 在数组末尾添加新数据，保持数据顺序
-          this.option.xAxis.data.push(this.tempTime1); // 在x轴标签的末尾添加新的标签
-        }
-        console.log(this.data2)
-        this.data1.shift(); // 移除数组的第一个元素
-        this.data2.shift(); // 移除数组的第一个元素
-        this.option.xAxis.data.shift(); // 移除x轴标签的第一个元素
-      }
-      this.myChart.setOption({
-        xAxis: {
-          data: this.option.xAxis.data // 更新x轴标签配置
-        },
-        series: [
-          {
-            data: this.data1
-          },
-          {
-            data: this.data2
-          }
-        ]
-      });
-    },
 
-    randomData(currentTime) {
 
-      this.value1 = this.value1 + Math.random() * 21 - 10;
-      this.value2 = this.value2 + Math.random() * 21 - 10;
 
-      return [
-        currentTime.toLocaleTimeString(), // 修改为本地时间格式
-        Math.round(this.value1),
-        Math.round(this.value2)
-      ];
     },
     initChart() {
-
-      axiosInstance.get('/next-n-records',{
-        params: {batch_size: this.batchSize}
+      axiosInstance.get('/next-n-records', {
+        params: { batch_size: this.batchSize }
       })
         .then(response => {
           this.records = response.data;
           this.consumption = this.records.map(record => record.Consumption)
           this.records = this.records.map(record => (new Date(record.time)))
-          console.log('工耗11:', this.consumption, 'Time:', this.records, 'CurTime:', new Date())
-        })
-        .catch(error => {
-          console.log('Error:', error.message);
-        });
-
-      axiosInstance.get('/next-an-records',{
-        params: {batch_size: this.batchSize1}
-      })
-        .then(response => {
-          this.records1 = response.data;
-          this.consumption1 = this.records1.map(record => record.Consumption)
-          this.records1 = this.records1.map(record => (new Date(record.time)))
-          // console.log('工耗22:', this.consumption1, 'Time:', this.records1, 'CurTime:', new Date())
-        })
-        .catch(error => {
-          console.log('Error:', error.message);
-        });
-
-      for (var i = 0; i < 50; i++) {
-        if (this.records[i] instanceof Date && this.records1[i] instanceof Date){
-          const updatedTime = new Date(this.records[i]);
-          updatedTime.setSeconds(updatedTime.getSeconds() + 0); // 修改时间
-          this.tempTime = updatedTime.toLocaleTimeString(); // 格式化时间字符串
-          if (i ==0){
-            console.log('tempTime:',this.tempTime)
+          
+          for (var i = 0; i < 50; i++) {
+            const updatedTime = new Date(this.records[i]);
+            updatedTime.setSeconds(updatedTime.getSeconds()); // 修改时间
+            this.tempTime = updatedTime.toLocaleTimeString(); // 格式化时间字符串
+            this.data1.push([this.tempTime, this.consumption[i]]); // 在数组末尾添加新数据，保持数据顺序
           }
-        this.data1.push([this.tempTime, this.consumption[i]]); // 在数组末尾添加新数据，保持数据顺序
-        const updatedTime1 = new Date(this.records[i]);
-          updatedTime1.setSeconds(updatedTime1.getSeconds() + 10); // 修改时间
-          this.tempTime1 = updatedTime1.toLocaleTimeString(); // 格式化时间字符串
-        this.data2.push([this.tempTime1, this.consumption1[i+10]]); // 在数组末尾添加新数据，保持数据顺序
-        }
-        
-      }
-      // 获取当前时间
-      // var currentTime = new Date();
-      // var currentTime1 = new Date();
-      // currentTime.setSeconds(currentTime.getSeconds() - 100);
-      // currentTime1.setSeconds(currentTime1.getSeconds() - 70);
-
-      // 减去100秒
-
-
-      // for (var i = 0; i < 100; i++) { // 初始化100个数据点
-
-
-      //   var newData = this.randomData(currentTime); // 传入当前时间
-      //   var newData1 = this.randomData(currentTime1);
-      //   this.data1.push([newData[0], newData[1]]); // 在数组末尾添加新数据，保持数据顺序
-      //   this.data2.push([newData1[0], newData1[2]]); // 在数组末尾添加新数据，保持数据顺序
-      //   currentTime.setSeconds(currentTime.getSeconds() + 1); // 增加1秒，即移动到下一个时间点
-      //   currentTime1.setSeconds(currentTime1.getSeconds() + 1);
-
-      // }
-      this.option.series[0].data = this.data1;
-      this.option.series[1].data = this.data2;
-      console.log(this.data2)
-      this.option.xAxis.data = this.data2.map(item => item[0]); // 使用时间数据作为x轴数据
-      this.myChart = echarts.init(document.getElementById('chartContainer'));
-      this.myChart.setOption(this.option);
+          this.option.series[0].data = this.data1;
+          axiosInstance.get('/next-an-records', {
+            params: { batch_size: this.batchSize1 }
+          })
+            .then(response => {
+              this.records1 = response.data;
+              this.consumption1 = this.records1.map(record => record.Consumption)
+              this.records1 = this.records1.map(record => (new Date(record.time)))
+             
+              for (var i = 0; i < 50; i++) {
+                if (this.records[i] instanceof Date && this.records1[i] instanceof Date) {
+                  const updatedTime1 = new Date(this.records[i]);
+                  updatedTime1.setSeconds(updatedTime1.getSeconds() + 10); // 修改时间
+                  this.tempTime1 = updatedTime1.toLocaleTimeString(); // 格式化时间字符串
+                  this.data2.push([this.tempTime1, this.consumption1[i + 10]]); // 在数组末尾添加新数据，保持数据顺序
+                }
+              }
+              this.option.series[1].data = this.data2;
+              this.option.xAxis.data = this.data2.map(item => item[0]); // 使用时间数据作为x轴数据
+              
+              this.myChart = echarts.init(document.getElementById('chartContainer'));
+              this.myChart.setOption(this.option);
+            })
+            .catch(error => {
+              console.log('Error:', error.message);
+            });
+        })
+        .catch(error => {
+          console.log('Error:', error.message);
+        });
     },
 
 
