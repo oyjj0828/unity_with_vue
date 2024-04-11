@@ -18,69 +18,67 @@
     </div>
 
     <div class="mainbox">
-      <div class="unity-container" style="z-index: -10;">
-        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="/Unity/index.html"
-          frameborder="0"></iframe>
-      </div>
+      <!-- <div class="unity-container" style="z-index: -10;">
+        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;"
+          src="/Unity/index.html" frameborder="0"></iframe>
+      </div> -->
 
       <!--<button_nenghaoyuce v-model="view1" :sendState="getState" />-->
       <!--<button1 v-model:view1="view1" :view2="view2" :view3="view3" :sendState="getStae"></button1>-->
-     
+
       <button_zhuye :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" :test="test" />
       <button_nenghaoyuce :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
       <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
-      <button_nenghaorelitu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"/>
-      <button_nenghaoliudongtu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"/>
-      <button_wendufenbutu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"/>
-      <button_tanpaifangjiance :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" :chart.sync="chart2"/>
+      
 
       <ul class="clearfix" style="z-index: 10; height: inherit">
         <transition name="fade" mode="out-in">
-          <li v-if="view1" style="width: 22%" key="hone">
+          <li v-if="view1" style="width: 25%" key="hone">
             <Statistics />
             <Equipments />
             <BarChart />
             <!-- <AirConditioningUnitParameters /> -->
           </li>
-          <li v-else-if="view2" style="width: 22%" key="consumption">
+          <li v-else-if="view2" style="width: 25%" key="consumption">
             <ServerPrediction />
             <RefrigePrediction />
           </li>
-          <li v-else-if="view3" style="width: 22%" key="control">
+          <li v-else-if="view3" style="width: 25%" key="control">
             <AirConditioningUnitParameters />
-            <button_guzhangjiance :chart.sync="chart"/>
+            <button_guzhangjiance :chart.sync="chart" />
           </li>
-          <li v-else-if="view4" style="width: 22%" key="control1"></li>
-          <li v-else-if="view5" style="width: 22%" key="control2"></li>
+          <li v-else-if="view4" style="width: 25%" key="control1"></li>
+          <li v-else-if="view5" style="width: 25%" key="control2"></li>
         </transition>
 
         <transition name="fade" mode="out-in">
           <!-- <li v-if="view3 && strategy" style="width: 50%" key="control-1">
-            <OptimStrategy />
-          </li> -->
-          <li style="width: 56%" key="none">
+        <OptimStrategy />
+      </li> -->
+          <li style="width: 50%" key="none">
           </li>
         </transition>
 
         <transition name="fade" mode="out-in">
-          <li v-if="view1" style="width: 22%" key="home">
-            <Overview />
+          <li v-if="view1" style="width: 25%" key="home">
+            <!-- <SlideShow />
             <Prediction />
-            <WaterPolo />
+            <WaterPolo /> -->
+            <TestBackend />
           </li>
-          <li v-else-if="view2" style="width: 22%" key="consumption">
+          <li v-else-if="view2" style="width: 25%" key="consumption">
             <TemperaturePrediction />
             <PuePrediction />
           </li>
-          <li v-else-if="view3" style="width: 22%" key="none" ></li>
-          <li v-else-if="view4" style="width: 22%" key="ACCharts">
+          <li v-else-if="view3" style="width: 25%" key="none"></li>
+          <li v-else-if="view4" style="width: 25%" key="ACCharts">
             <ACTable />
           </li>
-          <li v-else-if="view5" style="width: 22%" key="ECCharts">
+          <li v-else-if="view5" style="width: 25%" key="ECCharts">
             <ECTable />
           </li>
         </transition>
-        
+
       </ul>
     </div>
   </div>
@@ -116,10 +114,9 @@ import ServerPrediction from '@/components/ServerPrediction'
 import RefrigePrediction from '@/components/RefrigePrediction'
 import TemperaturePrediction from '@/components/TemperaturePrediction'
 import PuePrediction from '@/components/PuePrediction'
-import Overview from '@/components/Overview'
+
 
 import Vue, { ref } from "vue";
-import axios from 'axios';
 
 export default {
 
@@ -153,7 +150,7 @@ export default {
     RefrigePrediction,
     TemperaturePrediction,
     PuePrediction,
-    Overview,
+    TestBackend,
   },
   data() {
     return {
@@ -173,7 +170,6 @@ export default {
       monitor: false,
       iframeLoaded: false,
       chart: false,
-      chart2: false,
       data: null,
     };
   },
@@ -187,13 +183,14 @@ export default {
   mounted() {
     this.updateTime();
     setInterval(() => {
-      this.updateTime();      
+      this.updateTime();
+      // this.fetchDataAndUpdate();    
     }, 1000);
     // this.fetchData();
     // this.interval = setInterval(this.fetchData, 100000);
     // window.addEventListener('message', function(e) {
     //   var res = e.data;
-      
+
     //   if(res == 'test'){
     //     console.log("this.view1");
     //     this.view1 = false;
@@ -208,10 +205,10 @@ export default {
         this.view3 = false;
         this.view4 = false;
         this.view5 = false;
-        if (event.data == "AC"){
+        if (event.data == "AC") {
           this.view4 = true;
         }
-        else if (event.data == "EC"){
+        else if (event.data == "EC") {
           this.view5 = true;
         }
       }
@@ -239,25 +236,16 @@ export default {
     Appendzero(obj) {
       return obj < 10 ? `0${obj}` : obj;
     },
-    test(){
+    test() {
       // console.log(this.$refs.iframe1.contentWindow.myGameInstance);
-      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("UI展示界面/总览按钮", "clickMove","");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("UI展示界面/总览按钮", "clickMove", "");
     },
     GetFlag(flag) {
       // console.log("--------------------");
-      if(flag == 1){
+      if (flag == 1) {
         // console.log(flag);
         this.view1 = this.view2 = this.view3 = false;
       }
-    },
-    fetchData: function() {
-      axios.get('http://localhost:8000/consumption?page=1')
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
     }
   }
 }
