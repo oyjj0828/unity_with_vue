@@ -220,19 +220,19 @@ body {
   text-shadow: 0 0 3px #1e82be, 0 0 4px #1e82be, 0 0 5px #1e82be, 0 0 6px #1e82be !important;
   line-height: .5rem;
   position: relative;
-  padding-left: .15rem;
-  top: 5%
+  padding-left: .25rem;
+  top: 5%;
+  left:10px;
 }
 
 .alltitle:before {
   position: absolute;
-  height: .2rem;
-  width: 4px;
-  background: #49bcf7;
-  border-radius: 5px;
+  height: 18px;
+  width: 21px;
   content: "";
-  left: 0;
-  top: 50%;
+  background-image: url('../../src/assets/bg_alltitle.svg');
+  left: -10px;
+  top: 38%;
   margin-top: -.1rem;
 }
 
