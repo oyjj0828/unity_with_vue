@@ -18,18 +18,18 @@
     </div>
 
     <div class="mainbox">
-      <div class="unity-container" style="z-index: -10;">
-        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="/AC_Test2/index.html"
+      <!-- <div class="unity-container" style="z-index: -10;">
+        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="/new/index.html"
           frameborder="0"></iframe>
-      </div>
+      </div> -->
 
       <!--<button_nenghaoyuce v-model="view1" :sendState="getState" />-->
       <!--<button1 v-model:view1="view1" :view2="view2" :view3="view3" :sendState="getStae"></button1>-->
-     
+
       <button_zhuye :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" :test="test" />
       <button_nenghaoyuce :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
       <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
-      
+
 
       <ul class="clearfix" style="z-index: 10; height: inherit">
         <transition name="fade" mode="out-in">
@@ -39,9 +39,15 @@
             <BarChart />
             <!-- <AirConditioningUnitParameters /> -->
           </li>
+          <li v-else-if="view2" style="width: 25%" key="consumption">
+            <ServerPrediction />
+            <RefrigePrediction />
+            <!-- <TestBackend Name="服务器能耗预测"/>
+            <TestBackend Name="空调能耗预测"/> -->
+          </li>
           <li v-else-if="view3" style="width: 25%" key="control">
             <AirConditioningUnitParameters />
-            <button_guzhangjiance :chart.sync="chart"/>
+            <button_guzhangjiance :chart.sync="chart" />
           </li>
           <li v-else-if="view4" style="width: 25%" key="control1"></li>
           <li v-else-if="view5" style="width: 25%" key="control2"></li>
@@ -49,8 +55,8 @@
 
         <transition name="fade" mode="out-in">
           <!-- <li v-if="view3 && strategy" style="width: 50%" key="control-1">
-            <OptimStrategy />
-          </li> -->
+        <OptimStrategy />
+      </li> -->
           <li style="width: 50%" key="none">
           </li>
         </transition>
@@ -60,8 +66,15 @@
             <SlideShow />
             <Prediction />
             <WaterPolo />
+            <!-- <TestBackend Name="设备占用情况"/> -->
           </li>
-          <li v-else-if="view3" style="width: 25%" key="none" ></li>
+          <li v-else-if="view2" style="width: 25%" key="consumption">
+            <TemperaturePrediction />
+            <!-- <PuePrediction /> -->
+            <!-- <TestBackend Name="室内温度预测"/>
+            <TestBackend Name="PUE预测"/> -->
+          </li>
+          <li v-else-if="view3" style="width: 25%" key="none"></li>
           <li v-else-if="view4" style="width: 25%" key="ACCharts">
             <ACTable />
           </li>
@@ -69,7 +82,7 @@
             <ECTable />
           </li>
         </transition>
-        
+
       </ul>
     </div>
   </div>
@@ -84,6 +97,10 @@ import button_zhuye from './components/button_zhuye.vue'
 import button_nenghaoyuce from './components/button_nenghaoyuce.vue'
 import button_youhuakongzhi from './components/button_youhuakongzhi.vue'
 import button_guzhangjiance from '@/components/button_guzhangjiance'
+import button_nenghaorelitu from '@/components/button_nenghaorelitu'
+import button_nenghaoliudongtu from '@/components/button_nenghaoliudongtu'
+import button_wendufenbutu from '@/components/button_wendufenbutu'
+import button_tanpaifangjiance from '@/components/button_tanpaifangjiance'
 
 /* Components */
 import Temperature from '@/components/Temperature'
@@ -97,9 +114,17 @@ import ACTable from '@/components/ACTable'
 import ECTable from '@/components/ECTable'
 import AirConditioningUnitParameters from '@/components/AirConditioningUnitParameters'
 import OptimizationStrategy from '@/components/OptimizationStrategy'
+import ServerPrediction from '@/components/ServerPrediction'
+import RefrigePrediction from '@/components/RefrigePrediction'
+import TemperaturePrediction from '@/components/TemperaturePrediction'
+import PuePrediction from '@/components/PuePrediction'
+import TestBackend from '@/components/TestBackend'
+
+import axios from 'axios';
 
 
 import Vue, { ref } from "vue";
+
 
 export default {
 
@@ -113,6 +138,10 @@ export default {
     button_nenghaoyuce,
     button_youhuakongzhi,
     button_guzhangjiance,
+    button_nenghaorelitu,
+    button_nenghaoliudongtu,
+    button_wendufenbutu,
+    button_tanpaifangjiance,
 
     Equipments,
     Temperature,
@@ -125,6 +154,12 @@ export default {
     ECTable,
     AirConditioningUnitParameters,
     OptimizationStrategy,
+    ServerPrediction,
+    RefrigePrediction,
+    TemperaturePrediction,
+    PuePrediction,
+    TestBackend,
+    // Overview
   },
   data() {
     return {
@@ -136,10 +171,15 @@ export default {
       view3: false,
       view4: false,
       view5: false,
+      top1: false,
+      top2: false,
+      top3: false,
+      top4: false,
       strategy: false,
       monitor: false,
       iframeLoaded: false,
       chart: false,
+      data: null,
     };
   },
   computed: {
@@ -152,13 +192,14 @@ export default {
   mounted() {
     this.updateTime();
     setInterval(() => {
-      this.updateTime();      
+      this.updateTime();
+      // this.fetchDataAndUpdate();    
     }, 1000);
-
-
+    // this.fetchData();
+    // this.interval = setInterval(this.fetchData, 100000);
     // window.addEventListener('message', function(e) {
     //   var res = e.data;
-      
+
     //   if(res == 'test'){
     //     console.log("this.view1");
     //     this.view1 = false;
@@ -170,17 +211,21 @@ export default {
       if (event.origin === window.location.origin) {
         // console.log(event.data)
         this.view1 = false;
+        this.view2 = false;
         this.view3 = false;
         this.view4 = false;
         this.view5 = false;
-        if (event.data == "AC"){
+        if (event.data == "AC") {
           this.view4 = true;
         }
-        else if (event.data == "EC"){
+        else if (event.data == "EC") {
           this.view5 = true;
         }
       }
     });
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
   },
   methods: {
     updateTime() {
@@ -201,17 +246,17 @@ export default {
     Appendzero(obj) {
       return obj < 10 ? `0${obj}` : obj;
     },
-    test(){
+    test() {
       // console.log(this.$refs.iframe1.contentWindow.myGameInstance);
-      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("UI展示界面/总览按钮", "clickMove","");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("test/F4/Overview", "clickMove", "");
     },
     GetFlag(flag) {
       // console.log("--------------------");
-      if(flag == 1){
+      if (flag == 1) {
         // console.log(flag);
         this.view1 = this.view2 = this.view3 = false;
       }
-    }
+    },
   }
 }
 </script>
@@ -234,13 +279,15 @@ unity-container {
 }
 
 .rounded-btn {
+  white-space: nowrap;
   border: none;
   /* 去除默认边框 */
   background-color: transparent;
   /* 设置背景色 */
-  color: rgb(0, 174, 255);
+  font-weight: bold;
+  color: azure;
   /* 设置字体颜色 */
-  padding: 12px 36px;
+  padding: 12px 0px;
   /* 调整按钮大小 */
   text-align: center;
   /* 居中显示文本 */

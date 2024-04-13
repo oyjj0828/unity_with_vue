@@ -13,17 +13,15 @@
           <ul style="position: relative;  height: 15%;">
             
             <li style="width: 30%; height: 100%">
-              <dv-border-box-12 style="height: 40px; width: 100px; top: 5px;">
-                <button class="rounded-btn-Optimization" @click="handleClick" style="z-index: 20; width: 100px; height: 40px;">
-                  <span style="font-size: 14px; font-weight: bold; color: azure;">
-                    执行
-                  </span>
+              <dv-border-box-10 style="position:absolute; height: 40px; left:35px; width: 80px; top: 10px;">
+                <button class="rounded-btn-Optimization" @click="handleClick" style="z-index: 20; width: inherit; height: inherit;">
+                  执行
                 </button>
-              </dv-border-box-12>
+              </dv-border-box-10>
             </li>
-            
+          
             <li style="width: 70%; height: 100%; text-align: center;">
-              <span style="position: relative;  top: 40%; color: greenyellow; font-size: 16px;
+              <span style="position: relative;  top: 45%; color: greenyellow; font-size: 16px;
               text-shadow: 0 0 2px green, 0 0 2px green, 0 0 2px green, 0 0 2px green !important;">预计降低能耗: 5.16% ↓</span>
             </li>
           </ul>
@@ -35,29 +33,23 @@
 
 <script>
 import { ref, watchEffect } from 'vue';
-
 export default {
   props: ['temperature', 'mode'],
-
   data() {
     return {
       Temperature: [],
 
       // receivedStatus: this., // 在子组件中使用props接收父组件传递的数据
       config: {
-
         data: [
-        ['空调运行台数', '3台'],
-                ['水阀开度', '42%'],
-                ['风机转速', '22000rpm'],
-                ['冷却塔回收量', '85%'],
-                ['空调送风面积', '60%'],
-                ['空调送风温度', '21℃'],
-                ['压缩机数量', '25台'],
-                ['工作模式', '-'],
-
-        
-          
+          ['空调运行台数', '3台'],
+          ['水阀开度', '42%'],
+          ['风机转速', '22000rpm'],
+          ['冷却塔回收量', '85%'],
+          ['空调送风面积', '60%'],
+          ['空调送风温度', '21℃'],
+          ['压缩机数量', '25台'],
+          ['工作模式', '-'],
         ],
         index: false,
         header: ['参数名称', '调整值'],
@@ -86,9 +78,6 @@ export default {
     }, 1000);
   },
 
-
-
-
   watch: {
     temperature: {
       handler (newData, oldData){
@@ -108,12 +97,8 @@ export default {
       }
     },
   deep: true
-
   // console.log(this.receivedStatus);
-  
   },
-
-
   methods: {
   handleClick() {
     // console.log("this.mode");
@@ -122,35 +107,33 @@ export default {
   },
 
   updateData() {
-
       // 更新 key，强制重新渲染组件
-
       this.updateDataCount += 1;
     }
-
   }
-
 }
 </script>
 <style>
-
 
 .rounded-btn-Optimization {
   border: none;
   /* 去除默认边框 */
   background-color: transparent;
   /* 设置背景色 */
-  color: rgb(0, 174, 255);
+  color: azure;
   /* 设置字体颜色 */
-  padding: 0px 36px;
+  padding: 0px 24px;
   /* 调整按钮大小 */
   text-align: center;
   /* 居中显示文本 */
-  font-size: 18px;
+  font-size: 16px;
   /* 设置字号 */
   cursor: pointer;
   /* 光标变成手型 */
   border-radius: 100px;
+  font-weight: bold;
+  cursor: pointer;
+
   /* 设置圆角 */
 }
 
