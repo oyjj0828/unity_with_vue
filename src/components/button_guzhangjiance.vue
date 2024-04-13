@@ -3,7 +3,7 @@
     <div v-if="chart">
       <dv-border-box-8 backgroundColor="rgba(6, 48, 109, .5)">
         <button class="btn_test" @click="handleClick" style="z-index: 20; width: 50px; height: 200px;">
-          <span style="font-size: 21px; font-weight: bold; color: azure;">
+          <span style="font-size: 21px; font-weight: bold; color:rgb(255, 174, 13);">
             故障检测
           </span>
         </button>
@@ -19,7 +19,7 @@
     <div v-else>
       <dv-border-box-8 style="width: 72dx;">
         <button class="btn_test" @click="handleClick" style="z-index: 20; width: 50px; height: 200px; left: -11px">
-          <span style="font-size: 21px; font-weight: bold; color: azure;">
+          <span style="font-size: 21px; font-weight: bold; color: rgb(255, 174, 13);">
             故障检测
           </span>
         </button>
