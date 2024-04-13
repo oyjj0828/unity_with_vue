@@ -70,10 +70,11 @@
             <Prediction />
             <WaterPolo />
             <!-- <TestBackend Name="设备占用情况"/> -->
+            <!-- <Prediction /> -->
           </li>
           <li v-else-if="view2" style="width: 22%" key="consumption">
-            <TemperaturePrediction />
-            <!-- <PuePrediction /> -->
+            <TemperaturePrediction /> 
+            <PuePrediction />
             <!-- <TestBackend Name="室内温度预测"/>
             <TestBackend Name="PUE预测"/> -->
           </li>
@@ -198,18 +199,7 @@ export default {
       this.updateTime();
       // this.fetchDataAndUpdate();    
     }, 1000);
-    // this.fetchData();
-    // this.interval = setInterval(this.fetchData, 100000);
-    // window.addEventListener('message', function(e) {
-    //   var res = e.data;
-
-    //   if(res == 'test'){
-    //     console.log("this.view1");
-    //     this.view1 = false;
-    //   }
-    // }) 
-
-    //const iframe = document.getElementById('iframe1');
+    
     window.addEventListener('message', (event) => {
       if (event.origin === window.location.origin) {
         // console.log(event.data)

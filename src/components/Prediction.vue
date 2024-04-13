@@ -5,22 +5,21 @@
       <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
         _echarts_instance_="ec_1710235324242">
         <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
-                        cursor: default;">
+                          cursor: default;">
           <div id="chartContainer" style="width: 100%; height: 100%;"></div>
         </div>
       </div>
     </div>
   </dv-border-box-13>
 </template>
-
 <script>
 import * as echarts from 'echarts';
 import axios from 'axios';
 
-// const axiosInstance = axios.create({
-//   baseURL: 'http://127.0.0.1:8000/api',
-//   withCredentials: true,
-// });
+const axiosInstance = axios.create({
+  baseURL: 'http://127.0.0.1:8000/api',
+  withCredentials: true,
+});
 
 
 export default {
@@ -179,7 +178,7 @@ export default {
             params: { batch_size: 5 }
           })
             .then(response => {
-             
+              console.log(response.data)
               this.records = response.data;
               this.consumption = this.records.map(record => record.Consumption)
               this.records = this.records.map(record => (new Date(record.time)))
@@ -223,7 +222,7 @@ export default {
         })
         .catch(error => {
           console.log('Error:', error.message);
-        });
+        },500);
 
 
 
