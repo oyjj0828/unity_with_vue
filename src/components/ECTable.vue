@@ -28,7 +28,7 @@
       <div id="app">
         <nav>
           <router-link to="/device_info">
-            <button class="rounded-btn" style="z-index: 20; width: inherit; height: inherit;">
+            <button class="rounded-btn" style="z-index: 20; width: inherit; height: inherit; color: rgb(255, 174, 13)">
               设备详细信息
             </button>
           </router-link>
