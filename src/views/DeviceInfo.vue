@@ -1,9 +1,11 @@
 <template>
     <div id="app">
         <component :is="currentMenu" :right="false">
-            <router-link to="/device_info">
-                <i class="fa fa-fw fa-star-o"></i>
+            <router-link to="/">
                 <span>首页</span>
+            </router-link>
+            <router-link to="/device_info">
+                <span>设备详细信息</span>
             </router-link>
         </component>
         <main id="page-wrap">
@@ -17,7 +19,7 @@
                 <div style="position: absolute; top:calc(0%); left:calc(3%); width:calc(97%); height:calc(18%); text-align: left;">
                     <img src="../assets/UPS.png" style="position:absolute; left:0px; top:5px; width:calc(25%); 
                     height:(100%); border: 1px solid black;"/>
-                    <span style="position:absolute; left:calc(28%); top:25px; font-size: 16px;">
+                    <span style="position:absolute; left:calc(28%); top:25px; font-size: 16px; width:calc(45%)">
                         UPS-PM1-IT-C4(tbt11auphw03)
                     </span>
                 </div>
