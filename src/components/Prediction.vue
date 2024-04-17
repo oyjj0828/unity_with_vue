@@ -1,25 +1,26 @@
 <template>
   <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(33% ); z-index: 11;">
     <div class="boxall" style="height: calc(100% )">
-      <div class="alltitle">设备占用情况</div>
+      <div class="alltitle">能耗预测</div>
       <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
         _echarts_instance_="ec_1710235324242">
         <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
-                          cursor: default;">
+                        cursor: default;">
           <div id="chartContainer" style="width: 100%; height: 100%;"></div>
         </div>
       </div>
     </div>
   </dv-border-box-13>
 </template>
+
 <script>
 import * as echarts from 'echarts';
 import axios from 'axios';
 
-const axiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api',
-  withCredentials: true,
-});
+// const axiosInstance = axios.create({
+//   baseURL: 'http://127.0.0.1:8000/api',
+//   withCredentials: true,
+// });
 
 
 export default {
@@ -150,20 +151,20 @@ export default {
     };
   },
   mounted() {
-    this.initChart();
-    this.timer = setInterval(() => {
-      this.fetchDataAndUpdate();
-    }, 10000);
+    // this.initChart();
+    // this.timer = setInterval(() => {
+    //   this.fetchDataAndUpdate();
+    // }, 10000);
   },
-  beforeDestroy() {
-    // 清除定时器
-    if (this.timer) {
-      clearInterval(this.timer);
-    }
-    if (this.myChart) {
-      this.myChart.dispose();
-    }
-  },
+  // beforeDestroy() {
+  //   // 清除定时器
+  //   if (this.timer) {
+  //     clearInterval(this.timer);
+  //   }
+  //   if (this.myChart) {
+  //     this.myChart.dispose();
+  //   }
+  // },
   methods: {
     fetchDataAndUpdate() {
       axiosInstance.get('/next-an-records', {
@@ -178,7 +179,7 @@ export default {
             params: { batch_size: 5 }
           })
             .then(response => {
-              console.log(response.data)
+             
               this.records = response.data;
               this.consumption = this.records.map(record => record.Consumption)
               this.records = this.records.map(record => (new Date(record.time)))
@@ -222,7 +223,7 @@ export default {
         })
         .catch(error => {
           console.log('Error:', error.message);
-        },500);
+        });
 
 
 

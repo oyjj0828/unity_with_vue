@@ -1,5 +1,5 @@
 <template>
-  <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(33% ); z-index: 11;">
+  <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(30% ); z-index: 11;">
     <div class="boxall" style="height: calc(100% )">
       <div class="alltitle">设备运行情况</div>
       <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
@@ -15,6 +15,7 @@
 
 <script>
 import * as echarts from 'echarts';
+import { RouterView } from 'vue-router';
 
 export default {
   data() {
