@@ -13,7 +13,7 @@
         </component>
         <main id="page-wrap">
             <h1 class="text-center">
-                设备详细信息
+                模型信息
             </h1>
             <div id="load_trend" />
             <div id="voltage_trend" />
@@ -489,8 +489,8 @@
     .device_signal{
         position: relative;
         top: -20px;
-        width: calc(100%);
         background: #ffffff;
+        width: calc(100%);
         height: calc(70%);
         border: 25px solid rgb(226, 226, 226);
     }
