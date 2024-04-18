@@ -195,7 +195,7 @@ export default {
       };
     },
     routerViewZIndex() {
-      return this.isRouteActive ? 20 : -20;
+      return this.$route.path !== '/' ? 20 : -20;
     }
   },
   created() {
