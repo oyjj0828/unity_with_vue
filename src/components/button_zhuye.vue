@@ -3,8 +3,8 @@
     <dv-border-box-12>
       <el-row class="block-col-2" style="text-align: center; height: 100%;">
           <el-col :span="12" style="width: 100%; height: 100%;">
-            <el-dropdown @command="handleClick" style="width: inherit; height: inherit; align-content: center;">
-              <span class="el-dropdown-link" style="font-size: 18px; font-weight: bold; color: rgb(255, 174, 13);">
+            <el-dropdown @command="handleClick" style="width: inherit; height: inherit; align-content: center; cursor: pointer;">
+              <span class="el-dropdown-link" style="font-size: 18px; font-weight: bold; color: rgb(255, 174, 13); ">
                 {{name}}<!-- <i class="el-icon-arrow-down el-icon--right"></i> -->
               </span>
               <el-dropdown-menu slot="dropdown">
