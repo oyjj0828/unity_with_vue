@@ -63,24 +63,6 @@
                 </div>
             </div>
         </main>
-
-        <div class="device_signal">
-            <h2 class="text-center" style="position:absolute; left: calc(2.5%); top: 15px">
-                设备信号
-            </h2>
-            <ve-table :columns="columns" :table-data="tableData" :cell-style-option="cellStyleOption" 
-                :row-style-option="rowStyleOption" row-key-field-name="rowKey" :sort-option="sortOption" 
-                style="position:relative; top:50px; left:calc(2.5%); width:calc(95%)"/>
-            <div class="table-pagination">
-                <ve-pagination
-                    :total="totalCount"
-                    :page-index="pageIndex"
-                    :page-size="pageSize"
-                    @on-page-number-change="pageNumberChange"
-                    @on-page-size-change="pageSizeChange"
-                />
-            </div>
-        </div>
     </div>
 </template>
 
