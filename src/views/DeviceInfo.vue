@@ -11,7 +11,7 @@
                 <span>模型信息</span>
             </router-link>
         </component>
-        <main id="page-wrap">
+        <div class="first">
             <h1 class="text-center">
                 设备详细信息
             </h1>
@@ -62,7 +62,7 @@
                     </vxe-table>
                 </div>
             </div>
-        </main>
+        </div>
 
         <div class="device_signal">
             <h2 class="text-center" style="position:absolute; left: calc(2.5%); top: 15px">
@@ -524,7 +524,13 @@
         height: 33%;
         text-align: center;
         background: #ffffff;
-        overflow: auto;
+        border: 25px solid rgb(226, 226, 226);
+    }
+
+    .first{
+        height: 33%;
+        text-align: center;
+        background: #ffffff;
         border: 25px solid rgb(226, 226, 226);
     }
 

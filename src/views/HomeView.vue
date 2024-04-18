@@ -17,8 +17,9 @@
     </div>
 
     <div class="mainbox">
-      <div class="unity-container" style="z-index: -10;">
-        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0;" src="../new/index.html"
+      <div class="unity-container" style="z-index: 0;">
+        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0; z-index: inherit;" 
+        src="../new/index.html"
           frameborder="0"></iframe>
       </div>
 
@@ -59,7 +60,7 @@
           <!-- <li v-if="view3 && strategy" style="width: 50%" key="control-1">
         <OptimStrategy />
          </li> -->
-          <li style="width: 56%" key="none">
+          <li style="width: 56%; z-index: -10;" key="none">
           </li>
         </transition>
 
