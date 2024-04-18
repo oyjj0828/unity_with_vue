@@ -18,6 +18,8 @@
   </template>
   
   <script>
+import Temperature from './Temperature.vue'
+
   
   export default {
     props: {
@@ -36,15 +38,20 @@
       top4: {
         type: Boolean,
         default: false,
-      }
+      },
+      TemperatureMap: {
+      type: Function,
+      default: () => {},
+    },
     },
   
     methods: {
       handleClick() {
         this.$emit('update:top1', false)
         this.$emit('update:top2', false)
-        this.$emit('update:top3', true)
+        this.$emit('update:top3',!this.top3)
         this.$emit('update:top4', false)
+        this.TemperatureMap()
       }
     }
   }
