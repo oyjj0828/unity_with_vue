@@ -202,12 +202,6 @@ export default {
       return this.$route.path !== '/' ? 20 : -20;
     }
   },
-  created() {
-    this.$router.beforeEach((to, from, next) => {
-      this.isRouteActive = !!to.name;
-      next();
-    });
-  },
   mounted() {
     this.updateTime();
     setInterval(() => {
