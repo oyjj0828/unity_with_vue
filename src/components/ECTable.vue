@@ -24,17 +24,15 @@
       </div>
     </dv-border-box-13>
 
-    <dv-border-box-10 style="z-index: 11; position:relative; height: 50px; width: 130px; top: 170px; left:105px">
-      <div id="app">
-        <nav>
+    <dv-border-box-7 style="z-index: 11; position:relative; height: 50px; width: 130px; top: 170px; left:105px">
+      <div>
           <router-link to="/device_info">
-            <button class="rounded-btn" style="z-index: 20; width: inherit; height: inherit; color: rgb(255, 174, 13)">
+            <button class="rounded-btn" style="z-index: 20; width: 130px; height: 50px; color: rgb(255, 174, 13)">
               设备详细信息
             </button>
           </router-link>
-        </nav>
       </div>
-    </dv-border-box-10>
+    </dv-border-box-7>
 
   </div>
 
