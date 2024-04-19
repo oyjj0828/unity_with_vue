@@ -43,6 +43,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    view4: {
+      type: Boolean,
+      default: false,
+    },
+    view5: {
+      type: Boolean,
+      default: false,
+    },
     overview: {
       type: Function,
       default: () => {},
@@ -71,8 +79,14 @@ export default {
 
 
   methods: {
-    handleClick(command) {
-
+    sendClose(){
+      this.$emit('update:view1', false)
+      this.$emit('update:view2', false)
+      this.$emit('update:view3', false) 
+      this.$emit('update:view4', false)  
+      this.$emit('update:view5', false)
+    },
+    handleClick(command) { 
       if (command == "overview") {
         this.$emit('update:view1', true)
         this.$emit('update:view2', false)
@@ -81,37 +95,27 @@ export default {
         this.name = "总览"
       }
       else if (command == "1F") {
-        this.$emit('update:view1', false)
-        this.$emit('update:view2', false)
-        this.$emit('update:view3', false)   
+        this.sendClose()
         this.Go1F();
         this.name = "1F"
       }
       else if (command == "2F") {
-        this.$emit('update:view1', false)
-        this.$emit('update:view2', false)
-        this.$emit('update:view3', false)   
+        this.sendClose()
         this.Go2F();
         this.name = "2F"
       }
       else if (command == "3F") {
-        this.$emit('update:view1', false)
-        this.$emit('update:view2', false)
-        this.$emit('update:view3', false)   
+        this.sendClose()   
         this.Go3F();
         this.name = "3F"
       }
       else if (command == "4F") {
-        this.$emit('update:view1', false)
-        this.$emit('update:view2', false)
-        this.$emit('update:view3', false)   
+        this.sendClose()  
         this.Go4F();   
         this.name = "4F"
       }
       else if (command == "5F") {
-        this.$emit('update:view1', false)
-        this.$emit('update:view2', false)
-        this.$emit('update:view3', false)   
+        this.sendClose()   
         this.Go5F();
         this.name = "5F"
       }

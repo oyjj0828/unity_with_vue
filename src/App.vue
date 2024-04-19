@@ -1,5 +1,6 @@
 <template>
   <div style="height: 100%;">
+
     <head>
       <meta charset="utf-8">
       <title>数据中心可视化管理平台</title>
@@ -17,24 +18,27 @@
     </div>
 
     <div class="mainbox">
-      <div :style="{position:'absolute', top:'0', left:'0', width:'100%', height:'100%', zIndex:routerViewZIndex}">
-        <router-view/>
+      <div
+        :style="{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', zIndex: routerViewZIndex }">
+        <router-view />
       </div>
       <div class="unity-container" style="z-index: 0;">
-        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0; z-index: inherit;" 
-        src="./new/index.html"
-          frameborder="0"></iframe>
+        <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0; z-index: inherit;"
+          src="./Datacenter0419/index.html" frameborder="0"></iframe>
       </div>
 
       <!--<button_nenghaoyuce v-model="view1" :sendState="getState" />-->
       <!--<button1 v-model:view1="view1" :view2="view2" :view3="view3" :sendState="getStae"></button1>-->
 
-      <button_zhuye :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" :test="test" />
+      <button_zhuye :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" :view4.sync="view4" :view5.sync="view5"
+        :overview="overview" :Go1F="Go1F" :Go2F="Go2F" :Go3F="Go3F" :Go4F="Go4F" :Go5F="Go5F" />
       <button_nenghaoyuce :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
       <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
-      <button_nenghaorelitu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
+      <button_nenghaorelitu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"
+        :EnergyConsumptionMap="EnergyConsumptionMap" />
       <button_nenghaoliudongtu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
-      <button_wendufenbutu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
+      <button_wendufenbutu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"
+        :TemperatureMap="TemperatureMap" />
       <button_tanpaifangjiance :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
 
       <ul class="clearfix" style="z-index: 10; height: inherit">
@@ -76,7 +80,7 @@
             <!-- <Prediction /> -->
           </li>
           <li v-else-if="view2" style="width: 22%" key="consumption">
-            <TemperaturePrediction /> 
+            <TemperaturePrediction />
             <PuePrediction />
             <!-- <TestBackend Name="室内温度预测"/>
             <TestBackend Name="PUE预测"/> -->
@@ -210,7 +214,7 @@ export default {
       this.updateTime();
       // this.fetchDataAndUpdate();    
     }, 1000);
-    
+
     window.addEventListener('message', (event) => {
       if (event.origin === window.location.origin) {
         // console.log(event.data)
@@ -250,9 +254,41 @@ export default {
     Appendzero(obj) {
       return obj < 10 ? `0${obj}` : obj;
     },
-    test() {
-      // console.log(this.$refs.iframe1.contentWindow.myGameInstance);
-      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("test/F4/Overview", "clickMove", "");
+    overview() {
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview", "clickMove", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview", "allFloors", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview", "Fun", "");
+    },
+    Go1F() {
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F1", "clickMove", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F1", "eachFloorOverview", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F1", "Floor1", "");
+    },
+    Go2F() {
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F2", "clickMove", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F2", "eachFloorOverview", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F2", "Floor2", "");
+    },
+    Go3F() {
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F3", "clickMove", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F3", "eachFloorOverview", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F3", "Floor3", "");
+    },
+    Go4F() {
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F4", "clickMove", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F4", "eachFloorOverview", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F4", "Floor4", "");
+    },
+    Go5F() {
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F5", "clickMove", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F5", "eachFloorOverview", "");
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("Overview_F5", "Floor5", "");
+    },
+    TemperatureMap() {
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("TemperatureCube", "ToggleMapVisibility", "");
+    },
+    EnergyConsumptionMap() {
+      this.$refs.iframe1.contentWindow.myGameInstance.SendMessage("EnergyConsumptionCube", "ToggleMapVisibility", "");
     },
     GetFlag(flag) {
       // console.log("--------------------");
@@ -279,8 +315,8 @@ export default {
 
 unity-container {
   position: absolute;
-  left:0;
-  top:0;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
 }
