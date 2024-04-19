@@ -42,15 +42,20 @@
       top4: {
         type: Boolean,
         default: false,
-      }
+      },
+      EnergyConsumptionMap:{
+        type: Function,
+        default: () => {},
+      },
     },
   
     methods: {
       handleClick() {
-        this.$emit('update:top1', true)
+        this.$emit('update:top1', !this.top1)
         this.$emit('update:top2', false)
         this.$emit('update:top3', false)
         this.$emit('update:top4', false)
+        this.EnergyConsumptionMap()
       }
     }
   }
