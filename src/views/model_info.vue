@@ -39,43 +39,51 @@
                         确认
                     </el-button>
                 </div>
-                <div style="position:absolute; width:68%; height:85%; top:calc(6%); left:calc(31%);">
-                    <div style="position:absolute; left:0; top:0; font-size: 18px; font-weight:bold">
-                        服务器能耗数据：
-                    </div>
-                    <el-table
-                        :data="tableData_pre" :max-height=250 border style="position:absolute; top:5%; width: 45%" stripe :resizable='false'
-                        :header-cell-style="headerCell2" :cell-style="Cell2">
-                        <el-table-column v-for="(column, index) in columns" :key="index" 
-                        :prop="column.prop" :label="column.label" :width="column.width" :height="20"/>
-                    </el-table>
-                    <div style="position:absolute; left:50%; top:0; font-size: 18px; font-weight:bold">
-                        空调能耗数据：
-                    </div>
-                    <el-table
-                        :data="tableData_pre" :max-height=250 border style="position:absolute; left:50%; top:5%; width: 45%" stripe :resizable='false'
-                        :header-cell-style="headerCell2" :cell-style="Cell2">
-                        <el-table-column v-for="(column, index) in columns" :key="index" 
-                        :prop="column.prop" :label="column.label" :width="column.width"/>
-                    </el-table>
-                    <div style="position:absolute; left:0; top:55%; font-size: 18px; font-weight:bold">
-                        室内温度数据：
-                    </div>
-                    <el-table
-                        :data="tableData_pre" :max-height=250 border style="position:absolute; left:0; top:60%; width: 45%" stripe :resizable='false'
-                        :header-cell-style="headerCell2" :cell-style="Cell2">
-                        <el-table-column v-for="(column, index) in columns" :key="index" 
-                        :prop="column.prop" :label="column.label" :width="column.width"/>
-                    </el-table>
-                    <div style="position:absolute; left:50%; top:55%; font-size: 18px; font-weight:bold">
-                        PUE数据：
-                    </div>
-                    <el-table
-                        :data="tableData_pre" :max-height=250 border style="position:absolute; left:50%; top:60%; width: 45%" stripe :resizable='false'
-                        :header-cell-style="headerCell2" :cell-style="Cell2">
-                        <el-table-column v-for="(column, index) in columns" :key="index" 
-                        :prop="column.prop" :label="column.label" :width="column.width"/>
-                    </el-table>
+        
+                <div style="position:absolute; width:68%; height:85%; top:calc(5%); left:calc(31%);">
+                    <el-select style="position:absolute; top:0; left:0;" v-model="value_data" placeholder="请选择数据"
+                    @change="handleDataChange">
+                        <el-option
+                            v-for="item in options_data"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
+                    <p v-if="view[0]">
+                        <el-table
+                            :data="tableData_pre" :max-height=540 border style="position:absolute; top:10%; width: 97%" stripe :resizable='false'
+                            :header-cell-style="headerCell2" :cell-style="Cell2">
+                            <el-table-column v-for="(column, index) in columns" :key="index" 
+                            :prop="column.prop" :label="column.label" :width="column.width" :height="20"/>
+                        </el-table>
+                    </p>
+                    <p v-else-if="view[1]">
+                        <el-table
+                            :data="tableData_pre" :max-height=540 border style="position:absolute; top:10%; width: 97%" stripe :resizable='false'
+                            :header-cell-style="headerCell2" :cell-style="Cell2">
+                            <el-table-column v-for="(column, index) in columns" :key="index" 
+                            :prop="column.prop" :label="column.label" :width="column.width"/>
+                        </el-table>
+                    </p>
+
+                    <p v-else-if="view[2]">
+                        <el-table
+                            :data="tableData_pre" :max-height=540 border style="position:absolute; top:10%; width: 97%" stripe :resizable='false'
+                            :header-cell-style="headerCell2" :cell-style="Cell2">
+                            <el-table-column v-for="(column, index) in columns" :key="index" 
+                            :prop="column.prop" :label="column.label" :width="column.width"/>
+                        </el-table>
+                    </p>
+
+                    <p v-else-if="view[3]">
+                        <el-table
+                            :data="tableData_pre" :max-height=540 border style="position:absolute; top:10%; width: 97%" stripe :resizable='false'
+                            :header-cell-style="headerCell2" :cell-style="Cell2">
+                            <el-table-column v-for="(column, index) in columns" :key="index" 
+                            :prop="column.prop" :label="column.label" :width="column.width"/>
+                        </el-table>
+                    </p>
                 </div>
             </div>
         </div>
@@ -103,6 +111,7 @@
     export default {
         data() {
             return {
+                view:[false,false,false,false],
                 tableData1: [
                     {name: '当前模型',value: 'LSTM'}, 
                     {name: 'R²',value: '0.952'}, 
@@ -126,6 +135,13 @@
                     {value: 'Crossformer',label: 'Crossformer'}, 
                 ],
                 value: '',
+                options_data: [
+                    {value: '服务器能耗数据',label: '服务器能耗数据'}, 
+                    {value: '空调能耗数据',label: '空调能耗数据'}, 
+                    {value: '室内温度数据',label: '室内温度数据'}, 
+                    {value: 'PUE数据',label: 'PUE数据'}, 
+                ],
+                value_data: '',
                 menus: {
                     slide: { buttonText: 'Slide' },
                     push: { buttonText: 'Push' },
@@ -168,7 +184,7 @@
                     complete: (results) => {
                         this.tableData_pre = results.data.slice(0, 50);
                         if (results.data[0]) {
-                            this.columns = Object.keys(results.data[0]).map(key => ({ prop: key, label: key, width: '140' }));
+                            this.columns = Object.keys(results.data[0]).map(key => ({ prop: key, label: key, width: '100' }));
                         }
                     }
                 });
@@ -211,6 +227,17 @@
                     "text-align":"center",
                     "font-size":"14px",
                     "color":"black"
+                }
+            },
+            handleDataChange(newData){
+                if(newData == '服务器能耗数据'){
+                    this.view = [true,false,false,false];
+                }else if(newData == '空调能耗数据'){
+                    this.view = [false,true,false,false];
+                }else if(newData == '室内温度数据'){
+                    this.view = [false,false,true,false];
+                }else if(newData == 'PUE数据'){
+                    this.view = [false,false,false,true];
                 }
             },
             handleModelChange(newModel){
