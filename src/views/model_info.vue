@@ -18,15 +18,25 @@
             <div style="position:absolute; width:96.5%; height:85%; ">
                 <div style="position:absolute; width:25%; height:96%; top:calc(2%); left:calc(2.5%); 
                 border-right: 1px solid rgb(200,200,200);">
+                    <el-dropdown trigger="click" @command="handleCommand" split-button type="primary" style="position:absolute; top:0; left:0">
+                        {{mode}}
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item command="服务器能耗预测">服务器能耗预测</el-dropdown-item>
+                            <el-dropdown-item command="空调能耗预测">空调能耗预测</el-dropdown-item>
+                            <el-dropdown-item command="室内温度预测">室内温度预测</el-dropdown-item>
+                            <el-dropdown-item command="PUE预测">PUE预测</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+
                     <el-table
-                        :data="tableData1" border style="position:absolute; width: 315px; top:4%" stripe 
-                        :resizable="false" :max-height=450
+                        :data="tableData1" border style="position:absolute; width: 315px; top:9%" stripe 
+                        :resizable="false" :max-height=430
                         :header-cell-style="headerCell" :cell-style="Cell">
                         <el-table-column prop="name" label="参数" width="155"/>
                         <el-table-column prop="value" label="值" width="155"/>
                     </el-table>
                     <span style="position:absolute; top:calc(81%); left:calc(2.5%); font-size:18px; font-weight:bold">切换模型：</span>
-                    <el-select style="position:absolute; top:calc(86%); left:calc(2.5%);" v-model="value" placeholder="请选择一个模型"
+                    <el-select style="position:absolute; top:calc(86%); left:calc(2.5%);" v-model="currentModel" placeholder="请选择一个模型"
                     @change="handleModelChange">
                         <el-option
                             v-for="item in options"
@@ -38,10 +48,27 @@
                     <el-button type="primary" style="position:absolute; top:calc(86%); left:calc(64%);" @click="handleClick">
                         确认
                     </el-button>
+                    <el-button type="primary" plain style="position:absolute; top:calc(94%); left:22%;" 
+                    @click="modelPreview=true">
+                        模型结构预览
+                    </el-button>
+
+                    <el-dialog
+                        :title="this.currentModel+'模型结构'"
+                        :visible.sync="modelPreview"
+                        width="60%"
+                        center
+                        append-to-body>
+                        <img :src="require('../assets/model_img/'+this.currentModel+'.png')" alt="模型结构图"/>
+                        <span slot="footer" class="dialog-footer">
+                            <el-button @click="modelPreview = false">取 消</el-button>
+                            <el-button type="primary" @click="modelPreview = false">确 定</el-button>
+                        </span>
+                    </el-dialog>
                 </div>
         
                 <div style="position:absolute; width:68%; height:85%; top:calc(5%); left:calc(31%);">
-                    <el-select style="position:absolute; top:0; left:0;" v-model="value_data" placeholder="请选择数据"
+                    <!-- <el-select style="position:absolute; top:0; left:0;" v-model="value_data" placeholder="请选择数据"
                     @change="handleDataChange">
                         <el-option
                             v-for="item in options_data"
@@ -49,41 +76,49 @@
                             :label="item.label"
                             :value="item.value">
                         </el-option>
-                    </el-select>
+                    </el-select> -->
+                    <el-tabs v-model="value_data" @tab-click="handleDataClick" style="position:absolute; top:0; left:0;">
+                        <el-tab-pane label="服务器能耗数据" name="first">服务器能耗数据</el-tab-pane>
+                        <el-tab-pane label="空调能耗数据" name="second">空调能耗数据</el-tab-pane>
+                        <el-tab-pane label="室内温度数据" name="third">室内温度数据</el-tab-pane>
+                        <el-tab-pane label="PUE数据" name="fourth">PUE数据</el-tab-pane>
+                    </el-tabs>
                     <p v-if="view[0]">
                         <el-table
-                            :data="tableData_pre" :max-height=540 border style="position:absolute; top:10%; width: 97%" stripe :resizable='false'
+                            :data="tableData_server" :max-height=540 border style="position:absolute; top:10%; width: 97%" stripe :resizable='false'
                             :header-cell-style="headerCell2" :cell-style="Cell2">
-                            <el-table-column v-for="(column, index) in columns" :key="index" 
+                            <el-table-column v-for="(column, index) in columns_server" :key="index" 
                             :prop="column.prop" :label="column.label" :width="column.width" :height="20"/>
                         </el-table>
                     </p>
+                    
                     <p v-else-if="view[1]">
                         <el-table
-                            :data="tableData_pre" :max-height=540 border style="position:absolute; top:10%; width: 97%" stripe :resizable='false'
+                            :data="tableData_refrige" :max-height=540 border style="position:absolute; top:10%; width: 97%" stripe :resizable='false'
                             :header-cell-style="headerCell2" :cell-style="Cell2">
-                            <el-table-column v-for="(column, index) in columns" :key="index" 
+                            <el-table-column v-for="(column, index) in columns_refrige" :key="index" 
                             :prop="column.prop" :label="column.label" :width="column.width"/>
                         </el-table>
                     </p>
 
                     <p v-else-if="view[2]">
                         <el-table
-                            :data="tableData_pre" :max-height=540 border style="position:absolute; top:10%; width: 97%" stripe :resizable='false'
+                            :data="tableData_tempe" :max-height=540 border style="position:absolute; top:10%; width: 97%" stripe :resizable='false'
                             :header-cell-style="headerCell2" :cell-style="Cell2">
-                            <el-table-column v-for="(column, index) in columns" :key="index" 
+                            <el-table-column v-for="(column, index) in columns_tempe" :key="index" 
                             :prop="column.prop" :label="column.label" :width="column.width"/>
                         </el-table>
                     </p>
 
                     <p v-else-if="view[3]">
                         <el-table
-                            :data="tableData_pre" :max-height=540 border style="position:absolute; top:10%; width: 97%" stripe :resizable='false'
+                            :data="tableData_pue" :max-height=540 border style="position:absolute; top:10%; width: 97%" stripe :resizable='false'
                             :header-cell-style="headerCell2" :cell-style="Cell2">
-                            <el-table-column v-for="(column, index) in columns" :key="index" 
+                            <el-table-column v-for="(column, index) in columns_pue" :key="index" 
                             :prop="column.prop" :label="column.label" :width="column.width"/>
                         </el-table>
                     </p>
+                    
                 </div>
             </div>
         </div>
@@ -111,7 +146,9 @@
     export default {
         data() {
             return {
-                view:[false,false,false,false],
+                modelPreview: false,
+                mode:'服务器能耗预测',
+                view:[true,false,false,false],
                 tableData1: [
                     {name: '当前模型',value: 'LSTM'}, 
                     {name: 'R²',value: '0.952'}, 
@@ -123,25 +160,31 @@
                     {name: 'AIC',value: '22.56'}, 
                     {name: 'BIC',value: '23.67'}, 
                 ],
-                tableData_pre: [],
-                columns:[],
+                tableData_server: [],
+                tableData_refrige: [],
+                tableData_tempe: [],
+                tableData_pue: [],
+                columns_server:[],
+                columns_refrige:[],
+                columns_tempe:[],
+                columns_pue:[],
                 options: [
                     {value: 'LSTM',label: 'LSTM'}, 
                     {value: 'Transformer',label: 'Transformer'}, 
                     {value: 'Autoformer',label: 'Autoformer'}, 
                     {value: 'Pyraformer',label: 'Pyraformer'}, 
-                    {value: 'Twinformer',label: 'Twinformer'},
-                    {value: 'Fedformer',label: 'Fedformer'},
+                    {value: 'FEDformer',label: 'FEDformer'},
                     {value: 'Crossformer',label: 'Crossformer'}, 
+                    {value: 'PatchTST',label: 'PatchTST'}, 
                 ],
-                value: '',
+                currentModel: 'LSTM',
                 options_data: [
                     {value: '服务器能耗数据',label: '服务器能耗数据'}, 
                     {value: '空调能耗数据',label: '空调能耗数据'}, 
                     {value: '室内温度数据',label: '室内温度数据'}, 
                     {value: 'PUE数据',label: 'PUE数据'}, 
                 ],
-                value_data: '',
+                value_data: 'first',
                 menus: {
                     slide: { buttonText: 'Slide' },
                     push: { buttonText: 'Push' },
@@ -177,21 +220,67 @@
             this.loadCsvData();
         },
         methods: {
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                .then(_ => {
+                    done();
+                })
+                .catch(_ => {});
+            },
+            handleDataClick(){
+                if(this.value_data == 'first'){
+                    this.view = [true,false,false,false];
+                }
+                else if(this.value_data == 'second'){
+                    this.view = [false,true,false,false];
+                }
+                else if(this.value_data == 'third'){
+                    this.view = [false,false,true,false];
+                }
+                else if(this.value_data == 'fourth'){
+                    this.view = [false,false,false,true];
+                }
+            },
+            handleCommand(command){
+                this.mode= command;
+                if(command=='服务器能耗预测'){
+                    this.value_data='first';
+                    this.view = [true,false,false,false];
+                }
+                else if(command=='空调能耗预测'){
+                    this.value_data='second';
+                    this.view = [false,true,false,false];
+                }
+                else if(command=='室内温度预测'){
+                    this.value_data='third';
+                    this.view = [false,false,true,false];
+                }
+                else if(command=='PUE预测'){
+                    this.value_data='fourth';
+                    this.view = [false,false,false,true];
+                }
+            },
             loadCsvData() {
                 Papa.parse('../consumption.csv', {
                     download: true,
                     header: true,
                     complete: (results) => {
-                        this.tableData_pre = results.data.slice(0, 50);
+                        this.tableData_server = results.data.slice(0, 50);
+                        this.tableData_refrige = results.data.slice(50, 100);
+                        this.tableData_tempe = results.data.slice(100, 150);
+                        this.tableData_pue = results.data.slice(150, 200);
                         if (results.data[0]) {
-                            this.columns = Object.keys(results.data[0]).map(key => ({ prop: key, label: key, width: '100' }));
+                            this.columns_server = Object.keys(results.data[0]).map(key => ({ prop: key, label: key, width: '100' }));
+                            this.columns_refrige = Object.keys(results.data[0]).map(key => ({ prop: key, label: key, width: '100' }));
+                            this.columns_tempe = Object.keys(results.data[0]).map(key => ({ prop: key, label: key, width: '100' }));
+                            this.columns_pue = Object.keys(results.data[0]).map(key => ({ prop: key, label: key, width: '100' }));
                         }
                     }
                 });
             },
             handleClick(){
-                console.log(this.value);
-                this.tableData1[0].value = this.value;
+                console.log(this.currentModel);
+                this.tableData1[0].value = this.currentModel;
                 for(let i=1;i<this.tableData1.length;i++){
                     this.tableData1[i].value = "正在计算中...";
                 }
@@ -203,7 +292,6 @@
                     "font-weight":"bold",
                     "color":"black",
                     "background":"rgb(226,226,226)"
-
                 }
             },
             Cell(){
@@ -241,16 +329,16 @@
                 }
             },
             handleModelChange(newModel){
-                this.value=newModel;
+                this.currentModel=newModel;
             },
             changeMenu(menu) {
-            // this.currentMenu = menu.replace(/ +/g, '').toLowerCase()
-            this.currentMenu = menu.replace(/ +/g, '')
-            console.log(this.currentMenu)
-            return this.currentMenu
+                // this.currentMenu = menu.replace(/ +/g, '').toLowerCase()
+                this.currentMenu = menu.replace(/ +/g, '')
+                console.log(this.currentMenu)
+                return this.currentMenu
             },
             changeSide(side) {
-            this.side = side
+                this.side = side
             },
             handleResize() {
                 const resizeObserver = new ResizeObserver(entries => {

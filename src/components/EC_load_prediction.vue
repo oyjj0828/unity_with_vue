@@ -1,12 +1,12 @@
 <template>
   <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(45% ); z-index: 11;">
     <div class="boxall" style="height: calc(100% )">
-      <div class="alltitle">服务器能耗预测</div>
+      <div class="alltitle">UPS设备负载趋势预测</div>
       <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
         _echarts_instance_="ec_1710235324242">
         <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
                         cursor: default;">
-          <div id="chartContainer" style="width: 100%; height: 100%;"></div>
+          <div id="chartContainer2" style="width: 100%; height: 100%;"></div>
         </div>
       </div>
     </div>
@@ -22,8 +22,8 @@ export default {
       data1: [],
       data2: [],
       now: new Date(), // 使用当前时间
-      value1: 690,
-      value2: 680,
+      value1: 60,
+      value2: 55,
       option: {
         title: {
           text: ''
@@ -149,8 +149,8 @@ export default {
       // 减去100秒
       // currentTime.setSeconds(currentTime.getSeconds() - 100);
 
-      this.value1 = this.value1 + Math.random() * 8 - 4;
-      this.value2 = this.value2 + Math.random() * 8 - 4;
+      this.value1 = this.value1 + Math.random() * 4 - 2;
+      this.value2 = this.value2 + Math.random() * 4 - 2;
 
       return [
         currentTime.toLocaleTimeString(), // 修改为本地时间格式
@@ -187,7 +187,7 @@ export default {
       this.option.series[0].data = this.data1;
       this.option.series[1].data = this.data2;
       this.option.xAxis.data = this.data2.map(item => item[0]); // 使用时间数据作为x轴数据
-      this.myChart = echarts.init(document.getElementById('chartContainer'));
+      this.myChart = echarts.init(document.getElementById('chartContainer2'));
       this.myChart.setOption(this.option);
 
       // 打印this.data1

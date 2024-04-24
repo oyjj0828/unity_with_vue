@@ -56,11 +56,19 @@
             <TestBackend Name="空调能耗预测"/> -->
           </li>
           <li v-else-if="view3" style="width: 22%" key="control">
-            <AirConditioningUnitParameters />
-            <button_guzhangjiance :chart.sync="chart" />
+            <dianjia />
+            <device_info />
+            <!-- <AirConditioningUnitParameters /> -->
+            <!-- <button_guzhangjiance :chart.sync="chart" /> -->
           </li>
-          <li v-else-if="view4" style="width: 22%" key="control1"></li>
-          <li v-else-if="view5" style="width: 22%" key="control2"></li>
+          <li v-else-if="view4" style="width: 22%" key="control1">
+            <AC_consumption_prediction/>
+            <AC_load_prediction/>
+          </li>
+          <li v-else-if="view5" style="width: 22%" key="control2">
+            <EC_consumption_prediction/>
+            <EC_load_prediction/>
+          </li>
         </transition>
 
         <transition name="fade" mode="out-in">
@@ -80,16 +88,20 @@
             <!-- <Prediction /> -->
           </li>
           <li v-else-if="view2" style="width: 22%" key="consumption">
-            <TemperaturePrediction />
-            <PuePrediction />
+            <TemperaturePrediction/>
+            <PuePrediction/>
             <!-- <TestBackend Name="室内温度预测"/>
             <TestBackend Name="PUE预测"/> -->
           </li>
-          <li v-else-if="view3" style="width: 22%" key="none"></li>
+          <li v-else-if="view3" style="width: 22%" key="none">
+            <youhuakongzhi />
+          </li>
           <li v-else-if="view4" style="width: 22%" key="ACCharts">
+            <AC_voltage_prediction/>
             <ACTable />
           </li>
           <li v-else-if="view5" style="width: 22%" key="ECCharts">
+            <EC_voltage_prediction/>
             <ECTable />
           </li>
         </transition>
@@ -121,8 +133,17 @@ import SlideShow from '@/components/SlideShow'
 import WaterPolo from '@/components/WaterPolo'
 import Prediction from '@/components/Prediction'
 import Statistics from '@/components/Statistics'
+
 import ACTable from '@/components/ACTable'
+import AC_consumption_prediction from '@/components/AC_consumption_prediction.vue'
+import AC_load_prediction from '@/components/AC_load_prediction.vue'
+import AC_voltage_prediction from '@/components/AC_voltage_prediction.vue'
+
 import ECTable from '@/components/ECTable'
+import EC_consumption_prediction from '@/components/EC_consumption_prediction.vue'
+import EC_load_prediction from '@/components/EC_load_prediction.vue'
+import EC_voltage_prediction from '@/components/EC_voltage_prediction.vue'
+
 import AirConditioningUnitParameters from '@/components/AirConditioningUnitParameters'
 import OptimizationStrategy from '@/components/OptimizationStrategy'
 import ServerPrediction from '@/components/ServerPrediction'
@@ -131,6 +152,9 @@ import TemperaturePrediction from '@/components/TemperaturePrediction'
 import PuePrediction from '@/components/PuePrediction'
 import TestBackend from '@/components/TestBackend'
 import Overview from '@/components/Overview'
+import dianjia from '@/components/dianjia'
+import device_info from '@/components/device_info'
+import youhuakongzhi from '@/components/youhuakongzhi'
 
 import axios from 'axios';
 import Vue, { ref } from "vue";
@@ -159,8 +183,17 @@ export default {
     WaterPolo,
     Prediction,
     Statistics,
+
     ACTable,
+    AC_consumption_prediction,
+    AC_load_prediction,
+    AC_voltage_prediction,
+
     ECTable,
+    EC_consumption_prediction,
+    EC_load_prediction,
+    EC_voltage_prediction,
+
     AirConditioningUnitParameters,
     OptimizationStrategy,
     ServerPrediction,
@@ -168,7 +201,10 @@ export default {
     TemperaturePrediction,
     PuePrediction,
     TestBackend,
-    Overview
+    Overview,
+    dianjia,
+    device_info,
+    youhuakongzhi,
   },
   data() {
     return {
