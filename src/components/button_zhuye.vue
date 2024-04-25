@@ -8,12 +8,12 @@
                 {{name}}<!-- <i class="el-icon-arrow-down el-icon--right"></i> -->
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="overview" ><i class="el-icon-office-building"></i></el-dropdown-item>
-                <el-dropdown-item command="1F">1F</el-dropdown-item>
-                <el-dropdown-item command="2F">2F</el-dropdown-item>
-                <el-dropdown-item command="3F">3F</el-dropdown-item>
-                <el-dropdown-item command="4F">4F</el-dropdown-item>
                 <el-dropdown-item command="5F">5F</el-dropdown-item>
+                <el-dropdown-item command="4F">4F</el-dropdown-item>
+                <el-dropdown-item command="3F">3F</el-dropdown-item>
+                <el-dropdown-item command="2F">2F</el-dropdown-item>
+                <el-dropdown-item command="1F">1F</el-dropdown-item>
+                <el-dropdown-item command="overview" ><i class="el-icon-office-building"></i></el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </el-col>
