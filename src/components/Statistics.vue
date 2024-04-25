@@ -21,7 +21,7 @@
 
             <li style="width: 30%; height: 50%; display: flex; align-items: center;">
               <span style="font-weight: bold; font-size: 18px; ">
-                1920台
+                {{total}}台
               </span>
             </li>
 
@@ -37,7 +37,7 @@
             </li>
             <li style="width: 30%; height: 40%; display: flex;  align-items: center;">
               <span style="font-weight: bold; font-size: 18px;">
-                708台
+                {{ used }}台
               </span>
             </li>
           </ul>
@@ -51,8 +51,17 @@
 export default {
   data() {
     return {
-      config: {
-        value: 40
+      used: 720,
+      total: 1920,
+    }
+  },
+  computed: {
+    value() {
+      return 100 * this.used / this.total;
+    },
+    config() {
+      return {
+        value: this.value,
       }
     }
   }

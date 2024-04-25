@@ -1,7 +1,7 @@
 <template>
   <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(33% ); z-index: 11;">
     <div class="boxall" style="height: calc(100% )">
-      <div class="alltitle">设备占用情况</div>
+      <div class="alltitle">设备总体占用情况</div>
       <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
         _echarts_instance_="ec_1710235324242">
         <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
@@ -24,7 +24,7 @@ import * as echarts from 'echarts';
 import 'echarts-liquidfill';
 
 const chartContainer = ref(null);
-const percent = ref(0.60);
+const percent = ref(0.535);
 const color = {
   x: 0,
   y: 0,
@@ -53,7 +53,7 @@ onMounted(() => {
   setInterval(() => {
     percent.value = Math.random() * 0.3 + 0.3;
     drawWaterball(chart); // 每次更新 percent 后重新绘制水球图
-  }, 1000); // 每隔 1000 毫秒（1 秒）更新一次
+  }, 10000); // 每隔 1000 毫秒（10 秒）更新一次
 });
 
 const drawWaterball = (chart) => {
