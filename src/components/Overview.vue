@@ -9,10 +9,10 @@
             <div style="position:absolute; width:calc(50%); top:25px; left:5px;">
                 <img src='../../src/assets/border.png' style="position: absolute; top: 0px; left: 0px;"> </img>
                 <img src='../../src/assets/闪电.png' style="position: absolute; top: 5px; left: 5px;"> </img>
-                <div class="text1">
+                <div class="Text1">
                     2643 (kWh)
                 </div>
-                <div class="text2">
+                <div class="Text2">
                     数据中心能耗
                 </div>
             </div>
@@ -20,10 +20,10 @@
             <div style="position:absolute; width:calc(50%); top:25px; left:160px;">
                 <img src='../../src/assets/border.png' style="position: absolute; top: 0px; left: 0px;"> </img>
                 <img src='../../src/assets/闪电.png' style="position: absolute; top: 5px; left: 5px;"> </img>
-                <div class="text1">
+                <div class="Text1">
                     15623(kWh)
                 </div>
-                <div class="text2">
+                <div class="Text2">
                     年度节电总量
                 </div>
             </div>
@@ -31,10 +31,10 @@
             <div style="position:absolute; width:calc(50%); top:100px; left:5px;">
                 <img src='../../src/assets/border.png' style="position: absolute; top: 0px; left: 0px;"> </img>
                 <img src='../../src/assets/仪表盘.png' style="position: absolute; top: 5px; left: 5px;"> </img>
-                <div class="text1">
+                <div class="Text1">
                     1.23/1.42
                 </div>
-                <div class="text2">
+                <div class="Text2">
                     PUE值/平均值
                 </div>
             </div>
@@ -42,10 +42,10 @@
             <div style="position:absolute; width:calc(50%); top:100px; left:160px;">
                 <img src='../../src/assets/border.png' style="position: absolute; top: 0px; left: 0px;"> </img>
                 <img src='../../src/assets/IT.png' style="position: absolute; top: 10px; left: 12px;"> </img>
-                <div class="text1">
+                <div class="Text1">
                     18056(kWh)
                 </div>
-                <div class="text2">
+                <div class="Text2">
                     IT设备耗能
                 </div>
             </div>
@@ -56,18 +56,18 @@
     </dv-border-box-13>
   </template>
   
-  <script>
+<script>
   export default {
     
   }
-  </script>
+</script>
   
-  <style>
+<style>
   /* @charset "utf-8"; */
   /* CSS Document */
   @import "../../public/css/comon0.css";
 
-  .text1{
+  .Text1{
     position: absolute;
     width:90px;
     top:7px;
@@ -76,7 +76,7 @@
     color: #009bd8;
     font-weight: bold;
   }
-  .text2{
+  .Text2{
     position: absolute;
     width:140px;
     top:22px;
@@ -85,4 +85,4 @@
     color: #ffffff;
     font-weight: bold;
   }
-  </style>
+</style>

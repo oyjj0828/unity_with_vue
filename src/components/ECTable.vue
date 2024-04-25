@@ -1,8 +1,8 @@
 <template>
-  <div style="height:calc(100%)">
-    <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(50%); z-index: 11; top: 25%;">
+  <div style="height:calc(45%)">
+    <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(100%); z-index: 11;">
       <div class="boxall" style="height: calc(100%)">
-        <div class="alltitle">UPS参数</div>
+        <div class="alltitle">UPS参数预览</div>
         <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
           _echarts_instance_="ec_1710235324242">
           <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
@@ -18,13 +18,13 @@
                 </tr>
               </table>
             </div>
-            <dv-scroll-board :config="config" style=" width:100%;height:80%" />
+            <dv-scroll-board :config="config" style=" width:100%;height:75%" />
           </div>
         </div>
       </div>
     </dv-border-box-13>
 
-    <dv-border-box-7 style="z-index: 11; position:relative; height: 50px; width: 130px; top: 170px; left:105px">
+    <dv-border-box-7 style="z-index: 11; position:absolute; height: 50px; width: 130px; top: 85%; right:105px">
       <div>
           <router-link to="/device_info">
             <button class="rounded-btn" style="z-index: 20; width: 130px; height: 50px; color: rgb(255, 174, 13)">

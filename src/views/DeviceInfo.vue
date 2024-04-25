@@ -65,12 +65,17 @@
         </div>
 
         <div class="device_signal">
-            <h2 class="text-center" style="position:absolute; left: calc(2.5%); top: 15px">
+            <!-- <h2 class="text-center" style="position:absolute; left: calc(2.5%); top: 15px">
                 设备信号
-            </h2>
+            </h2> -->
+            <el-tabs v-model="activeName" type="card" @tab-click="handleClick" 
+            style="position:absolute; left: calc(2.5%); top: 15px">
+                <el-tab-pane label="设备信号" name="first"></el-tab-pane>
+                <el-tab-pane label="报警信息" name="second"></el-tab-pane>
+            </el-tabs>
             <ve-table :columns="columns" :table-data="tableData" :cell-style-option="cellStyleOption" 
                 :row-style-option="rowStyleOption" row-key-field-name="rowKey" :sort-option="sortOption" 
-                style="position:relative; top:50px; left:calc(2.5%); width:calc(95%)"/>
+                style="position:relative; top:70px; left:calc(2.5%); width:calc(95%)"/>
             <div class="table-pagination">
                 <ve-pagination
                     :total="totalCount"
@@ -154,7 +159,7 @@
                         width: 60,
                         align: "center",
                     },
-                    { field: "ComponentName", key: "b", title: "部件名称", align: "center", width:"35%",sortBy: "",
+                    { field: "ComponentName", key: "b", title: "部件名称", align: "center", width:"15%",sortBy: "",
                         ellipsis: {
                             showTitle: true,
                         }, 
@@ -164,7 +169,7 @@
                     { field: "Unit", key: "e", title: "单位", align: "center" },
                     { field: "UpdateTime", key: "f", title: "上次更新时间", align: "center", width:"15%", sortBy: "",},
                     { field: "CounterAttribute", key: "g", title: "指标属性", align: "center" },
-                    { field: "CounterGroup", key: "h", title: "指标组", align: "center", sortBy: "",},
+                    { field: "CounterGroup", key: "h", title: "指标组", align: "center",  width:"25%", sortBy: "",},
                     { field: "Operation", key: "i", title: "操作", align: "center" },
                 ],
                 menus: {
@@ -237,13 +242,13 @@
                 for (let i = 0; i < 1000; i++) {
                     DB_DATA.push({
                         order:i+1,
-                        ComponentName: "Air Conditioner_HUAWEI_NetCol8000-C150_V2R2C00_MODBUSTCP2",
-                        CounterName: "运行转速",
+                        ComponentName: "Battery Group[1]",
+                        CounterName: "Battery Capacity",
                         CounterValue: "",
-                        Unit: "%",
+                        Unit: "Ah",
                         UpdateTime:"2024-03-20 12:00:00",
                         CounterAttribute:"AI",
-                        CounterGroup:"电加热"+(i+1).toString(),
+                        CounterGroup:"Power Unit Associated Battery Pack"+(i+1).toString(),
                         Operation:"",
                     });
                 }
@@ -783,7 +788,7 @@
 
     .table-pagination {
         position: relative;
-        top: 70px;
+        top: 80px;
         text-align: center;
     }
 

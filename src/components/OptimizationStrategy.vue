@@ -1,34 +1,32 @@
 <template>
-  <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(100%); width: calc(100% ); z-index: 11;">
-    <div class="boxall" style="height: calc(100% )">
-      <div class="alltitle">优化策略</div>
-    
-      <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
-        _echarts_instance_="ec_1710235324242">
-        <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
-                   padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
-          <div style="height:5%;"></div>
-
-          <dv-scroll-board :config="config" :key="updateDataCount + '-' +initDataCount " style="width:100%; height:75%" />
-          <ul style="position: relative;  height: 15%;">
-            
-            <li style="width: 30%; height: 100%">
-              <dv-border-box-10 style="position:absolute; height: 40px; left:35px; width: 80px; top: 10px;">
-                <button class="rounded-btn-Optimization" @click="handleClick" style="z-index: 20; width: inherit; height: inherit;">
-                  执行
-                </button>
-              </dv-border-box-10>
-            </li>
-          
-            <li style="width: 70%; height: 100%; text-align: center;">
-              <span style="position: relative;  top: 45%; color: greenyellow; font-size: 16px;
-              text-shadow: 0 0 2px green, 0 0 2px green, 0 0 2px green, 0 0 2px green !important;">预计降低能耗: 5.16% ↓</span>
-            </li>
-          </ul>
+  <dv-border-box-11 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(100%); width: calc(100% ); z-index: 11;">
+    <div class="boxall" style="height: 100%; width:100%">
+      <div class="title1">优化策略</div>
+      <el-tabs v-model="activeName" @tab-click="handleClick2" style="position:absolute; left:5%; top:12%;">
+        <el-tab-pane label="综合能源选择比例" name="first"></el-tab-pane>
+        <el-tab-pane label="制冷系统优化" name="second"></el-tab-pane>
+      </el-tabs>
+      <p v-if="views[0]">
+        <dv-scroll-board :config="config1" style="position:absolute; top:24%; left:5%; width:90%; height:60%" />
+      </p>
+      <p v-else-if="views[1]">
+        <dv-scroll-board :config="config2" :key="updateDataCount + '-' +initDataCount " style="position:absolute; top:24%; 
+        left:5%; width:90%; height:60%" />
+      </p>
+      <div style="position: absolute; top:85%; height:12%; width:100%">
+        <dv-border-box-10 style="position:absolute; height: 40px; left:20%; width: 80px; top: 10%;">
+          <button class="rounded-btn-Optimization" @click="handleClick" style="z-index: 20; width: inherit; height: inherit;">
+            执行
+          </button>
+        </dv-border-box-10>
+        <div style="position: absolute; height:100%; top:10%; left:42%; color: greenyellow; font-size: 14px; text-align: left;
+        text-shadow: 0 0 2px green, 0 0 2px green, 0 0 2px green, 0 0 2px green !important;">
+          预计降低能耗: 5.16% ↓<br/>
+          预计降低碳排放: 50万吨 ↓
         </div>
       </div>
     </div>
-  </dv-border-box-13>
+  </dv-border-box-11>
 </template>
 
 <script>
@@ -37,10 +35,34 @@ export default {
   props: ['temperature', 'mode'],
   data() {
     return {
+      activeName:'first',
+      views:[true,false],
       Temperature: [],
-
       // receivedStatus: this., // 在子组件中使用props接收父组件传递的数据
-      config: {
+      config1:{
+        data: [
+          ['风电','3000万','2500万','43.26'],
+          ['水电','2300万','1600万','18.23'],
+          ['水电','1700万','1200万','13.90'],
+          ['光伏','1300万','900万','7.63'],
+          ['燃气','950万','400万','5.75'],
+          ['储能系统','700万','280万','4.78'],
+          ['其他','500万','163万','3.02'],
+        ],
+        index: false,
+        header: [
+          "<div class='datav-cell' title='能源类型'>能源类型</div>", 
+          "<div class='datav-cell' title='发电量/千瓦时'>发电量...</div>",
+          "<div class='datav-cell' title='发电电力/千瓦'>发电电...</div>",
+          "<div class='datav-cell' title='发电电力占比/%'>发电电...</div>",
+      ],
+        align: ['center','center','center','center'],
+        carousel: 'page',
+        oddRowBGC: '#2457A0',
+        evenRowBGC: '#068AC0',
+        rowNum: 7,
+      },
+      config2: {
         data: [
           ['空调运行台数', '3台'],
           ['水阀开度', '42%'],
@@ -62,9 +84,7 @@ export default {
       initDataCount: 0,
       updateDataCount: 0,
       boardKey: 0, // 初始key
-
       ret: 0
-
     };
   },
   created() {
@@ -100,20 +120,50 @@ export default {
   // console.log(this.receivedStatus);
   },
   methods: {
-  handleClick() {
-    // console.log("this.mode");
-    this.$emit('update:mode', this.ret);
-    // console.log(this.ret);
-  },
-
-  updateData() {
-      // 更新 key，强制重新渲染组件
-      this.updateDataCount += 1;
+    handleClick() {
+      // console.log("this.mode");
+      this.$emit('update:mode', this.ret);
+      // console.log(this.ret);
+    },
+    handleClick2(){
+      if(this.activeName === 'first'){
+        this.views = [true,false];
+      }else{
+        this.views = [false,true];
+      }
+    },
+    updateData() {
+        // 更新 key，强制重新渲染组件
+        this.updateDataCount += 1;
+      }
     }
-  }
 }
 </script>
-<style>
+<style scoped>
+
+::v-deep .el-tabs__item.is-active {  /* 被选中时 */
+  color: #72bdff;  
+}
+
+::v-deep .el-tabs__item {  /* 未被选中时 */
+  color: #ffffff; 
+}
+
+.datav-cell {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+
+.title1{
+  position:absolute; 
+  left:40%; 
+  top:4%;
+  font-size: 20px;
+  color: #ffffff;
+  text-shadow: 0 0 3px #1e82be, 0 0 4px #1e82be, 0 0 5px #1e82be, 0 0 6px #1e82be !important;
+}
 
 .rounded-btn-Optimization {
   border: none;
@@ -133,7 +183,6 @@ export default {
   border-radius: 100px;
   font-weight: bold;
   cursor: pointer;
-
   /* 设置圆角 */
 }
 
