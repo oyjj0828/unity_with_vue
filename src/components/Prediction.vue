@@ -17,10 +17,10 @@
 import * as echarts from 'echarts';
 import axios from 'axios';
 
-// const axiosInstance = axios.create({
-//   baseURL: 'http://127.0.0.1:8000/api',
-//   withCredentials: true,
-// });
+const axiosInstance = axios.create({
+  baseURL: 'http://127.0.0.1:8000/api',
+  withCredentials: true,
+});
 
 
 export default {
@@ -151,20 +151,20 @@ export default {
     };
   },
   mounted() {
-    // this.initChart();
-    // this.timer = setInterval(() => {
-    //   this.fetchDataAndUpdate();
-    // }, 10000);
+    this.initChart();
+    this.timer = setInterval(() => {
+      this.fetchDataAndUpdate();
+    }, 10000);
   },
-  // beforeDestroy() {
-  //   // 清除定时器
-  //   if (this.timer) {
-  //     clearInterval(this.timer);
-  //   }
-  //   if (this.myChart) {
-  //     this.myChart.dispose();
-  //   }
-  // },
+  beforeDestroy() {
+    // 清除定时器
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+    if (this.myChart) {
+      this.myChart.dispose();
+    }
+  },
   methods: {
     fetchDataAndUpdate() {
       axiosInstance.get('/next-an-records', {
