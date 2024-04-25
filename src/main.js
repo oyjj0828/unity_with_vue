@@ -13,6 +13,7 @@ import 'vxe-table/lib/style.css'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import Select from 'element-ui'
+import * as echarts from 'echarts';
 
 Vue.use(VXETable);
 Vue.use(ElementUI);
@@ -23,6 +24,7 @@ Vue.use(VePagination);
 Vue.use(VeIcon);
 Vue.use(VeLoading);
 Vue.use(Select);
+Vue.use(echarts);
 
 Vue.prototype.$veLoading = VeLoading;
 Vue.prototype.$veLocale = VeLocale;

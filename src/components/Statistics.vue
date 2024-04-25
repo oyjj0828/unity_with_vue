@@ -21,7 +21,7 @@
 
             <li style="width: 30%; height: 50%; display: flex; align-items: center;">
               <span style="font-weight: bold; font-size: 18px; ">
-                1920台
+                {{total}}台
               </span>
             </li>
 
@@ -37,7 +37,7 @@
             </li>
             <li style="width: 30%; height: 40%; display: flex;  align-items: center;">
               <span style="font-weight: bold; font-size: 18px;">
-                {{ usedCabinets }} 台
+                {{ used }}台
               </span>
             </li>
           </ul>
@@ -51,21 +51,19 @@
 export default {
   data() {
     return {
-      config: {
-        value: 36.88
-      },
-      usedCabinets: 708, // 初始已使用机柜数
-      key:0,
+      used: 720,
+      total: 1920,
     }
   },
-  mounted() {
-    // 设置定时器，每隔10秒更新已使用机柜数和value值
-    setInterval(() => {
-      this.usedCabinets = Math.floor(Math.random() * 21) + 700; // 生成700-720之间的随机数
-      // 计算value值并保留两位小数
-      this.$set(this.config, 'value', parseFloat((this.usedCabinets / 19.2).toFixed(2))); 
-    }, 5000);
-    this.count+=1;
+  computed: {
+    value() {
+      return 100 * this.used / this.total;
+    },
+    config() {
+      return {
+        value: this.value,
+      }
+    }
   }
 }
 </script>

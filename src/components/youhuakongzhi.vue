@@ -34,10 +34,19 @@
                 </div>
 
                 <div style="position:absolute; left:5%; top:22%; width:90%; height:50%">
-                    <div style="position:absolute; left:0; top:0; width: 100%; height:10%; 
-                    font-size: 16px; font-weight: bold; color:azure">
-                        电价波动
-                    </div>
+                    <el-dropdown trigger="click" style="position:absolute; top:0; left:0" @command="handleCommand2">
+                        <span class="el-dropdown-link" style="color:azure; font-size:16px; font-weight:bold; cursor: pointer">
+                            {{hint}}<i class="el-icon-arrow-down el-icon--right"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item command="煤电">煤电</el-dropdown-item>
+                            <el-dropdown-item command="风电">风电</el-dropdown-item>
+                            <el-dropdown-item command="水电">水电</el-dropdown-item>
+                            <el-dropdown-item command="光伏">光伏</el-dropdown-item>
+                            <el-dropdown-item command="天然气">天然气</el-dropdown-item>
+                            <el-dropdown-item command="储能系统">储能系统</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
                     <div id="echartsContainer" style="position:absolute; left:0; top:10%; width: 100%; height: 90%" />
                 </div>
 
@@ -66,6 +75,7 @@ export default {
     },
     data() {
         return {
+            hint:'煤电',
             view:false,
             option:{
                 xAxis: {
@@ -131,6 +141,30 @@ export default {
         },
         handleClick() {
             this.view = !this.view;
+        },
+        handleCommand2(command) {
+            this.hint = command;
+            var chart=echarts.getInstanceByDom(document.getElementById('echartsContainer'));
+            var option=chart.getOption();
+            if(command=='煤电'){
+                option.series[0].data=[0.66254, 0.642556, 0.665254, 0.652344, 0.671327];
+            }
+            else if(command=='风电'){
+                option.series[0].data=[0.56254, 0.542556, 0.565254, 0.552344, 0.571327];
+            }
+            else if(command=='水电'){
+                option.series[0].data=[0.46254, 0.442556, 0.465254, 0.452344, 0.471327];
+            }
+            else if(command=='光伏'){
+                option.series[0].data=[0.36254, 0.342556, 0.365254, 0.352344, 0.371327];
+            }
+            else if(command=='天然气'){
+                option.series[0].data=[0.26254, 0.242556, 0.265254, 0.252344, 0.271327];
+            }
+            else if(command=='储能系统'){
+                option.series[0].data=[0.562354, 0.542556, 0.565254, 0.552344, 0.571327];
+            }
+            chart.setOption(option);
         },
     }
 }
