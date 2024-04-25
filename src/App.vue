@@ -36,7 +36,7 @@
       <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
       <button_nenghaorelitu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"
         :EnergyConsumptionMap="EnergyConsumptionMap" />
-      <button_nenghaoliudongtu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
+      <!-- <button_nenghaoliudongtu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" /> -->
       <button_wendufenbutu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"
         :TemperatureMap="TemperatureMap" />
       <button_tanpaifangjiance :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />

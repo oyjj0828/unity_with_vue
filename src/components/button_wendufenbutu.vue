@@ -1,5 +1,5 @@
 <template>
-    <div style="position: absolute; width: 110px; height: 100px; left: 52.8%; top: 80px; z-index: 10;">
+    <div style="position: absolute; width: 110px; height: 100px; left: 46.5%; top: 80px; z-index: 10;">
       <p v-if="top3">
         <dv-border-box-10 backgroundColor="rgba(6, 48, 109, .5)">
           <button class="rounded-btn" @click="handleClick" style="z-index: 20; width: inherit; height: inherit;">

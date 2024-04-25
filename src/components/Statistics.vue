@@ -26,7 +26,7 @@
             </li>
 
             <li style="width: 35%; height: 50%;">
-              <dv-percent-pond :config="config" style="width:80px; height:160%;" />
+              <dv-percent-pond :config="config" :key="count" style="width:100px; height:160%;" />
             </li>
             <li style="width: 25%; height: 40%;">
               <dv-loading>
@@ -37,7 +37,7 @@
             </li>
             <li style="width: 30%; height: 40%; display: flex;  align-items: center;">
               <span style="font-weight: bold; font-size: 18px;">
-                708台
+                {{ usedCabinets }} 台
               </span>
             </li>
           </ul>
@@ -52,9 +52,20 @@ export default {
   data() {
     return {
       config: {
-        value: 40
-      }
+        value: 36.88
+      },
+      usedCabinets: 708, // 初始已使用机柜数
+      key:0,
     }
+  },
+  mounted() {
+    // 设置定时器，每隔10秒更新已使用机柜数和value值
+    setInterval(() => {
+      this.usedCabinets = Math.floor(Math.random() * 21) + 700; // 生成700-720之间的随机数
+      // 计算value值并保留两位小数
+      this.$set(this.config, 'value', parseFloat((this.usedCabinets / 19.2).toFixed(2))); 
+    }, 5000);
+    this.count+=1;
   }
 }
 </script>
