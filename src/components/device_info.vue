@@ -4,7 +4,7 @@
             <div class="boxall" style="height: calc(100% )">
                 <div class="alltitle" style="top:10px">设备参数</div>
                 <el-dropdown trigger="click" style="position:absolute; top:10%; left:5%" @command="handleCommand">
-                    <span class="el-dropdown-link" style="color:#009bd8; font-size:16px; font-weight:bold; cursor: pointer">
+                    <span class="el-dropdown-link" style="color:azure; font-size:16px; font-weight:bold; cursor: pointer">
                         {{hint}}<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
@@ -132,7 +132,7 @@ export default {
                     ['燃机效率', '36.5%'],
                     ['余热锅炉', '2台/套'],
                     ['高压蒸汽', '6.5MPa'],
-                    ['高压蒸汽温度', '438℃'],
+                    ['高压蒸汽温度', '138℃'],
                     ['高压流量', '45.3t/h'],
                     ['抽凝汽机', '1台/套'],
                     ['抽汽压力', '0.6MPa'],
@@ -140,7 +140,7 @@ export default {
                     ['最大抽汽量', '33t/h'],
                     ['背压汽轮机', '1台/套'],
                     ['排汽压力', '0.6MPa'],
-                    ['排汽温度', '207℃'],
+                    ['排汽温度', '107℃'],
                     ['排汽流量', '44.9t/h'],
                 ],
                 index: false,
@@ -212,6 +212,7 @@ export default {
 /* @charset "utf-8"; */
 /* CSS Document */
 @import "../../public/css/comon0.css";
+
 .device_info{
     position:absolute;
     width:90%;
