@@ -24,19 +24,20 @@
       </div>
       <div class="unity-container" style="z-index: 0;">
         <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0; z-index: inherit;"
-          src="./Datacenter0419/index.html" frameborder="0"></iframe>
+          src="./DatacenterFinal/index.html" frameborder="0"></iframe>
       </div>
 
       <!--<button_nenghaoyuce v-model="view1" :sendState="getState" />-->
       <!--<button1 v-model:view1="view1" :view2="view2" :view3="view3" :sendState="getStae"></button1>-->
 
       <button_zhuye :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" :view4.sync="view4" :view5.sync="view5"
-        :overview="overview" :Go1F="Go1F" :Go2F="Go2F" :Go3F="Go3F" :Go4F="Go4F" :Go5F="Go5F" />
+        :overview="overview" :Go1F="Go1F" :Go2F="Go2F" :Go3F="Go3F" :Go4F="Go4F" :Go5F="Go5F"
+        :floor1.sync="floor1" :floor2.sync="floor2" :floor3.sync="floor3" :floor4.sync="floor4" :floor5.sync="floor5" />
       <button_nenghaoyuce :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
       <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
       <button_nenghaorelitu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"
         :EnergyConsumptionMap="EnergyConsumptionMap" />
-      <button_nenghaoliudongtu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
+      <!-- <button_nenghaoliudongtu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" /> -->
       <button_wendufenbutu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"
         :TemperatureMap="TemperatureMap" />
       <button_tanpaifangjiance :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
@@ -62,8 +63,8 @@
             <!-- <button_guzhangjiance :chart.sync="chart" /> -->
           </li>
           <li v-else-if="view4" style="width: 22%" key="control1">
-            <AC_consumption_prediction/>
-            <AC_load_prediction/>
+            <AC_consumption_prediction :name="name" />
+            <AC_load_prediction :name="name" />
           </li>
           <li v-else-if="view5" style="width: 22%" key="control2">
             <EC_consumption_prediction/>
@@ -97,8 +98,8 @@
             <youhuakongzhi />
           </li>
           <li v-else-if="view4" style="width: 22%" key="ACCharts">
-            <AC_voltage_prediction/>
-            <ACTable />
+            <AC_voltage_prediction :name="name" />
+            <ACTable :name="name" />
           </li>
           <li v-else-if="view5" style="width: 22%" key="ECCharts">
             <EC_voltage_prediction/>
@@ -226,6 +227,7 @@ export default {
       iframeLoaded: false,
       chart: false,
       data: null,
+      name: null,
     };
   },
   computed: {
@@ -253,11 +255,17 @@ export default {
         this.view3 = false;
         this.view4 = false;
         this.view5 = false;
+        console.log(typeof(event.data));
+        
         if (event.data == "AC") {
           this.view4 = true;
         }
         else if (event.data == "EC") {
           this.view5 = true;
+        }
+        if (String(event.data).includes("机柜")) {
+          this.name = String(event.data);
+          this.view4 = true;
         }
       }
     });
