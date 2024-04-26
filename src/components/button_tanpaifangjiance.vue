@@ -29,6 +29,10 @@
       Tanpaifangjiance
     },
     props: {
+      top2: {
+        type: Boolean,
+        default: false,
+      },
       top4: {
         type: Boolean,
         default: false,
@@ -37,6 +41,7 @@
   
     methods: {
       handleClick() {
+        this.$emit('update:top2', false)  
         this.$emit('update:top4', !this.top4)   
       }
     }

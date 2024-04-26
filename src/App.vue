@@ -36,7 +36,7 @@
       <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
       <button_nenghaorelitu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"
         :EnergyConsumptionMap="EnergyConsumptionMap" />
-      <button_nenghaoliudongtu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
+      <button_baojingxinxi :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
       <button_wendufenbutu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"
         :TemperatureMap="TemperatureMap" />
       <button_tanpaifangjiance :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
@@ -121,7 +121,7 @@ import button_nenghaoyuce from '@/components/button_nenghaoyuce.vue'
 import button_youhuakongzhi from '@/components/button_youhuakongzhi.vue'
 import button_guzhangjiance from '@/components/button_guzhangjiance'
 import button_nenghaorelitu from '@/components/button_nenghaorelitu'
-import button_nenghaoliudongtu from '@/components/button_nenghaoliudongtu'
+import button_baojingxinxi from '@/components/button_baojingxinxi'
 import button_wendufenbutu from '@/components/button_wendufenbutu'
 import button_tanpaifangjiance from '@/components/button_tanpaifangjiance'
 
@@ -172,7 +172,7 @@ export default {
     button_youhuakongzhi,
     button_guzhangjiance,
     button_nenghaorelitu,
-    button_nenghaoliudongtu,
+    button_baojingxinxi,
     button_wendufenbutu,
     button_tanpaifangjiance,
 
@@ -380,6 +380,7 @@ unity-container {
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0;
+  transition: opacity 0;
 }
+
 </style>

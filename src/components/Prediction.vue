@@ -1,7 +1,7 @@
 <template>
   <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(33% ); z-index: 11;">
     <div class="boxall" style="height: calc(100% )">
-      <div class="alltitle">能耗预测</div>
+      <div class="alltitle">数据中心总体能耗预测</div>
       <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
         _echarts_instance_="ec_1710235324242">
         <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
@@ -17,11 +17,10 @@
 import * as echarts from 'echarts';
 import axios from 'axios';
 
-const axiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api',
-  withCredentials: true,
-});
-
+// const axiosInstance = axios.create({
+//   baseURL: 'http://127.0.0.1:8000/api',
+//   withCredentials: true,
+// });
 
 export default {
   props:['Name'],
@@ -108,7 +107,6 @@ export default {
           bottom: '3%', // 设置底部边距为容器高度的3%
           containLabel: true // 包含坐标轴的标签
         },
-
         xAxis: {
           type: 'category', // x轴类型改为类别
           boundaryGap: false, // 不留白
@@ -151,20 +149,20 @@ export default {
     };
   },
   mounted() {
-    this.initChart();
-    this.timer = setInterval(() => {
-      this.fetchDataAndUpdate();
-    }, 10000);
+    // this.initChart();
+    // this.timer = setInterval(() => {
+    //   this.fetchDataAndUpdate();
+    // }, 10000);
   },
-  beforeDestroy() {
-    // 清除定时器
-    if (this.timer) {
-      clearInterval(this.timer);
-    }
-    if (this.myChart) {
-      this.myChart.dispose();
-    }
-  },
+  // beforeDestroy() {
+  //   // 清除定时器
+  //   if (this.timer) {
+  //     clearInterval(this.timer);
+  //   }
+  //   if (this.myChart) {
+  //     this.myChart.dispose();
+  //   }
+  // },
   methods: {
     fetchDataAndUpdate() {
       axiosInstance.get('/next-an-records', {
@@ -179,7 +177,6 @@ export default {
             params: { batch_size: 5 }
           })
             .then(response => {
-             
               this.records = response.data;
               this.consumption = this.records.map(record => record.Consumption)
               this.records = this.records.map(record => (new Date(record.time)))
@@ -202,7 +199,6 @@ export default {
                 this.data2.shift(); // 移除数组的第一个元素
                 this.option.xAxis.data.shift(); // 移除x轴标签的第一个元素
               }
-              
               this.myChart.setOption({
                 xAxis: {
                   data: this.option.xAxis.data // 更新x轴标签配置
@@ -224,9 +220,6 @@ export default {
         .catch(error => {
           console.log('Error:', error.message);
         });
-
-
-
     },
     initChart() {
       axiosInstance.get('/next-n-records', {
@@ -274,12 +267,7 @@ export default {
           console.log('Error:', error.message);
         });
     },
-
-
-
   }
-
-
 };
 </script>
 

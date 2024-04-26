@@ -10,6 +10,9 @@
             <router-link to="/model_info">
                 <span>模型信息</span>
             </router-link>
+            <router-link to="/alarm_info">
+                <span>报警信息</span>
+            </router-link>
         </component>
         <div>
             <h1 class="text-center">
@@ -127,21 +130,10 @@
 
 <script>
     import { VeTable } from 'vue-easytable';
-    import * as echarts from 'echarts';
     import Papa from 'papaparse';
 
     import {
         Slide,
-        Bubble,
-        Elastic,
-        Push,
-        PushRotate,
-        ScaleDown,
-        ScaleRotate,
-        Reveal,
-        Stack,
-        FallDown,
-        Menu
     } from 'vue-burger-menu';
     export default {
         data() {
@@ -187,32 +179,12 @@
                 value_data: 'first',
                 menus: {
                     slide: { buttonText: 'Slide' },
-                    push: { buttonText: 'Push' },
-                    pushRotate: { buttonText: 'Push Rotate' },
-                    reveal: { buttonText: 'Reveal' },
-                    scaleDown: { buttonText: 'Scale Down' },
-                    scaleRotate: { buttonText: 'Scale Rotate' },
-                    // elastic: { buttonText: 'Elastic - (WIP)' },
-                    // stack: { buttonText: 'Stack - (WIP)' },
-                    bubble: { buttonText: 'Bubble' },
-                    fallDown: { buttonText: 'Fall Down' }
                 },
-                side: 'left',
                 currentMenu: 'Slide'
             }
         },
         components: {
             Slide,
-            Bubble,
-            Elastic,
-            Push,
-            PushRotate,
-            ScaleDown,
-            ScaleRotate,
-            Reveal,
-            Stack,
-            FallDown,
-            Menu,
             VeTable,
         },
         mounted() {
@@ -331,15 +303,6 @@
             handleModelChange(newModel){
                 this.currentModel=newModel;
             },
-            changeMenu(menu) {
-                // this.currentMenu = menu.replace(/ +/g, '').toLowerCase()
-                this.currentMenu = menu.replace(/ +/g, '')
-                console.log(this.currentMenu)
-                return this.currentMenu
-            },
-            changeSide(side) {
-                this.side = side
-            },
             handleResize() {
                 const resizeObserver = new ResizeObserver(entries => {
                     for (let entry of entries) {
@@ -389,261 +352,13 @@
         
     }
 
-    *,
-    *:after,
-    *:before {
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-
-    html {
-        height: 100%;
-    }
-
-    body {
-        height: 100%;
-        color: #fffce1;
-        font-family: 'Raleway', Arial, sans-serif;
-        margin: 0px;
-    }
-
     #app {
         height: 300%;
         width:100%;
     }
 
-    a {
-        color: #4e4a46;
-        text-decoration: none;
-
-        &:hover,
-        &:focus {
-            color: #c94e50;
-        }
-    }
-
-    main {
-        height: 33%;
-        text-align: center;
-        background: #ffffff;
-        overflow: auto;
-        border: 25px solid rgb(226, 226, 226);
-    }
-
     h1 {
         font-weight: 800;
         font-size: 3.75em;
-    }
-
-    .description {
-        max-width: 20em;
-        margin: 1.2em auto 1em;
-        line-height: 1.3em;
-        font-weight: 400;
-    }
-
-    .demo-buttons {
-        font-size: 1em;
-        max-width: 1200px;
-        margin: 2em auto 3em;
-        padding: 0 10em;
-
-        a {
-            display: inline-block;
-            margin: 0.75em;
-            padding: 1.35em 1.1em;
-            width: 15em;
-            background: #fffce1;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 800;
-            border-top-left-radius: 20px 50px;
-            border-top-right-radius: 20px 50px;
-            border-bottom-right-radius: 20px 50px;
-            border-bottom-left-radius: 20px 50px;
-            cursor: pointer;
-
-            &.currentDemo {
-            background: #c94e50;
-            color: #fffce1;
-            }
-        }
-    }
-
-    .sideButton {
-        display: inline-block;
-        width: 5em;
-        height: 2.5em;
-        line-height: 2.5em;
-        cursor: pointer;
-        background: #fffce1;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 0.8em;
-        font-weight: 800;
-
-        &.left {
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-        }
-
-        &.right {
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-        }
-
-        &.active {
-            background: #c94e50;
-            color: #fffce1;
-        }
-    }
-
-    @media screen and (max-width: 40em) {
-        main {
-            font-size: 80%;
-        }
-
-        h1 {
-            padding-top: 1em;
-            font-size: 2.5em;
-        }
-
-        .demo-buttons {
-            max-width: 900px;
-            padding: 0 2em;
-        }
-    }
-
-    //
-    // Burger menu custom styles
-    //
-    .bm-burger-button {
-        position: absolute;
-        width: 36px;
-        height: 30px;
-        left: 36px;
-        top: 36px;
-    }
-
-    .right .bm-burger-button {
-        left: initial;
-        right: 36px;
-    }
-
-    .bm-burger-bars {
-        background: #373a47;
-    }
-
-    .bm-morph-shape {
-        fill: #373a47;
-    }
-
-    .bm-menu {
-        background: #373a47;
-
-        a {
-            color: #b8b7ad;
-
-            &:hover,
-            &:focus {
-            color: #c94e50;
-            }
-        }
-    }
-
-    //
-    // Mixins
-    //
-    .menu-1 {
-        .bm-cross {
-            background: #bdc3c7;
-        }
-
-        .bm-menu {
-            padding: 2.5em 1.5em 0;
-            font-size: 1.15em;
-        }
-    }
-
-    .menu-2 {
-        .bm-cross {
-            background: #999;
-        }
-
-        .bm-menu {
-            padding: 3.4em 1em 0;
-        }
-
-        a {
-            padding: 1em;
-        }
-
-        i {
-            font-size: 1.7em;
-            vertical-align: middle;
-            color: #282a35;
-        }
-    }
-
-    .menu-3 {
-        .bm-cross {
-            background: #888;
-        }
-
-        .bm-menu {
-            padding: 2em 1em;
-            font-size: 1.15em;
-        }
-
-        i {
-            opacity: 0.5;
-        }
-
-        span {
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.75em;
-        }
-    }
-
-    .menu-4 {
-        .bm-cross {
-            background: #888;
-        }
-
-        h2 {
-            margin: 0 auto;
-            padding: 2em 1em;
-            color: rgba(0, 0, 0, 0.4);
-            box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
-
-            i {
-                margin-left: 0.2em;
-            }
-
-            span {
-                font-size: 1.6em;
-                font-weight: 700;
-            }
-        }
-
-        a {
-            padding: 1em;
-            text-transform: uppercase;
-            transition: background 0.3s, box-shadow 0.3s;
-            box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
-
-            span {
-                letter-spacing: 1px;
-                font-weight: 400;
-            }
-
-            &:hover,
-            &:focus {
-                background: rgba(0, 0, 0, 0.2);
-                box-shadow: inset 0 -1px rgba(0, 0, 0, 0);
-                color: #b8b7ad;
-            }
-        }
     }
 </style>
