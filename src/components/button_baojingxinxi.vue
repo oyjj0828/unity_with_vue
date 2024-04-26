@@ -48,9 +48,7 @@ export default {
 
   methods: {
     handleClick() {
-      this.$emit('update:top1', false)
       this.$emit('update:top2', !this.top2)
-      this.$emit('update:top3', false)
       this.$emit('update:top4', false)
     }
   }

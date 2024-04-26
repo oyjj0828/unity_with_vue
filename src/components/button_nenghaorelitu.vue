@@ -47,14 +47,19 @@
         type: Function,
         default: () => {},
       },
+      TemperatureMap:{
+        type: Function,
+        default: () => {},
+      },
     },
   
     methods: {
       handleClick() {
+        if(this.top3){
+          this.TemperatureMap()
+        }
         this.$emit('update:top1', !this.top1)
-        this.$emit('update:top2', false)
         this.$emit('update:top3', false)
-        this.$emit('update:top4', false)
         this.EnergyConsumptionMap()
       }
     }

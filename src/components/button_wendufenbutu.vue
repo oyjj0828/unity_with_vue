@@ -39,18 +39,23 @@ import Temperature from './Temperature.vue'
         type: Boolean,
         default: false,
       },
+      EnergyConsumptionMap: {
+        type: Function,
+        default: () => {},
+      },
       TemperatureMap: {
-      type: Function,
-      default: () => {},
-    },
+        type: Function,
+        default: () => {},
+      },
     },
   
     methods: {
       handleClick() {
+        if(this.top1){
+          this.EnergyConsumptionMap()
+        }
         this.$emit('update:top1', false)
-        this.$emit('update:top2', false)
         this.$emit('update:top3',!this.top3)
-        this.$emit('update:top4', false)
         this.TemperatureMap()
       }
     }

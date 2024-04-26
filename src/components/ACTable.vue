@@ -27,7 +27,7 @@
     <dv-border-box-7 style="z-index: 11; position:absolute; height: 50px; width: 130px; top: 85%; right:105px">
       <div>
           <router-link to="/device_info">
-            <button class="rounded-btn" style="z-index: 20; width: 130px; height: 50px; color: rgb(255, 174, 13)">
+            <button class="rounded-btn" style="z-index: 20; width: 130px; height: 50px; color: azure">
               设备详细信息
             </button>
           </router-link>

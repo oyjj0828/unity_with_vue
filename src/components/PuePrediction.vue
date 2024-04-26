@@ -16,7 +16,7 @@
     <dv-border-box-7 style="z-index: 11; position:relative; height: 50px; width: 170px; top: 10px; left:80px">
       <div style="height:100%; width:100%">
         <router-link to="/model_info">
-          <button class="rounded-btn" style="z-index: 20; width: 100%; height: 100%; color: rgb(255, 174, 13)">
+          <button class="rounded-btn" style="z-index: 20; width: 100%; height: 100%; color: azure">
               预测模型详细信息
           </button>
         </router-link>

@@ -22,7 +22,7 @@
       </div>
       <div class="unity-container" style="z-index: 0;">
         <iframe ref="iframe1" style="width:100%; height:100% ;position: absolute;top:0;left: 0; z-index: inherit;"
-          src="./Datacenter0419/index.html" frameborder="0"></iframe>
+          src="./DatacenterFinal/index.html" frameborder="0"></iframe>
       </div>
 
       <!--<button_nenghaoyuce v-model="view1" :sendState="getState" />-->
@@ -33,10 +33,10 @@
       <button_nenghaoyuce :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
       <button_youhuakongzhi :view1.sync="view1" :view2.sync="view2" :view3.sync="view3" />
       <button_nenghaorelitu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"
-        :EnergyConsumptionMap="EnergyConsumptionMap" />
+        :EnergyConsumptionMap="EnergyConsumptionMap" :TemperatureMap="TemperatureMap"/>
       <button_baojingxinxi :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
       <button_wendufenbutu :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4"
-        :TemperatureMap="TemperatureMap" />
+        :EnergyConsumptionMap="EnergyConsumptionMap" :TemperatureMap="TemperatureMap" />
       <button_tanpaifangjiance :top1.sync="top1" :top2.sync="top2" :top3.sync="top3" :top4.sync="top4" />
 
       <ul class="clearfix" style="z-index: 10; height: inherit">
