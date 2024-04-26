@@ -25,106 +25,101 @@
     <!-- <div style="display: flex; justify-content: center;"> -->
     <div style="display: flex; justify-content: center; z-index: 10;">
       <p v-if="floor1" style="margin-right: 35px;">
-        <dv-border-box-12 backgroundColor="rgba(6, 48, 109, .5)" style="width: 80px; height: 36px">
+        <dv-border-box-7 backgroundColor="rgba(6, 48, 109, .5)" style="width: 80px; height: 36px">
           <button class="rounded-btn" @click="handleClick_floor1" style="z-index: 20; width: inherit; height: 36px; display: flex; align-items: center;">
-            <span style="font-size: 12px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
+            <span style="font-size: 14px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
               1F
             </span>
           </button>
-        </dv-border-box-12>
+        </dv-border-box-7>
       </p>
       <p v-else style="margin-right: 35px;">
-        <dv-border-box-12 style="width: 80px; height: 36px">
+        <dv-border-box-7 style="width: 80px; height: 36px">
           <button class="rounded-btn" @click="handleClick_floor1" style="z-index: 20; width: inherit; height: 36px; display: flex; align-items: center;">
-            <span style="font-size: 12px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
+            <span style="font-size: 14px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
               1F
             </span>
           </button>
-        </dv-border-box-12>
+        </dv-border-box-7>
       </p>
 
 
       <p v-if="floor2">
-        <dv-border-box-12 backgroundColor="rgba(6, 48, 109, .5)" style="width: 80px; height: 36px;">
+        <dv-border-box-7 backgroundColor="rgba(6, 48, 109, .5)" style="width: 80px; height: 36px;">
           <button class="rounded-btn" @click="handleClick_floor2" style="z-index: 20; width: inherit; height: 36px; display: flex; align-items: center;">
-            <span style="font-size: 12px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
+            <span style="font-size: 14px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
               2F
             </span>
           </button>
-        </dv-border-box-12>
+        </dv-border-box-7>
       </p>
       <p v-else>
-        <dv-border-box-12 style="width: 80px; height: 36px;">
+        <dv-border-box-7 style="width: 80px; height: 36px;">
           <button class="rounded-btn" @click="handleClick_floor2" style="z-index: 20; width: inherit; height: 36px; display: flex; align-items: center;">
-            <span style="font-size: 12px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
+            <span style="font-size: 14px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
               2F
             </span>
           </button>
-        </dv-border-box-12>
+        </dv-border-box-7>
       </p>
-
 
       <p v-if="floor3" style="margin-right: 35px; margin-left: 35px;">
-        <dv-border-box-12 backgroundColor="rgba(6, 48, 109, .5)" style="width: 80px; height: 36px">
+        <dv-border-box-7 backgroundColor="rgba(6, 48, 109, .5)" style="width: 80px; height: 36px">
           <button class="rounded-btn" @click="handleClick_floor3" style="z-index: 20; width: inherit; height: 36px; display: flex; align-items: center;">
-            <span style="font-size: 12px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
+            <span style="font-size: 14px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
               3F
             </span>
           </button>
-        </dv-border-box-12>
+        </dv-border-box-7>
       </p>
       <p v-else >
-        <dv-border-box-12 style="width: 80px; height: 36px; margin-left: 35px; margin-right: 35px;">
+        <dv-border-box-7 style="width: 80px; height: 36px; margin-left: 35px; margin-right: 35px;">
           <button class="rounded-btn" @click="handleClick_floor3" style="z-index: 20; width: inherit; height: 36px; display: flex; align-items: center;">
-            <span style="font-size: 12px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
+            <span style="font-size: 14px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
               3F
             </span>
           </button>
-        </dv-border-box-12>
+        </dv-border-box-7>
       </p>
-
 
       <p v-if="floor4">
-        <dv-border-box-12 backgroundColor="rgba(6, 48, 109, .5)" style="width: 80px; height: 36px">
+        <dv-border-box-7 backgroundColor="rgba(6, 48, 109, .5)" style="width: 80px; height: 36px">
           <button class="rounded-btn" @click="handleClick_floor4" style="z-index: 20; width: inherit; height: 36px; display: flex; align-items: center;">
-            <span style="font-size: 12px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
+            <span style="font-size: 14px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
               4F
             </span>
           </button>
-        </dv-border-box-12>
+        </dv-border-box-7>
       </p>
       <p v-else>
-        <dv-border-box-12 style="width: 80px; height: 36px">
+        <dv-border-box-7 style="width: 80px; height: 36px">
           <button class="rounded-btn" @click="handleClick_floor4" style="z-index: 20; width: inherit; height: 36px; display: flex; align-items: center;">
-            <span style="font-size: 12px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
+            <span style="font-size: 14px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
               4F
             </span>
           </button>
-        </dv-border-box-12>
+        </dv-border-box-7>
       </p>
-
 
       <p v-if="floor5" style="margin-left: 35px;">
-        <dv-border-box-12 backgroundColor="rgba(6, 48, 109, .5)" style="width: 80px; height: 36px">
+        <dv-border-box-7 backgroundColor="rgba(6, 48, 109, .5)" style="width: 80px; height: 36px">
           <button class="rounded-btn" @click="handleClick_floor5" style="z-index: 20; width: inherit; height: 36px; display: flex; align-items: center;">
-            <span style="font-size: 12px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
+            <span style="font-size: 14px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
               5F
             </span>
           </button>
-        </dv-border-box-12>
+        </dv-border-box-7>
       </p>
       <p v-else style="margin-left: 35px;">
-        <dv-border-box-12 style="width: 80px; height: 36px">
+        <dv-border-box-7 style="width: 80px; height: 36px">
           <button class="rounded-btn" @click="handleClick_floor5" style="z-index: 20; width: inherit; height: 36px; display: flex; align-items: center;">
-            <span style="font-size: 12px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
+            <span style="font-size: 14px; font-weight: bold; color:rgb(255, 174, 13); margin: auto;">
               5F
             </span>
           </button>
-        </dv-border-box-12>
+        </dv-border-box-7>
       </p> 
     </div>
-
-
   </div>
 </template>
 

@@ -65,7 +65,7 @@ export default{
                             show: true
                         },
                         itemStyle: {
-                            borderRadius: 10,
+                            borderRadius: 5,
                             color:'rgb(238,102,102)',
                         },
                         clickable: true,
@@ -83,7 +83,7 @@ export default{
                         },
                         clickable: true,
                         itemStyle: {
-                            borderRadius: 10,
+                            borderRadius: 5,
                             color:'rgb(250,200,88)',
                         },
                         emphasis: {
@@ -100,7 +100,7 @@ export default{
                         },
                         clickable: true,
                         itemStyle: {
-                            borderRadius: 10,
+                            borderRadius: 5,
                             color:'rgb(227,238,109)',
                         },
                         emphasis: {
@@ -117,7 +117,7 @@ export default{
                         },
                         clickable: true,
                         itemStyle: {
-                            borderRadius: 10,
+                            borderRadius: 5,
                         },
                         emphasis: {
                             focus: 'none'

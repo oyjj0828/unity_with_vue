@@ -5,9 +5,7 @@
       <meta charset="utf-8">
       <title>数据中心可视化管理平台</title>
     </head>
-    <footer class="footer" style="z-index: 10; width:100%">
-      <!-- Footer content -->
-    </footer>
+    <!-- <footer class="footer" style="z-index: 10; width:100%" /> -->
     <div class="loading" style="display: none;">
       <div class="loadbox"> <img src="./assets/loading.gif"> 页面加载中... </div>
     </div>
