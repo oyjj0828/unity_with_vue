@@ -2,7 +2,7 @@
   <div style="height:calc(45%)">
     <dv-border-box-13 backgroundColor="rgba(6, 48, 109, .5)" style="height: calc(100%); z-index: 11;">
       <div class="boxall" style="height: calc(100%)">
-        <div class="alltitle">UPS参数预览</div>
+        <div class="alltitle">{{this.name}}参数预览</div>
         <div class=" boxnav " id="echarts4" style="user-select: none; z-index: -10;"
           _echarts_instance_="ec_1710235324242">
           <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
@@ -40,6 +40,12 @@
 
 <script>
 export default {
+  props: {
+    name: {
+      type: String,
+      default: null,
+    }
+  },
   data() {
     return {
       config: {

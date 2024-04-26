@@ -123,7 +123,24 @@ export default {
       // Simulating dynamic data update
       setInterval(() => {
         this.chartData.forEach(item => {
-          item.value = Math.random().toFixed(2) * 100;
+          //item.value = Math.random().toFixed(2) * 100;
+          switch (item.name) {
+            case '空调':
+              item.value = (Math.random() * (0.70 - 0.62) + 0.62).toFixed(2)* 100; // 生成0.62-0.70之间的随机数
+              break;
+            case '烟感':
+              item.value = (Math.random() * (0.78 - 0.72) + 0.72).toFixed(2)* 100; // 生成0.72-0.78之间的随机数
+              break;
+            case '摄像头':
+              item.value = (Math.random() * (0.30 - 0.25) + 0.25).toFixed(2)* 100; // 生成0.25-0.30之间的随机数
+              break;
+            case '照明':
+              item.value = (Math.random() * (0.90 - 0.80) + 0.80).toFixed(2)* 100; // 生成0.80-0.90之间的随机数
+              break;
+            case 'UPS':
+              item.value = (Math.random() * (0.55 - 0.48) + 0.48).toFixed(2)* 100; // 生成0.48-0.55之间的随机数
+              break;
+          }
         });
         this.chartInstance.setOption({
           yAxis: {

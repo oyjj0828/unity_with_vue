@@ -26,7 +26,7 @@
             </li>
 
             <li style="width: 35%; height: 50%;">
-              <dv-percent-pond :config="config" style="width:80px; height:160%;" />
+              <dv-percent-pond :config="config" :key="count" style="width:100px; height:160%;" />
             </li>
             <li style="width: 25%; height: 40%;">
               <dv-loading>

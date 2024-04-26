@@ -6,7 +6,7 @@
           _echarts_instance_="ec_1710235324242">
           <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
                      padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
-            <div style="position:absolute; width:calc(50%); top:25px; left:5px;">
+            <div style="position:absolute; width:50%; top:10%; ">
                 <img src='../../src/assets/border.png' style="position: absolute; top: 0px; left: 0px;"> </img>
                 <img src='../../src/assets/闪电.png' style="position: absolute; top: 5px; left: 5px;"> </img>
                 <div class="Text1">
@@ -17,7 +17,7 @@
                 </div>
             </div>
 
-            <div style="position:absolute; width:calc(50%); top:25px; left:160px;">
+            <div style="position:absolute; width:50%; top:10%; left:50%;">
                 <img src='../../src/assets/border.png' style="position: absolute; top: 0px; left: 0px;"> </img>
                 <img src='../../src/assets/闪电.png' style="position: absolute; top: 5px; left: 5px;"> </img>
                 <div class="Text1">
@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <div style="position:absolute; width:calc(50%); top:100px; left:5px;">
+            <div style="position:absolute; width:50%; top:60%;">
                 <img src='../../src/assets/border.png' style="position: absolute; top: 0px; left: 0px;"> </img>
                 <img src='../../src/assets/仪表盘.png' style="position: absolute; top: 5px; left: 5px;"> </img>
                 <div class="Text1">
@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <div style="position:absolute; width:calc(50%); top:100px; left:160px;">
+            <div style="position:absolute; width:50%; top:60%; left:50%;">
                 <img src='../../src/assets/border.png' style="position: absolute; top: 0px; left: 0px;"> </img>
                 <img src='../../src/assets/IT.png' style="position: absolute; top: 10px; left: 12px;"> </img>
                 <div class="Text1">
