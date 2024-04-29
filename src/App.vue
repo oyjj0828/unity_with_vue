@@ -59,13 +59,13 @@
             <!-- <AirConditioningUnitParameters /> -->
             <!-- <button_guzhangjiance :chart.sync="chart" /> -->
           </li>
-          <li v-else-if="view4" style="width: 22%" key="control1">
-            <AC_consumption_prediction/>
-            <AC_load_prediction/>
+          <li v-else-if="view4" style="width: 22%" :key="name">
+            <AC_consumption_prediction :name="name" />
+            <AC_load_prediction :name="name" />
           </li>
-          <li v-else-if="view5" style="width: 22%" key="control2">
-            <EC_consumption_prediction/>
-            <EC_load_prediction/>
+          <li v-else-if="view5" style="width: 22%" :key="name_U">
+            <EC_consumption_prediction :name="name_U"/>
+            <EC_load_prediction :name="name_U"/>
           </li>
         </transition>
 
@@ -94,13 +94,13 @@
           <li v-else-if="view3" style="width: 22%" key="none">
             <youhuakongzhi />
           </li>
-          <li v-else-if="view4" style="width: 22%" key="ACCharts">
-            <AC_voltage_prediction/>
-            <ACTable />
+          <li v-else-if="view4" style="width: 22%" :key="name">
+            <AC_voltage_prediction :name="name" />
+            <ACTable :name="name" />
           </li>
-          <li v-else-if="view5" style="width: 22%" key="ECCharts">
-            <EC_voltage_prediction/>
-            <ECTable />
+          <li v-else-if="view5" style="width: 22%" :key="name_U">
+            <EC_voltage_prediction :name="name_U"/>
+            <ECTable :name="name_U" />
           </li>
         </transition>
 
@@ -224,6 +224,8 @@ export default {
       iframeLoaded: false,
       chart: false,
       data: null,
+      name: null,
+      name_U: null,
     };
   },
   computed: {
@@ -255,6 +257,14 @@ export default {
           this.view4 = true;
         }
         else if (event.data == "EC") {
+          this.view5 = true;
+        }
+        if (String(event.data).includes("机柜")) {
+          this.name = String(event.data);
+          this.view4 = true;
+        }
+        else if (String(event.data).includes("C190D")) {
+          this.name_U = String(event.data);
           this.view5 = true;
         }
       }

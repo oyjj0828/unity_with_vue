@@ -273,11 +273,7 @@ export default {
           console.log('Error:', error.message);
         });
     },
-
-
-
   }
-
 
 };
 </script>
