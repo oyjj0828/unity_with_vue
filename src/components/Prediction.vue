@@ -185,7 +185,7 @@ export default {
           this.consumption = this.records.map(record => record.Consumption)
           this.records = this.records.map(record => record.time)
           axiosInstance.get('/next-an-records', {
-            params: { batch_size: 5 }
+            params: { batch_size: 5, model:'Crossformer'}
           })
             .then(response => {
               this.records1 = response.data;
@@ -245,7 +245,7 @@ export default {
           }
           this.option.series[0].data = this.data1;
           axiosInstance.get('/next-an-records', {
-            params: { batch_size: this.batchSize1 , init: 1}
+            params: { batch_size: this.batchSize1 , init: 1, model:'Crossformer'}
           })
             .then(response => {
               this.records1 = response.data;

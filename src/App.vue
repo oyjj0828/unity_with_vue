@@ -244,31 +244,34 @@ export default {
       this.updateTime();
       // this.fetchDataAndUpdate();    
     }, 1000);
-
+    
     window.addEventListener('message', (event) => {
-      if (event.origin === window.location.origin) {
-        // console.log(event.data)
-        this.view1 = false;
-        this.view2 = false;
-        this.view3 = false;
-        this.view4 = false;
-        this.view5 = false;
-        if (event.data == "AC") {
-          this.view4 = true;
-        }
-        else if (event.data == "EC") {
-          this.view5 = true;
-        }
-        if (String(event.data).includes("机柜")) {
-          this.name = String(event.data);
-          this.view4 = true;
-        }
-        else if (String(event.data).includes("C190D")) {
-          this.name_U = String(event.data);
-          this.view5 = true;
-        }
-      }
-    });
+      if (event.origin === window.location.origin) {
+        // console.log(event.data)
+        this.view1 = false;
+        this.view2 = false;
+        this.view3 = false;
+        // this.view4 = false;
+        // this.view5 = false;
+        // if (event.data == "AC") {
+        //   this.view4 = true;
+        // }
+        // else if (event.data == "EC") {
+        //   this.view5 = true;
+        // }
+        if (String(event.data).includes("机柜")) {
+          this.name = String(event.data);
+          this.view4 = false;
+          this.view5 = true;
+  
+        }
+        else if (String(event.data).includes("C190D") || String(event.data).includes("BKFG") || String(event.data).includes("C130") || String(event.data).includes("C065") || String(event.data).includes("外机")) {
+          this.name_U = String(event.data);
+          this.view5 = false;
+          this.view4 = true;
+        }
+      }
+    });
   },
   beforeDestroy() {
     clearInterval(this.interval);
