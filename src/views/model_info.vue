@@ -81,10 +81,10 @@
                         </el-option>
                     </el-select> -->
                     <el-tabs v-model="value_data" @tab-click="handleDataClick" style="position:absolute; top:0; left:0;">
-                        <el-tab-pane label="服务器能耗数据" name="first">服务器能耗数据</el-tab-pane>
-                        <el-tab-pane label="空调能耗数据" name="second">空调能耗数据</el-tab-pane>
-                        <el-tab-pane label="室内温度数据" name="third">室内温度数据</el-tab-pane>
-                        <el-tab-pane label="PUE数据" name="fourth">PUE数据</el-tab-pane>
+                        <el-tab-pane label="服务器能耗数据" name="first"></el-tab-pane>
+                        <el-tab-pane label="空调能耗数据" name="second"></el-tab-pane>
+                        <el-tab-pane label="室内温度数据" name="third"></el-tab-pane>
+                        <el-tab-pane label="PUE数据" name="fourth"></el-tab-pane>
                     </el-tabs>
                     <p v-if="view[0]">
                         <el-table
@@ -129,20 +129,21 @@
 </template>
 
 <script>
-    import { VeTable } from 'vue-easytable';
-    import Papa from 'papaparse';
-
-    import {
-        Slide,
-    } from 'vue-burger-menu';
+import { VeTable } from 'vue-easytable';
+import Papa from 'papaparse';
+import {
+    Slide,
+} from 'vue-burger-menu';
+import { TimeSelect } from 'element-ui';
     export default {
         data() {
             return {
+                currentModel: this.$store.state.server_model,
                 modelPreview: false,
                 mode:'服务器能耗预测',
                 view:[true,false,false,false],
                 tableData1: [
-                    {name: '当前模型',value: 'LSTM'}, 
+                    {name: '当前模型', value: this.$store.state.server_model}, 
                     {name: 'R²',value: '0.952'}, 
                     {name: '调整R²',value: '0.968'}, 
                     {name: 'MAE',value: '0.056'},
@@ -161,15 +162,14 @@
                 columns_tempe:[],
                 columns_pue:[],
                 options: [
+                    {value: 'Crossformer',label: 'Crossformer'}, 
                     {value: 'LSTM',label: 'LSTM'}, 
                     {value: 'Transformer',label: 'Transformer'}, 
                     {value: 'Autoformer',label: 'Autoformer'}, 
                     {value: 'Pyraformer',label: 'Pyraformer'}, 
                     {value: 'FEDformer',label: 'FEDformer'},
-                    {value: 'Crossformer',label: 'Crossformer'}, 
                     {value: 'PatchTST',label: 'PatchTST'}, 
                 ],
-                currentModel: 'LSTM',
                 options_data: [
                     {value: '服务器能耗数据',label: '服务器能耗数据'}, 
                     {value: '空调能耗数据',label: '空调能耗数据'}, 
@@ -190,6 +190,9 @@
         mounted() {
             this.handleResize();
             this.loadCsvData();
+        },
+        computed:{
+
         },
         methods: {
             handleClose(done) {
@@ -218,18 +221,26 @@
                 if(command=='服务器能耗预测'){
                     this.value_data='first';
                     this.view = [true,false,false,false];
+                    this.tableData1[0].value=this.$store.state.server_model;
+                    this.currentModel=this.$store.state.server_model;
                 }
                 else if(command=='空调能耗预测'){
                     this.value_data='second';
                     this.view = [false,true,false,false];
+                    this.tableData1[0].value=this.$store.state.refrige_model;
+                    this.currentModel=this.$store.state.refrige_model;
                 }
                 else if(command=='室内温度预测'){
                     this.value_data='third';
                     this.view = [false,false,true,false];
+                    this.tableData1[0].value=this.$store.state.tempe_model;
+                    this.currentModel=this.$store.state.tempe_model;
                 }
                 else if(command=='PUE预测'){
                     this.value_data='fourth';
                     this.view = [false,false,false,true];
+                    this.tableData1[0].value=this.$store.state.pue_model;
+                    this.currentModel=this.$store.state.pue_model;
                 }
             },
             loadCsvData() {
@@ -252,7 +263,23 @@
             },
             handleClick(){
                 console.log(this.currentModel);
-                this.tableData1[0].value = this.currentModel;
+                if(this.mode==='服务器能耗预测'){
+                    this.$store.commit('setServerModel',this.currentModel);
+                    this.currentModel=this.$store.state.server_model;
+                }
+                else if(this.mode==='空调能耗预测'){
+                    this.$store.commit('setRefrigeModel',this.currentModel);
+                    this.currentModel=this.$store.state.refrige_model;
+                }
+                else if(this.mode==='室内温度预测'){
+                    this.$store.commit('setTempeModel',this.currentModel);
+                    this.currentModel=this.$store.state.tempe_model;
+                }
+                else if(this.mode==='PUE预测'){
+                    this.$store.commit('setPueModel',this.currentModel);
+                    this.currentModel=this.$store.state.pue_model;
+                }
+                this.tableData1[0].value=this.currentModel;
                 for(let i=1;i<this.tableData1.length;i++){
                     this.tableData1[i].value = "正在计算中...";
                 }

@@ -1,14 +1,9 @@
 <template>
   <div style="height: 100%;">
-
     <head>
       <meta charset="utf-8">
       <title>数据中心可视化管理平台</title>
     </head>
-    <!-- <footer class="footer" style="z-index: 10; width:100%" /> -->
-    <div class="loading" style="display: none;">
-      <div class="loadbox"> <img src="./assets/loading.gif"> 页面加载中... </div>
-    </div>
     <div class="head" style="z-index: 10;">
       <h1 style="font-size: xx-large;">数据中心可视化管理平台</h1>
       <div class="time" id="showTime">{{ currentTime }}</div>
@@ -49,7 +44,7 @@
           </li>
           <li v-else-if="view2" style="width: 22%" key="consumption">
             <ServerPrediction />
-            <RefrigePrediction />
+            <!-- <RefrigePrediction /> -->
             <!-- <TestBackend Name="服务器能耗预测"/>
             <TestBackend Name="空调能耗预测"/> -->
           </li>
@@ -80,14 +75,14 @@
         <transition name="fade" mode="out-in">
           <li v-if="view1" style="width: 22%" key="home">
             <Overview />
-            <Prediction />
+            <Prediction/>
             <WaterPolo />
             <!-- <TestBackend Name="设备占用情况"/> -->
             <!-- <Prediction /> -->
           </li>
           <li v-else-if="view2" style="width: 22%" key="consumption">
-            <TemperaturePrediction/>
-            <PuePrediction/>
+            <!-- <TemperaturePrediction/>
+            <PuePrediction/> -->
             <!-- <TestBackend Name="室内温度预测"/>
             <TestBackend Name="PUE预测"/> -->
           </li>

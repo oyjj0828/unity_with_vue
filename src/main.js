@@ -15,6 +15,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 import Select from 'element-ui'
 import * as echarts from 'echarts';
 import moment from 'moment';
+import axios from 'axios';
+
+export const axiosInstance = axios.create({
+  baseURL: 'http://127.0.0.1:8000/api',
+  withCredentials: true,
+});
 
 Vue.use(VXETable);
 Vue.use(ElementUI);

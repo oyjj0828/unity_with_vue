@@ -6,7 +6,7 @@
         _echarts_instance_="ec_1710235324242">
         <div class="mainbox" style="position: relative; overflow:hidden; width: 100%; height: 100%;
                         cursor: default;">
-          <div id="chartContainer" style="width: 100%; height: 100%;"></div>
+          <div ref="chart" style="width: 100%; height: 100%; top:15px"></div>
         </div>
       </div>
     </div>
@@ -15,18 +15,17 @@
 
 <script>
 import * as echarts from 'echarts';
-import axios from 'axios';
+import { axiosInstance } from '@/main.js';
 
-const axiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api',
-  withCredentials: true,
-});
+// const axiosInstance = axios.create({
+//   baseURL: 'http://127.0.0.1:8000/api',
+//   withCredentials: true,
+// });
 
 export default {
   props:['Name'],
   data() {
     return {
-      chartInitialized: false,
       records: [],
       consumption: [],
       records1: [],
@@ -115,7 +114,7 @@ export default {
           top: '15%',
           left: '1%', // 设置左边距为容器宽度的10%
           right: '1%', // 设置右边距为容器宽度的10%
-          bottom: '3%', // 设置底部边距为容器高度的3%
+          bottom: '7%', // 设置底部边距为容器高度的3%
           containLabel: true // 包含坐标轴的标签
         },
         xAxis: {
@@ -159,33 +158,36 @@ export default {
       }
     };
   },
-  mounted() {
+  async mounted() {
     this.initChart();
     this.timer = setInterval(() => {
       this.fetchDataAndUpdate();
-    }, 10000);
+    }, 5000);
   },
   beforeDestroy() {
     // 清除定时器
     if (this.timer) {
       clearInterval(this.timer);
+      this.timer = null;
     }
     if (this.myChart) {
       this.myChart.dispose();
     }
   },
+  computed:{
+  },
   methods: {
-    fetchDataAndUpdate() {
-      axiosInstance.get('/next-n-records', {
-        params: { batch_size: 5 }
+    async fetchDataAndUpdate() {
+      await axiosInstance.get('/next-ns-records', {
+        params: { batch_size: 5, model:this.$store.state.server_model}
       })
         .then(response => {
           
           this.records = response.data;
           this.consumption = this.records.map(record => record.Consumption)
           this.records = this.records.map(record => record.time)
-          axiosInstance.get('/next-an-records', {
-            params: { batch_size: 5, model:'Crossformer'}
+          axiosInstance.get('/next-ans-records', {
+            params: { batch_size: 5, model:this.$store.state.server_model}
           })
             .then(response => {
               this.records1 = response.data;
@@ -227,9 +229,9 @@ export default {
           console.log('Error:', error.message);
         });
     },
-    initChart() {
-      axiosInstance.get('/next-n-records', {
-        params: { batch_size: this.batchSize ,init: 1}
+    async initChart() {
+      await axiosInstance.get('/next-ns-records', {
+        params: { batch_size: this.batchSize ,init: 1, model:this.$store.state.server_model}
       })
         .then(response => {
           this.records = response.data;
@@ -244,8 +246,8 @@ export default {
             this.data1.push([updatedTime, this.consumption[i]]); // 在数组末尾添加新数据，保持数据顺序
           }
           this.option.series[0].data = this.data1;
-          axiosInstance.get('/next-an-records', {
-            params: { batch_size: this.batchSize1 , init: 1, model:'Crossformer'}
+          axiosInstance.get('/next-ans-records', {
+            params: { batch_size: this.batchSize1 , init: 1, model:this.$store.state.server_model}
           })
             .then(response => {
               this.records1 = response.data;
@@ -259,7 +261,7 @@ export default {
                   this.data2.push([updatedTime1, (this.consumption1[i]).toFixed(1)]); // 在数组末尾添加新数据，保持数据顺序
               }
               this.option.series[1].data = this.data2;
-              this.myChart = echarts.init(document.getElementById('chartContainer'));
+              this.myChart = echarts.init(this.$refs.chart);
               this.myChart.setOption(this.option);
               console.log(this.option.series[0].data);
               console.log(this.option.series[1].data);

@@ -15,15 +15,14 @@
 
 <script>
 import * as echarts from 'echarts';
-import axios from 'axios';
+import { axiosInstance } from '@/main.js';
 
-const axiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api',
-  withCredentials: true,
-});
+// const axiosInstance = axios.create({
+//   baseURL: 'http://127.0.0.1:8000/api',
+//   withCredentials: true,
+// });
 
 export default {
-  props:['Name'],
   data() {
     return {
       chartInitialized: false,
@@ -163,7 +162,7 @@ export default {
     this.initChart();
     this.timer = setInterval(() => {
       this.fetchDataAndUpdate();
-    }, 10000);
+    }, 5000);
   },
   beforeDestroy() {
     // 清除定时器
@@ -177,7 +176,7 @@ export default {
   methods: {
     fetchDataAndUpdate() {
       axiosInstance.get('/next-n-records', {
-        params: { batch_size: 5 }
+        params: { batch_size: 5 ,model: this.$store.state.home_model}
       })
         .then(response => {
           
@@ -185,7 +184,7 @@ export default {
           this.consumption = this.records.map(record => record.Consumption)
           this.records = this.records.map(record => record.time)
           axiosInstance.get('/next-an-records', {
-            params: { batch_size: 5, model:'Crossformer'}
+            params: { batch_size: 5, model: this.$store.state.home_model}
           })
             .then(response => {
               this.records1 = response.data;
@@ -229,7 +228,7 @@ export default {
     },
     initChart() {
       axiosInstance.get('/next-n-records', {
-        params: { batch_size: this.batchSize ,init: 1}
+        params: { batch_size: this.batchSize ,init: 1, model: this.$store.state.home_model}
       })
         .then(response => {
           this.records = response.data;
@@ -245,7 +244,7 @@ export default {
           }
           this.option.series[0].data = this.data1;
           axiosInstance.get('/next-an-records', {
-            params: { batch_size: this.batchSize1 , init: 1, model:'Crossformer'}
+            params: { batch_size: this.batchSize1 , init: 1, model:this.$store.state.home_model}
           })
             .then(response => {
               this.records1 = response.data;
